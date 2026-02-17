@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://osi-model-simulator.roboticela.com/sitemap.xml
