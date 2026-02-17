@@ -4,10 +4,17 @@ import { useState } from 'react';
 import { Menu, X, Github } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === '/';
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -15,6 +22,14 @@ export default function Navbar() {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    if (isHome) {
+      e.preventDefault();
+      scrollToTop();
+      closeMenu();
+    }
   };
 
   const navLinks = [
@@ -32,17 +47,56 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-card/70 backdrop-blur-md border-b border-border/40">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 flex items-center justify-between gap-2 overflow-x-hidden relative z-50">
-        <Link href="/" className="flex items-center gap-1.5 sm:gap-2 md:gap-3 min-w-0 flex-1">
-          <img src="/Favicon.svg" alt="OSI Model Simulator" className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 shrink-0" />
-          <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold text-foreground truncate">
-            OSI Model Simulator
-          </span>
-        </Link>
+        {isHome ? (
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToTop();
+            }}
+            className="flex items-center gap-1.5 sm:gap-2 md:gap-3 min-w-0 flex-1 cursor-pointer"
+          >
+            <img src="/Favicon.svg" alt="OSI Model Simulator" className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 shrink-0" />
+            <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold text-foreground truncate">
+              OSI Model Simulator
+            </span>
+          </a>
+        ) : (
+          <Link href="/" className="flex items-center gap-1.5 sm:gap-2 md:gap-3 min-w-0 flex-1">
+            <img src="/Favicon.svg" alt="OSI Model Simulator" className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 shrink-0" />
+            <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold text-foreground truncate">
+              OSI Model Simulator
+            </span>
+          </Link>
+        )}
         
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-4 md:gap-6 shrink-0">
-          {navLinks.map((link) =>
-            link.href.startsWith('/') && link.href !== '/' ? (
+          {navLinks.map((link) => {
+            if (link.href === '/') {
+              return isHome ? (
+                <a
+                  key={link.href}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToTop();
+                  }}
+                  className="text-foreground/80 hover:text-primary transition-all duration-200 cursor-pointer text-sm md:text-base"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href="/"
+                  className="text-foreground/80 hover:text-primary transition-all duration-200 cursor-pointer text-sm md:text-base"
+                >
+                  {link.label}
+                </Link>
+              );
+            }
+            return link.href.startsWith('/') ? (
               <Link
                 key={link.href}
                 href={link.href}
@@ -51,15 +105,25 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ) : (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-foreground/80 hover:text-primary transition-all duration-200 cursor-pointer text-sm md:text-base"
-              >
-                {link.label}
-              </a>
-            )
-          )}
+              isHome ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-foreground/80 hover:text-primary transition-all duration-200 cursor-pointer text-sm md:text-base"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={`/${link.href}`}
+                  className="text-foreground/80 hover:text-primary transition-all duration-200 cursor-pointer text-sm md:text-base"
+                >
+                  {link.label}
+                </Link>
+              )
+            );
+          })}
           <a 
             href="https://github.com/Roboticela/osi-model-simulator" 
             target="_blank" 
@@ -119,8 +183,33 @@ export default function Navbar() {
               className="lg:hidden fixed top-[73px] left-0 right-0 bg-card/95 backdrop-blur-md border-b border-border/40 z-30 max-h-[calc(100vh-73px)] overflow-y-auto"
             >
               <div className="max-w-7xl mx-auto px-4 py-4 space-y-3">
-                {navLinks.map((link) =>
-                  link.href.startsWith('/') && link.href !== '/' ? (
+                {navLinks.map((link) => {
+                  if (link.href === '/') {
+                    return isHome ? (
+                      <a
+                        key={link.href}
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          scrollToTop();
+                          closeMenu();
+                        }}
+                        className="block px-4 py-3 text-foreground/80 hover:text-primary hover:bg-accent rounded-xl transition-all duration-200 cursor-pointer text-base"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        key={link.href}
+                        href="/"
+                        onClick={closeMenu}
+                        className="block px-4 py-3 text-foreground/80 hover:text-primary hover:bg-accent rounded-xl transition-all duration-200 cursor-pointer text-base"
+                      >
+                        {link.label}
+                      </Link>
+                    );
+                  }
+                  return link.href.startsWith('/') ? (
                     <Link
                       key={link.href}
                       href={link.href}
@@ -129,7 +218,7 @@ export default function Navbar() {
                     >
                       {link.label}
                     </Link>
-                  ) : (
+                  ) : isHome ? (
                     <a
                       key={link.href}
                       href={link.href}
@@ -138,8 +227,17 @@ export default function Navbar() {
                     >
                       {link.label}
                     </a>
-                  )
-                )}
+                  ) : (
+                    <Link
+                      key={link.href}
+                      href={`/${link.href}`}
+                      onClick={closeMenu}
+                      className="block px-4 py-3 text-foreground/80 hover:text-primary hover:bg-accent rounded-xl transition-all duration-200 cursor-pointer text-base"
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
                 <a
                   href="https://github.com/Roboticela/osi-model-simulator"
                   target="_blank"

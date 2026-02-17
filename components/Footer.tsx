@@ -2,8 +2,16 @@
 
 import { Github, Mail } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
   return (
     <footer className="py-12 px-4 bg-card/30 border-t border-border/40 overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
@@ -11,12 +19,28 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Logo & Description */}
           <div className="col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <img src="/Favicon.svg" alt="OSI Model Simulator" className="w-6 h-6 shrink-0" />
-              <span className="text-lg font-semibold text-foreground">
-                OSI Model Simulator
-              </span>
-            </Link>
+            {isHome ? (
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToTop();
+                }}
+                className="flex items-center gap-2 mb-4 cursor-pointer"
+              >
+                <img src="/Favicon.svg" alt="OSI Model Simulator" className="w-6 h-6 shrink-0" />
+                <span className="text-lg font-semibold text-foreground">
+                  OSI Model Simulator
+                </span>
+              </a>
+            ) : (
+              <Link href="/" className="flex items-center gap-2 mb-4">
+                <img src="/Favicon.svg" alt="OSI Model Simulator" className="w-6 h-6 shrink-0" />
+                <span className="text-lg font-semibold text-foreground">
+                  OSI Model Simulator
+                </span>
+              </Link>
+            )}
             <p className="text-sm text-foreground/60 mb-4">
               Interactive educational app that visualizes how messages travel through the seven OSI layers. Free and open source.
             </p>
@@ -46,24 +70,55 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">Product</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-sm text-foreground/70 hover:text-primary transition-colors">
-                  Home
-                </Link>
+                {isHome ? (
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToTop();
+                    }}
+                    className="text-sm text-foreground/70 hover:text-primary transition-colors cursor-pointer"
+                  >
+                    Home
+                  </a>
+                ) : (
+                  <Link href="/" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    Home
+                  </Link>
+                )}
               </li>
               <li>
-                <a href="#features" className="text-sm text-foreground/70 hover:text-primary transition-colors">
-                  Features
-                </a>
+                {isHome ? (
+                  <a href="#features" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    Features
+                  </a>
+                ) : (
+                  <Link href="/#features" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    Features
+                  </Link>
+                )}
               </li>
               <li>
-                <a href="#demo" className="text-sm text-foreground/70 hover:text-primary transition-colors">
-                  Demo
-                </a>
+                {isHome ? (
+                  <a href="#demo" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    Demo
+                  </a>
+                ) : (
+                  <Link href="/#demo" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    Demo
+                  </Link>
+                )}
               </li>
               <li>
-                <a href="#downloads" className="text-sm text-foreground/70 hover:text-primary transition-colors">
-                  Download
-                </a>
+                {isHome ? (
+                  <a href="#downloads" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    Download
+                  </a>
+                ) : (
+                  <Link href="/#downloads" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    Download
+                  </Link>
+                )}
               </li>
             </ul>
           </div>
@@ -78,19 +133,37 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#platforms" className="text-sm text-foreground/70 hover:text-primary transition-colors">
-                  Platforms
-                </a>
+                {isHome ? (
+                  <a href="#platforms" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    Platforms
+                  </a>
+                ) : (
+                  <Link href="/#platforms" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    Platforms
+                  </Link>
+                )}
               </li>
               <li>
-                <a href="#faq" className="text-sm text-foreground/70 hover:text-primary transition-colors">
-                  FAQ
-                </a>
+                {isHome ? (
+                  <a href="#faq" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    FAQ
+                  </a>
+                ) : (
+                  <Link href="/#faq" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    FAQ
+                  </Link>
+                )}
               </li>
               <li>
-                <a href="#about" className="text-sm text-foreground/70 hover:text-primary transition-colors">
-                  About
-                </a>
+                {isHome ? (
+                  <a href="#about" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    About
+                  </a>
+                ) : (
+                  <Link href="/#about" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    About
+                  </Link>
+                )}
               </li>
               <li>
                 <a 
