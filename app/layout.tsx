@@ -105,6 +105,27 @@ export default function RootLayout({
         {/* Preconnect to speed up third-party scripts */}
         <link rel="preconnect" href="https://www.clarity.ms" />
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
+        
+        {/* Google tag (gtag.js) */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-8NELPL2FXP"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-8NELPL2FXP');
+            `,
+          }}
+        />
+
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
