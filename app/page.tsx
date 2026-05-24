@@ -9,11 +9,9 @@ import Demo from '@/components/Demo';
 import UseCases from '@/components/UseCases';
 import Downloads from '@/components/Downloads';
 import WhyChoose from '@/components/WhyChoose';
-import Platforms from '@/components/Platforms';
 import TechnologyStack from '@/components/TechnologyStack';
 import Comparison from '@/components/Comparison';
 import SystemRequirements from '@/components/SystemRequirements';
-import FAQ from '@/components/FAQ';
 import About from '@/components/About';
 import Footer from '@/components/Footer';
 
@@ -47,9 +45,6 @@ export default function Home() {
       {/* Why Choose Section */}
       <WhyChoose />
 
-      {/* Platforms Section */}
-      <Platforms />
-
       {/* Technology Stack */}
       <TechnologyStack />
 
@@ -58,9 +53,6 @@ export default function Home() {
 
       {/* System Requirements */}
       <SystemRequirements />
-
-      {/* FAQ Section */}
-      <FAQ />
 
       {/* About Section */}
       <About />

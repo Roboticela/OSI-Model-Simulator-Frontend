@@ -133,26 +133,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                {isHome ? (
-                  <a href="#platforms" className="text-sm text-foreground/70 hover:text-primary transition-colors">
-                    Platforms
-                  </a>
-                ) : (
-                  <Link href="/#platforms" className="text-sm text-foreground/70 hover:text-primary transition-colors">
-                    Platforms
-                  </Link>
-                )}
-              </li>
-              <li>
-                {isHome ? (
-                  <a href="#faq" className="text-sm text-foreground/70 hover:text-primary transition-colors">
-                    FAQ
-                  </a>
-                ) : (
-                  <Link href="/#faq" className="text-sm text-foreground/70 hover:text-primary transition-colors">
-                    FAQ
-                  </Link>
-                )}
+                <Link href="/blogs" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                  Blogs
+                </Link>
               </li>
               <li>
                 {isHome ? (

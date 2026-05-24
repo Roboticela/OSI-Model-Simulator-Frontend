@@ -38,8 +38,7 @@ export default function Navbar() {
     { href: '#how-it-works', label: 'How it works' },
     { href: '#demo', label: 'Demo' },
     { href: '#downloads', label: 'Download' },
-    { href: '#platforms', label: 'Platforms' },
-    { href: '#faq', label: 'FAQ' },
+    { href: '/blogs', label: 'Blogs' },
     { href: '#about', label: 'About' },
     { href: '/support', label: 'Support' },
   ];
