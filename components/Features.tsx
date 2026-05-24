@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Image, Sliders, Download, Eye, Smartphone, Monitor, Palette, Grid3x3, FileCheck } from 'lucide-react';
+import { Image, Sliders, Download, Eye, Palette, Grid3x3, FileCheck, Gamepad2 } from 'lucide-react';
 
 const containerAnimation = {
   hidden: { opacity: 0 },
@@ -60,6 +60,12 @@ const features = [
     title: 'Web & Desktop',
     description: 'Use the simulator in your browser or download the desktop app. No account required. Free and educational.',
     color: 'text-teal-500'
+  },
+  {
+    icon: Gamepad2,
+    title: 'Networking Games',
+    description: 'Nine game modes — quizzes, true/false, port matching, layer ordering, and more. Pick a topic, build streaks, and track your high score.',
+    color: 'text-violet-500'
   }
 ];
 

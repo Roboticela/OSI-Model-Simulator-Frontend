@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 
 const stats = [
   { value: '7', label: 'OSI Layers' },
+  { value: '9', label: 'Networking Games' },
   { value: '5', label: 'Protocols (HTTP, HTTPS, SMTP, DNS, FTP)' },
-  { value: '5', label: 'Transmission Media' },
   { value: '100%', label: 'Free & Educational' }
 ];
 

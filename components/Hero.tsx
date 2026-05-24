@@ -2,8 +2,9 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Download, ExternalLink, Layers, Zap, Lock, Monitor, Globe, Grid3x3 } from 'lucide-react';
+import { Download, ExternalLink, Gamepad2, Layers, Zap, Lock, Monitor, Globe, Grid3x3 } from 'lucide-react';
 import Link from 'next/link';
+import { APP_URL, GAMES_URL } from '@/lib/appLinks';
 
 const benefits = [
   { icon: Layers, text: '7 OSI Layers' },
@@ -58,13 +59,22 @@ export default function Hero() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4 w-full sm:w-auto">
             <a
-              href="https://app.osi-model-simulator.roboticela.com"
+              href={APP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-primary hover:bg-primary/90 text-background rounded-xl font-semibold text-base sm:text-lg transition-transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
             >
               <ExternalLink className="text-lg sm:text-xl" />
               Open Simulator
+            </a>
+            <a
+              href={GAMES_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-card/40 hover:bg-card/60 backdrop-blur-md rounded-xl font-semibold text-base sm:text-lg transition-transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 text-foreground border border-primary/30 hover:border-primary/50"
+            >
+              <Gamepad2 className="text-lg sm:text-xl text-primary" />
+              Play Games
             </a>
             <Link href="#downloads" className="w-full sm:w-auto">
               <div className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-card/40 hover:bg-card/60 backdrop-blur-md rounded-xl font-semibold text-base sm:text-lg transition-transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 text-foreground border border-border/40">

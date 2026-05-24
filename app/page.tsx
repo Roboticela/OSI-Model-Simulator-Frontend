@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Stats from '@/components/Stats';
 import Features from '@/components/Features';
+import Games from '@/components/Games';
 import HowItWorks from '@/components/HowItWorks';
 import Demo from '@/components/Demo';
 import UseCases from '@/components/UseCases';
@@ -30,6 +31,9 @@ export default function Home() {
 
         {/* Features Section */}
         <Features />
+
+        {/* Games Section */}
+        <Games />
 
         {/* How It Works Section */}
         <HowItWorks />

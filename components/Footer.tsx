@@ -3,6 +3,7 @@
 import { Github, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { GAMES_URL } from '@/lib/appLinks';
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -97,6 +98,27 @@ export default function Footer() {
                     Features
                   </Link>
                 )}
+              </li>
+              <li>
+                {isHome ? (
+                  <a href="#games" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    Games
+                  </a>
+                ) : (
+                  <Link href="/#games" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                    Games
+                  </Link>
+                )}
+              </li>
+              <li>
+                <a
+                  href={GAMES_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground/70 hover:text-primary transition-colors"
+                >
+                  Play Games
+                </a>
               </li>
               <li>
                 {isHome ? (
