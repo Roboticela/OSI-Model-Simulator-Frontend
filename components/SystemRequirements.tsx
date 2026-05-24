@@ -149,16 +149,15 @@ export default function SystemRequirements() {
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={containerAnimation}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
         >
           {requirements.map((req, index) => (
-            <motion.div
+            <div
               key={index}
-              variants={itemAnimation}
-              className="bg-card/40 backdrop-blur-md rounded-xl p-6 border border-border/40 hover:border-primary/40 transition-all duration-300"
+              className="bg-card/40 backdrop-blur-md rounded-xl p-6 border border-border/40 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             >
               {/* Header */}
               <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border/40">
@@ -182,7 +181,7 @@ export default function SystemRequirements() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
 

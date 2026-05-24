@@ -78,22 +78,20 @@ export default function UseCases() {
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={containerAnimation}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
         >
           {useCases.map((useCase, index) => (
-            <motion.div
+            <div
               key={index}
-              variants={itemAnimation}
-              whileHover={{ scale: 1.02 }}
-              className="bg-card/40 backdrop-blur-md rounded-xl p-6 border border-border/40 hover:border-primary/40 transition-all duration-300 h-full"
+              className="bg-card/40 backdrop-blur-md rounded-xl p-6 border border-border/40 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full"
             >
               <useCase.icon className={`w-12 h-12 mb-4 ${useCase.color}`} />
               <h3 className="text-xl font-semibold text-foreground mb-2">{useCase.title}</h3>
               <p className="text-foreground/70">{useCase.description}</p>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </div>

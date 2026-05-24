@@ -76,13 +76,9 @@ export default function Comparison() {
 
           {/* Rows */}
           {comparisons.map((item, index) => (
-            <motion.div
+            <div
               key={index}
-              className="grid grid-cols-3 gap-4 p-4 sm:p-6 border-b border-border/20 last:border-b-0"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
+              className="grid grid-cols-3 gap-4 p-4 sm:p-6 border-b border-border/20 last:border-b-0 transition-colors hover:bg-accent/10"
             >
               <div className="text-foreground font-medium">{item.feature}</div>
               <div className="text-center">
@@ -91,7 +87,7 @@ export default function Comparison() {
               <div className="text-center">
                 <span className="text-foreground/60">{item.others}</span>
               </div>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </div>

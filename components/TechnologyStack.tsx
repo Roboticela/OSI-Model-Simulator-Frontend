@@ -47,20 +47,19 @@ export default function TechnologyStack() {
 
         <motion.div
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto"
-          variants={containerAnimation}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
         >
           {technologies.map((tech, index) => (
-            <motion.div
+            <div
               key={index}
-              variants={itemAnimation}
-              className="bg-card/40 backdrop-blur-md p-6 rounded-xl text-center transition-colors border border-border/40"
+              className="bg-card/40 backdrop-blur-md p-6 rounded-xl text-center transition-colors border border-border/40 hover:bg-accent/10"
             >
               <p className="text-primary font-semibold text-lg mb-1">{tech.name}</p>
               <p className="text-foreground/60 text-sm">{tech.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </div>

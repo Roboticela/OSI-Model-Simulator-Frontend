@@ -45,15 +45,17 @@ export default function WhyChoose() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
+        >
           {benefits.map((benefit, index) => (
-            <motion.div
+            <div
               key={index}
               className="bg-card/40 backdrop-blur-md rounded-xl p-8 border border-border/40"
-              initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: benefit.delay }}
             >
               <h3 className="text-2xl font-semibold text-foreground mb-4 flex items-center gap-2">
                 <Check className="text-primary w-6 h-6" />
@@ -62,9 +64,9 @@ export default function WhyChoose() {
               <p className="text-foreground/70 leading-relaxed">
                 {benefit.description}
               </p>
-            </motion.div>
+            </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
