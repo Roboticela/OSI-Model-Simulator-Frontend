@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Download, ExternalLink, Layers, Zap, Lock, Monitor, Globe, Grid3x3 } from 'lucide-react';
 import Link from 'next/link';
@@ -49,17 +50,21 @@ export default function Hero() {
             whileHover={{ rotate: 360 }}
             transition={{ duration: 0.6 }}
             className="bg-card/40 backdrop-blur-md rounded-full p-6 w-fit mx-auto mb-6 border border-border/40"
+            style={{ width: 128, height: 128, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            <img src="/Favicon.svg" alt="OSI Model Simulator" className="w-16 h-16 md:w-20 md:h-20" />
+            {/* Explicit width/height prevents CLS; priority preloads for LCP */}
+            <Image
+              src="/Favicon.svg"
+              alt="OSI Model Simulator – Interactive Network Protocol Learning Tool"
+              width={80}
+              height={80}
+              priority
+              className="w-16 h-16 md:w-20 md:h-20"
+            />
           </motion.div>
-          <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground py-2 mb-4 px-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground py-2 mb-4 px-2">
             See How Data Travels the Internet
-          </motion.h1>
+          </h1>
           <motion.p
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70 max-w-3xl mx-auto mb-8 px-4"
             initial={{ opacity: 0 }}

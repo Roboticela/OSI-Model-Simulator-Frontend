@@ -6,6 +6,8 @@ import { blogs } from '@/data/blogs';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, User } from 'lucide-react';
 
+const BASE_URL = 'https://osi-model-simulator.roboticela.com';
+
 export function generateStaticParams() {
   return blogs.map((blog) => ({
     slug: blog.slug,
@@ -25,19 +27,17 @@ export async function generateMetadata(
     };
   }
 
-  // Truncate title to <= 60 chars (leaves room for " | OSI Blog" suffix = 11 chars → ~71 total)
-  const rawTitle = blog.title;
+  // Enforce title ≤ 70 chars: truncate raw title to 55 chars then add " | OSI Blog" (11 chars) = 66 max
   const seoTitle =
-    rawTitle.length <= 55
-      ? `${rawTitle} | OSI Blog`
-      : `${rawTitle.substring(0, 55).trimEnd()}… | OSI Blog`;
+    blog.title.length <= 55
+      ? `${blog.title} | OSI Blog`
+      : `${blog.title.substring(0, 55).trimEnd()}… | OSI Blog`;
 
-  // Build a rich description >100 chars
-  const baseDesc = blog.excerpt;
+  // Enforce description ≥ 120 chars
   const description =
-    baseDesc.length >= 120
-      ? baseDesc
-      : `${baseDesc} Covering topics: ${blog.tags.join(', ')}. A detailed guide from OSI Model Simulator.`;
+    blog.excerpt.length >= 120
+      ? blog.excerpt
+      : `${blog.excerpt} Topics covered: ${blog.tags.join(', ')}. A detailed networking guide from OSI Model Simulator.`;
 
   return {
     title: seoTitle,
@@ -47,7 +47,7 @@ export async function generateMetadata(
       canonical: `/blogs/${blog.slug}`,
     },
     openGraph: {
-      title: rawTitle,
+      title: blog.title,
       description: blog.excerpt,
       type: 'article',
       url: `/blogs/${blog.slug}`,
@@ -71,8 +71,34 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     notFound();
   }
 
-  // A very simple markdown to HTML parser for the blog content
-  // In a real production environment, you might use a library like 'marked' or 'react-markdown'
+  // JSON-LD BlogPosting structured data
+  const blogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: blog.title,
+    description: blog.excerpt,
+    author: {
+      '@type': 'Person',
+      name: blog.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Roboticela',
+      url: 'https://roboticela.com',
+    },
+    datePublished: new Date(blog.date).toISOString(),
+    dateModified: new Date(blog.date).toISOString(),
+    url: `${BASE_URL}/blogs/${blog.slug}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${BASE_URL}/blogs/${blog.slug}`,
+    },
+    keywords: blog.tags.join(', '),
+    articleSection: 'Networking',
+    inLanguage: 'en-US',
+  };
+
+  // A simple markdown-to-JSX parser
   const parseContent = (content: string) => {
     return content.split('\n').map((line, i) => {
       const trimmedLine = line.trim();
@@ -81,14 +107,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       } else if (trimmedLine.startsWith('## ')) {
         return <h2 key={i} className="text-3xl font-bold text-foreground mt-10 mb-6">{trimmedLine.substring(3)}</h2>;
       } else if (trimmedLine.startsWith('# ')) {
+        // Render inline content-level "# " as h2 to avoid competing with the page's own <h1>
         return <h2 key={i} className="text-4xl font-bold text-foreground mt-12 mb-6">{trimmedLine.substring(2)}</h2>;
       } else if (trimmedLine.startsWith('- ')) {
         return <li key={i} className="ml-6 list-disc my-2 text-foreground/80">{trimmedLine.substring(2)}</li>;
       } else if (trimmedLine === '') {
         return <div key={i} className="h-4"></div>;
       }
-      
-      // Replace bold text within lines
+
       const parts = line.split(/(\*\*.*?\*\*)/g);
       return (
         <p key={i} className="my-4 text-foreground/80 leading-relaxed text-lg">
@@ -107,18 +133,24 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     <div className="min-h-screen bg-background transition-colors duration-300 overflow-x-hidden w-full flex flex-col">
       <Navbar />
 
+      {/* JSON-LD structured data for this article */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+
       <main className="flex-grow pt-32 pb-16 md:pt-40 md:pb-24 px-4">
         <div className="max-w-4xl mx-auto">
           {/* Back Button */}
-          <Link 
-            href="/blogs" 
+          <Link
+            href="/blogs"
             className="inline-flex items-center gap-2 text-foreground/60 hover:text-primary transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to all articles
           </Link>
 
-          {/* Article Header */}
+          {/* Article */}
           <article className="bg-card/40 backdrop-blur-md border border-border/40 rounded-3xl p-6 md:p-12 mb-8">
             <div className="flex flex-wrap gap-2 mb-6">
               {blog.tags.map((tag) => (
@@ -128,6 +160,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               ))}
             </div>
 
+            {/* Single <h1> per page — always server-rendered */}
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
               {blog.title}
             </h1>

@@ -9,8 +9,10 @@ const inter = Inter({
   display: "swap",
 });
 
+const BASE_URL = "https://osi-model-simulator.roboticela.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://osi-model-simulator.roboticela.com"),
+  metadataBase: new URL(BASE_URL),
   title: "OSI Model Simulator – Learn Network Protocols Interactively",
   description: "Free interactive simulator that visualizes how messages travel through all seven OSI model layers. Explore TCP/IP, HTTP, HTTPS, SMTP and more with step-by-step animations, real protocols, and hands-on learning. Perfect for students and educators.",
   keywords: "OSI model, networking, education, data encapsulation, TCP/IP, HTTP, HTTPS, network layers, protocol simulation, network education, OSI layers explained",
@@ -50,6 +52,48 @@ export const metadata: Metadata = {
   },
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "OSI Model Simulator",
+  url: BASE_URL,
+  description:
+    "Free interactive simulator for learning OSI model layers and network protocols. Covers TCP/IP, HTTP, HTTPS, SMTP, DNS and more.",
+  publisher: {
+    "@type": "Organization",
+    name: "Roboticela",
+    url: "https://roboticela.com",
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${BASE_URL}/blogs?search={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const softwareAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "OSI Model Simulator",
+  url: BASE_URL,
+  applicationCategory: "EducationalApplication",
+  operatingSystem: "Windows, macOS, Linux, Web Browser",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  description:
+    "Interactive OSI model simulator that visualizes all seven network protocol layers step-by-step.",
+  author: {
+    "@type": "Organization",
+    name: "Roboticela",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -57,9 +101,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} antialiased`}
-      >
+      <head>
+        {/* Preconnect to speed up third-party scripts */}
+        <link rel="preconnect" href="https://www.clarity.ms" />
+        <link rel="dns-prefetch" href="https://www.clarity.ms" />
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }}
+        />
+      </head>
+      <body className={`${inter.variable} antialiased`}>
         {children}
         <Script
           id="microsoft-clarity"

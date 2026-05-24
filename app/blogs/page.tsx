@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useDeferredValue, useMemo } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { blogs } from '@/data/blogs';
@@ -14,10 +14,20 @@ export default function BlogsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Filter blogs based on search term
-  const filteredBlogs = blogs.filter((blog) =>
-    blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    blog.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+  // useDeferredValue defers expensive filtering so the input stays responsive (INP fix)
+  const deferredSearch = useDeferredValue(searchTerm);
+
+  // useMemo avoids re-filtering on every render unrelated to search changes
+  const filteredBlogs = useMemo(
+    () =>
+      blogs.filter(
+        (blog) =>
+          blog.title.toLowerCase().includes(deferredSearch.toLowerCase()) ||
+          blog.tags.some((tag) =>
+            tag.toLowerCase().includes(deferredSearch.toLowerCase())
+          )
+      ),
+    [deferredSearch]
   );
 
   // Calculate pagination
@@ -40,15 +50,11 @@ export default function BlogsPage() {
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
           <div className="text-center mb-12">
-            <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+            {/* H1 rendered as a plain element (not motion.h1) so crawlers always see it */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-fade-in">
               OSI Model Insights
-            </motion.h1>
-            <motion.p 
+            </h1>
+            <motion.p
               className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto mb-10"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -58,7 +64,7 @@ export default function BlogsPage() {
             </motion.p>
 
             {/* Search Bar */}
-            <motion.div 
+            <motion.div
               className="relative max-w-xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -69,6 +75,8 @@ export default function BlogsPage() {
               </div>
               <input
                 type="text"
+                id="blog-search"
+                aria-label="Search articles"
                 className="w-full pl-12 pr-4 py-4 bg-card/40 backdrop-blur-md border border-border/40 rounded-xl text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                 placeholder="Search articles by title or tag..."
                 value={searchTerm}
@@ -88,7 +96,7 @@ export default function BlogsPage() {
                   key={blog.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.05 }}
                   className="bg-card/40 backdrop-blur-md border border-border/40 rounded-2xl overflow-hidden hover:bg-card/60 transition-all flex flex-col h-full group"
                 >
                   <div className="p-6 flex flex-col flex-grow">
@@ -144,15 +152,15 @@ export default function BlogsPage() {
               >
                 Previous
               </button>
-              
+
               <div className="flex items-center gap-2">
                 {[...Array(totalPages)].map((_, i) => (
                   <button
                     key={i}
                     onClick={() => handlePageChange(i + 1)}
                     className={`w-10 h-10 rounded-lg flex items-center justify-center border transition-colors ${
-                      currentPage === i + 1 
-                        ? 'bg-primary text-background border-primary' 
+                      currentPage === i + 1
+                        ? 'bg-primary text-background border-primary'
                         : 'bg-card/40 border-border/40 text-foreground hover:bg-card/60'
                     }`}
                   >
