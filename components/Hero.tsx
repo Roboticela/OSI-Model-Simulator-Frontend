@@ -78,20 +78,19 @@ export default function Hero() {
         {/* Benefits */}
         <motion.div
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto"
-          variants={containerAnimation}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
         >
           {benefits.map((benefit, index) => (
-            <motion.div
+            <div
               key={index}
-              variants={itemAnimation}
               className="bg-card/40 backdrop-blur-md rounded-xl p-4 text-center transition-all border border-border/40 hover:bg-card/60"
             >
               <benefit.icon className="w-8 h-8 mx-auto mb-2 text-primary" />
               <p className="text-sm text-foreground/80 font-medium">{benefit.text}</p>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </div>

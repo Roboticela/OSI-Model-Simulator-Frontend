@@ -65,17 +65,13 @@ const features = [
 
 function FeatureCard({ icon: Icon, title, description, color }: any) {
   return (
-    <motion.div
-      variants={itemAnimation}
-      whileHover={{ scale: 1.02 }}
-      className="bg-card/40 backdrop-blur-md rounded-xl p-6 border border-border/40 hover:border-primary/40 transition-all duration-300"
-    >
+    <div className="bg-card/40 backdrop-blur-md rounded-xl p-6 border border-border/40 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       <div className={`${color} mb-4`}>
         <Icon className="w-12 h-12" />
       </div>
       <h3 className="text-xl font-bold text-foreground mb-2">{title}</h3>
       <p className="text-foreground/70">{description}</p>
-    </motion.div>
+    </div>
   );
 }
 
@@ -87,7 +83,7 @@ export default function Features() {
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
@@ -100,10 +96,10 @@ export default function Features() {
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={containerAnimation}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
         >
           {features.map((feature, index) => (
             <FeatureCard

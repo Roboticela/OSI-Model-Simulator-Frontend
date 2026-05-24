@@ -15,19 +15,15 @@ export default function Stats() {
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="grid grid-cols-2 md:grid-cols-4 gap-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
         >
           {stats.map((stat, index) => (
-            <motion.div
+            <div
               key={index}
               className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
             >
               <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
                 {stat.value}
@@ -35,7 +31,7 @@ export default function Stats() {
               <div className="text-foreground/70 text-sm md:text-base">
                 {stat.label}
               </div>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </div>
