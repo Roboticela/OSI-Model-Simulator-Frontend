@@ -6,13 +6,18 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "OSI Model Simulator – Learn How Data Travels the Internet",
-  description: "Interactive educational app that visualizes how messages travel through the seven layers of the OSI model. See encapsulation step-by-step with real protocols and media.",
-  keywords: "OSI model, networking, education, data encapsulation, TCP/IP, HTTP, HTTPS, network layers, protocol simulation",
+  metadataBase: new URL("https://osi-model-simulator.roboticela.com"),
+  title: "OSI Model Simulator – Learn Network Protocols Interactively",
+  description: "Free interactive simulator that visualizes how messages travel through all seven OSI model layers. Explore TCP/IP, HTTP, HTTPS, SMTP and more with step-by-step animations, real protocols, and hands-on learning. Perfect for students and educators.",
+  keywords: "OSI model, networking, education, data encapsulation, TCP/IP, HTTP, HTTPS, network layers, protocol simulation, network education, OSI layers explained",
   authors: [{ name: "Roboticela" }],
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [
       { url: "/icon.ico" },
@@ -22,9 +27,26 @@ export const metadata: Metadata = {
     apple: "/icon.ico"
   },
   openGraph: {
-    title: "OSI Model Simulator – Learn How Data Travels the Internet",
-    description: "Interactive educational app that visualizes how messages travel through the seven layers of the OSI model.",
+    title: "OSI Model Simulator – Learn Network Protocols Interactively",
+    description: "Free interactive simulator that visualizes how messages travel through all seven OSI model layers with real protocols and step-by-step animations.",
     type: "website",
+    url: "/",
+    siteName: "OSI Model Simulator",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "OSI Model Simulator – Learn Network Protocols Interactively",
+    description: "Free interactive simulator for all seven OSI model layers with real protocols and step-by-step animations.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+    },
   },
 };
 

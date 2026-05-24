@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -9,6 +10,57 @@ export function generateStaticParams() {
   return blogs.map((blog) => ({
     slug: blog.slug,
   }));
+}
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const resolvedParams = await params;
+  const blog = blogs.find((b) => b.slug === resolvedParams.slug);
+
+  if (!blog) {
+    return {
+      title: 'Article Not Found – OSI Model Simulator Blog',
+      description: 'The requested article could not be found. Browse our full collection of networking and OSI model articles.',
+    };
+  }
+
+  // Truncate title to <= 60 chars (leaves room for " | OSI Blog" suffix = 11 chars → ~71 total)
+  const rawTitle = blog.title;
+  const seoTitle =
+    rawTitle.length <= 55
+      ? `${rawTitle} | OSI Blog`
+      : `${rawTitle.substring(0, 55).trimEnd()}… | OSI Blog`;
+
+  // Build a rich description >100 chars
+  const baseDesc = blog.excerpt;
+  const description =
+    baseDesc.length >= 120
+      ? baseDesc
+      : `${baseDesc} Covering topics: ${blog.tags.join(', ')}. A detailed guide from OSI Model Simulator.`;
+
+  return {
+    title: seoTitle,
+    description,
+    authors: [{ name: blog.author }],
+    alternates: {
+      canonical: `/blogs/${blog.slug}`,
+    },
+    openGraph: {
+      title: rawTitle,
+      description: blog.excerpt,
+      type: 'article',
+      url: `/blogs/${blog.slug}`,
+      publishedTime: new Date(blog.date).toISOString(),
+      tags: blog.tags,
+      siteName: 'OSI Model Simulator',
+    },
+    twitter: {
+      card: 'summary',
+      title: seoTitle,
+      description: blog.excerpt,
+    },
+  };
 }
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
@@ -29,7 +81,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       } else if (trimmedLine.startsWith('## ')) {
         return <h2 key={i} className="text-3xl font-bold text-foreground mt-10 mb-6">{trimmedLine.substring(3)}</h2>;
       } else if (trimmedLine.startsWith('# ')) {
-        return <h1 key={i} className="text-4xl font-bold text-foreground mt-12 mb-6">{trimmedLine.substring(2)}</h1>;
+        return <h2 key={i} className="text-4xl font-bold text-foreground mt-12 mb-6">{trimmedLine.substring(2)}</h2>;
       } else if (trimmedLine.startsWith('- ')) {
         return <li key={i} className="ml-6 list-disc my-2 text-foreground/80">{trimmedLine.substring(2)}</li>;
       } else if (trimmedLine === '') {

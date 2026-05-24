@@ -1,4 +1,7 @@
+# This static robots.txt has been superseded by the dynamic app/robots.ts route.
+# The Next.js App Router will serve /robots.txt automatically from app/robots.ts.
 User-agent: *
 Allow: /
+Disallow: /api/
 
 Sitemap: https://osi-model-simulator.roboticela.com/sitemap.xml
