@@ -71,9 +71,9 @@ export default function Hero() {
               href={GAMES_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-card/40 hover:bg-card/60 backdrop-blur-md rounded-xl font-semibold text-base sm:text-lg transition-transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 text-foreground border border-primary/30 hover:border-primary/50"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-card/40 hover:bg-card/60 backdrop-blur-md rounded-xl font-semibold text-base sm:text-lg transition-transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 text-foreground border border-border/40"
             >
-              <Gamepad2 className="text-lg sm:text-xl text-primary" />
+              <Gamepad2 className="text-lg sm:text-xl" />
               Play Games
             </a>
             <Link href="#downloads" className="w-full sm:w-auto">
