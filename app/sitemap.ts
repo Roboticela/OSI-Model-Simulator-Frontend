@@ -3,6 +3,8 @@ import { blogs } from '@/data/blogs';
 
 const BASE_URL = 'https://osi-model-simulator.roboticela.com';
 
+export const dynamic = 'force-dynamic';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
@@ -29,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const blogRoutes: MetadataRoute.Sitemap = blogs.map((blog) => ({
     url: `${BASE_URL}/blogs/${blog.slug}`,
-    lastModified: new Date(blog.date),
+    lastModified: now,
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
