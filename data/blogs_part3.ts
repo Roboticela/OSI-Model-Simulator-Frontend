@@ -13,7 +13,7 @@ While that makes sense historically, it's not how users experience the internet.
 
 So, let's explore the OSI model from a **top-down** perspective. Let's see what happens to your data as it descends from the app on your screen down into the physical wires.
 
-**Layer 7: The Application Layer**
+## Layer 7: The Application Layer
 
 This is the only layer you actually interact with. It contains the protocols that power the software you use every day. 
 
@@ -74,7 +74,8 @@ This top-down process—where each layer wraps the data in its own specific enve
 It is the reason the internet scales so beautifully. The browser at Layer 7 doesn't need to know if you are on WiFi or Ethernet. The router at Layer 3 doesn't care if the packet contains a video or an email. Every layer does its one specific job perfectly, oblivious to the rest, allowing you to seamlessly view a webpage from a server ten thousand miles away.
     `,
     date: "2024-07-02",
-    author: "Elena Rostova",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["OSI Model", "Encapsulation", "Networking Basics"]
   },
   {
@@ -87,7 +88,7 @@ Imagine you need to move a 10,000-pound boulder across the country. You can't ju
 
 In the world of networking, data is the boulder, network packets are the trucks, and the **MTU (Maximum Transmission Unit)** is the weight limit.
 
-**What exactly is an MTU?**
+## What exactly is an MTU?
 
 The MTU is the largest size (in bytes) that a single data packet can be on a specific network connection. 
 
@@ -95,7 +96,7 @@ On almost all standard Ethernet networks—which make up the vast majority of lo
 
 This means that if your computer wants to send a photograph that is 3,000,000 bytes (3 Megabytes) to a server, it physically cannot send it as one giant chunk. The network interface card (NIC) and the operating system must chop that photograph up into thousands of individual 1,500-byte packets, send them sequentially, and let the receiving computer reassemble them.
 
-**Why 1,500 Bytes?**
+## Why 1,500 Bytes?
 
 Why not 10,000 bytes? Why not 1,000,000 bytes? 
 
@@ -106,7 +107,7 @@ The 1,500-byte limit is largely a historical artifact from the early days of Eth
 
 They settled on 1,500 bytes as the "Goldilocks" size—big enough to be efficient, small enough to be reliable. And because backward compatibility is the golden rule of the internet, that standard has stuck around for 40 years.
 
-**Fragmentation: Breaking the Boulder**
+## Fragmentation: Breaking the Boulder
 
 What happens if a router receives a packet that is *larger* than the MTU of the next cable it needs to send it down? 
 
@@ -118,7 +119,7 @@ The router violently chops the packet into two separate pieces (e.g., one 1,500-
 
 Fragmentation is computationally expensive. It forces routers to use their CPUs to actively slice up data, which slows down the network. Even worse, if one of those fragments gets lost, the receiving computer cannot reassemble the original packet, so the *entire* original 1,550-byte payload has to be retransmitted by the sender.
 
-**Path MTU Discovery (PMTUD)**
+## Path MTU Discovery (PMTUD)
 
 Because fragmentation is so terrible for performance, modern networks try to avoid it at all costs using a clever trick called **Path MTU Discovery (PMTUD)**.
 
@@ -128,7 +129,7 @@ If a router receives this packet and it's too big, it drops the packet and sends
 
 Your computer receives this message, immediately adjusts its own MTU down to 1400 bytes for that specific connection, and resends the data. This guarantees that the data flows smoothly end-to-end without any routers having to stop and chop things up.
 
-**Jumbo Frames**
+## Jumbo Frames
 
 While 1,500 bytes is the standard for the public internet, things are different inside modern, high-speed data centers. 
 
@@ -141,80 +142,9 @@ However, Jumbo Frames only work if *every single switch and router* in the path 
 The MTU is a perfect example of networking's hidden mechanics. You never see it, but it governs the exact size of every piece of data you've ever downloaded.
     `,
     date: "2024-07-06",
-    author: "David Chen",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["MTU", "Layer 2", "Layer 3", "Packet Fragmentation"]
-  },
-  {
-    id: "43",
-    slug: "vlans-virtual-local-area-networks",
-    title: "VLANs: How to Build Invisible Walls Inside Your Network",
-    excerpt: "You have one physical switch and 50 computers. How do you keep the Accounting department's traffic completely separate from the Guest WiFi? Enter the magic of Virtual LANs.",
-    content: `
-In a traditional, basic network, a network switch acts as a single, open room. If you plug 10 computers into a switch, they are all on the same Local Area Network (LAN). They share the same subnet. They can all ping each other. And most importantly, if one computer sends a **broadcast message** (like an ARP request), the switch obediently blasts that message to every single other computer plugged into it.
-
-For a home network or a small office, this is fine. But imagine you are managing the network for a large corporate building, a hospital, or a university.
-
-You might have 500 devices plugged into dozens of switches. You have HR computers handling payroll, security cameras streaming video, IoT thermostats, and a guest WiFi network for visitors. 
-
-If all 500 devices were on the same LAN, it would be a disaster:
-1. **Security:** A guest on the WiFi could easily scan the network and attempt to access the HR payroll server.
-2. **Performance:** With 500 devices constantly sending background broadcast traffic, the network would be choked by "broadcast storms," slowing everything down.
-
-The physical solution would be to buy separate switches and run separate cables for every single department. One switch for HR, one switch for Cameras, one switch for Guests. This would be incredibly expensive and an absolute nightmare to wire.
-
-The intelligent solution is the **VLAN (Virtual Local Area Network)**.
-
-**What is a VLAN?**
-
-A VLAN is a logical concept that allows you to take one physical switch and chop it up into multiple, completely isolated *virtual* switches.
-
-Using the switch's software interface, a network administrator can assign specific physical ports to specific VLANs. 
-
-For example, on a 24-port switch:
-- Ports 1-10 are assigned to **VLAN 10 (HR)**.
-- Ports 11-20 are assigned to **VLAN 20 (Security Cameras)**.
-- Ports 21-24 are assigned to **VLAN 30 (Guest WiFi)**.
-
-Once configured, the switch enforces an ironclad invisible wall between these ports. If a computer on Port 1 (VLAN 10) sends a broadcast message, the switch will *only* forward it to ports 2 through 10. The computers on ports 11-24 will never even know the message existed. 
-
-As far as the computers are concerned, they are plugged into completely separate, physically disconnected networks. They usually even have completely different IP subnets (e.g., HR is \`10.0.10.x\`, Cameras are \`10.0.20.x\`).
-
-**How Do VLANs Communicate?**
-
-By definition, VLANs cannot talk directly to each other. That is the whole point of isolating them. 
-
-But what if the HR manager (VLAN 10) genuinely needs to view a security camera feed (VLAN 20)? 
-
-Because they are on different logical networks, Layer 2 (switching) cannot help them. To move data from one VLAN to another, you must route the traffic through Layer 3. You need a **Router**. 
-
-The traffic leaves VLAN 10 on the switch, goes up to the router, the router inspects it against its firewall rules ("Is HR allowed to view Cameras? Yes."), and then routes the traffic back down to the switch into VLAN 20. This is known as **Inter-VLAN Routing**. It ensures that all communication between isolated departments is strictly controlled and inspected by a firewall.
-
-**The Magic of VLAN Tagging (802.1Q)**
-
-VLANs are great on a single switch. But what happens when your network is spread across multiple floors of a building, with multiple switches connected to each other? 
-
-Suppose Switch A is on Floor 1 and Switch B is on Floor 2. Both switches have HR computers (VLAN 10) and Guest computers (VLAN 30). You need a way to connect the two switches so the HR computers on both floors can talk to each other. 
-
-You *could* run two separate cables between the switches—one for VLAN 10 and one for VLAN 30. But in a large network with 50 VLANs, you would need 50 cables between every switch. That defeats the purpose.
-
-Instead, we use a single cable called a **Trunk Link** and a protocol called **802.1Q VLAN Tagging**.
-
-When a frame from an HR computer arrives at Switch A and needs to travel across the trunk cable to Switch B, Switch A literally modifies the Ethernet frame. It pries open the frame header and inserts a small, 4-byte **VLAN Tag** that says \`VLAN ID: 10\`. 
-
-The tagged frame shoots across the trunk cable. Switch B receives it, looks at the tag, says, "Ah, this belongs to VLAN 10," strips the tag off, and forwards the standard, untagged frame only to the HR ports on Floor 2.
-
-**Why VLANs Rule the Enterprise**
-
-VLANs are arguably the most important feature of enterprise switching. They provide:
-- **Security:** Complete isolation of sensitive traffic without buying extra hardware.
-- **Flexibility:** If an HR employee moves their desk from Floor 1 to Floor 3, you don't have to run new cables. You just log into the switch and change their new port to VLAN 10. 
-- **Performance:** By shrinking the size of the broadcast domain, the network remains fast and efficient, no matter how many devices are plugged in.
-
-Without VLAN tags, modern corporate networks would be chaotic, unsecure, and physically unmanageable.
-    `,
-    date: "2024-07-09",
-    author: "Chris Vance",
-    tags: ["VLAN", "Layer 2", "Switching", "Network Architecture"]
   },
   {
     id: "44",
@@ -228,7 +158,7 @@ If this highway treated every vehicle equally, the ambulance would be stuck behi
 
 In computer networking, this exact scenario plays out millions of times a second. And the mechanism that allows the network "ambulances" to bypass the "delivery trucks" is called **Quality of Service (QoS)**.
 
-**All Packets Are Not Created Equal**
+## All Packets Are Not Created Equal
 
 By default, network switches and routers operate on a strictly **FIFO (First In, First Out)** basis. They are perfectly egalitarian. If a packet arrives, it gets put at the back of the queue. It doesn't matter if the packet contains a mundane software update or a critical piece of live audio from a CEO's conference call. 
 
@@ -242,13 +172,13 @@ For some applications, this is totally fine.
 For real-time applications, this is catastrophic.
 - **Voice over IP (VoIP) and Video Conferencing:** If the packets carrying your voice get delayed in a queue for even 200 milliseconds, the person on the other end will hear an annoying echo or silence. If the packets get dropped completely, your voice will sound choppy and robotic. Real-time data cannot tolerate delay (latency) or variation in delay (jitter).
 
-**How QoS Solves the Problem**
+## How QoS Solves the Problem
 
 Quality of Service allows network administrators to look at the traffic flowing through their routers and say, "This type of traffic is critical. This type of traffic is not."
 
 It works in two main steps: **Classification/Marking** and **Queuing**.
 
-**Step 1: Classification and Marking (The Sirens)**
+## Step 1: Classification and Marking (The Sirens)
 
 Before a router can prioritize traffic, it has to know what it's looking at. 
 
@@ -258,7 +188,7 @@ Having identified the packet, the device **marks** it. In modern networks, this 
 
 For example, VoIP traffic is almost universally marked with a DSCP value of 46 (which translates to 'Expedited Forwarding'). The packet now has its "sirens" on. 
 
-**Step 2: Queuing (Pulling Over)**
+## Step 2: Queuing (Pulling Over)
 
 Now the marked packet travels across the network. It arrives at the main gateway router connecting the office to the internet—a major bottleneck that is heavily congested by employees watching YouTube and downloading files.
 
@@ -274,7 +204,7 @@ When the router sees a packet arrive, it checks the DSCP mark in the IP header.
 
 Even if there are a thousand web packets waiting to be sent, the router will stop processing them, instantly transmit the VoIP packet, and then resume normal operations. The voice packet experiences effectively zero latency, even though the network is congested.
 
-**The Limits of QoS**
+## The Limits of QoS
 
 There is one major catch to QoS: **You can only control the networks you own.**
 
@@ -285,6 +215,7 @@ Major ISPs generally strip off or ignore QoS markings on the public internet. Wh
 But within the walls of a corporate network, or across private leased lines, QoS is the unsung hero keeping the modern digital workplace functioning without driving everyone crazy.
     `,
     date: "2024-07-12",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["QoS", "VoIP", "Traffic Management", "Layer 3"]
   },
@@ -310,7 +241,7 @@ But this raises a massive technical question: **How does your computer know to t
 
 The answer lies in a brilliant, slightly hacky manipulation of **DNS (Domain Name System)**.
 
-**The Traditional DNS Lookup**
+## The Traditional DNS Lookup
 
 Normally, DNS is just a phonebook. You type \`example.com\`, your computer asks a DNS server for the IP address, and the DNS server returns a static IP, like \`192.0.2.1\`. No matter who asks in the world, they get the exact same IP address.
 
@@ -357,7 +288,8 @@ If the London server loses power and goes offline, its BGP announcement disappea
 Without CDNs, the modern internet—with its 4K video streams, instant software downloads, and dynamic web applications—would be impossibly slow and fragile. By combining the geographic cloning of data with intelligent DNS and Anycast routing, CDNs bend the rules of latency, making the global internet feel like a local area network.
     `,
     date: "2024-07-15",
-    author: "Jamie Lin",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["DNS", "CDN", "Anycast", "Network Architecture"]
   },
   {
@@ -372,7 +304,7 @@ While they do provide significant privacy benefits, they aren't magic. A VPN is 
 
 To understand how a VPN works, we first have to understand the problem it solves.
 
-**The Public Internet Problem**
+## The Public Internet Problem
 
 Imagine you are sitting in a coffee shop in Paris. You want to connect to your corporate intranet in New York to download a highly confidential financial report. 
 
@@ -382,7 +314,7 @@ At *any* of those hops, a malicious actor (or just a nosy ISP) could intercept y
 
 Worse, your corporate firewall is explicitly configured to block all incoming connections from random public IP addresses to protect the intranet. Your request from Paris will be instantly dropped.
 
-**The Solution: Tunneling**
+## The Solution: Tunneling
 
 A VPN solves this by creating a **Tunnel**. 
 
@@ -398,7 +330,7 @@ This new outer packet has:
 
 The coffee shop router and the global internet routers only look at the outer envelope. They have no idea what the inner packet contains. They just route the traffic to the VPN server in New York.
 
-**The Solution: Encryption**
+## The Solution: Encryption
 
 Tunneling alone isn't enough. If the outer packet was intercepted, a hacker could just strip it off and read the inner packet. 
 
@@ -406,7 +338,7 @@ This is where encryption comes in. Before the VPN software encapsulates the orig
 
 Now, even if someone intercepts the packet on the oceanic cable, all they see is a completely randomized string of gibberish traveling between a coffee shop in Paris and a server in New York. They cannot see what website you are actually visiting, and they cannot read the data.
 
-**The Unboxing (Decapsulation)**
+## The Unboxing (Decapsulation)
 
 When the packet arrives at the VPN server in New York, the server performs the reverse process. 
 1. It strips off the outer envelope.
@@ -417,7 +349,7 @@ Because the VPN server is sitting *inside* the corporate network, it is trusted.
 
 When the internal server replies, it sends the data to the VPN server. The VPN server encrypts the reply, wraps it in a new envelope destined for the Paris coffee shop, and fires it back across the internet.
 
-**Commercial VPNs vs Corporate VPNs**
+## Commercial VPNs vs Corporate VPNs
 
 The exact same underlying technology powers both Corporate VPNs and Commercial VPNs (like NordVPN or ExpressVPN), but they are used for different purposes.
 
@@ -430,7 +362,7 @@ Why do this? Two reasons:
 1. **Hiding from your Local ISP:** The coffee shop (or your home ISP) only sees an encrypted stream of data going to a VPN server. They cannot see that you are actually browsing Wikipedia or watching Netflix. 
 2. **Location Spoofing:** Because the VPN server is the device that ultimately requests the webpage from Netflix, Netflix sees the IP address of the VPN server, not your real IP address. If you connect to a VPN server in Japan, Netflix assumes you are physically in Japan and serves you Japanese content.
 
-**The Illusion of Perfect Anonymity**
+## The Illusion of Perfect Anonymity
 
 While VPNs protect your data in transit, they are not a silver bullet for anonymity. 
 
@@ -439,7 +371,8 @@ When you use a commercial VPN, you are simply shifting your trust from your loca
 A VPN is a powerful tool for encrypting data across untrusted networks and manipulating routing via tunneling, but it is just one layer in a comprehensive security strategy.
     `,
     date: "2024-07-18",
-    author: "Elena Rostova",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["VPN", "Security", "Encryption", "Tunneling"]
   },
   {
@@ -454,7 +387,7 @@ But not all boxes are created equal. Historically and functionally, network hard
 
 Understanding the difference between them is the quickest way to understand the first three layers of the OSI model. Let's break them down.
 
-**The Hub: The Dumb Broadcaster (Layer 1)**
+## The Hub: The Dumb Broadcaster (Layer 1)
 
 Imagine a small room with five people in it. They all speak different languages, but they all have megaphones. When Person A wants to say something to Person C, they don't walk over and whisper. They just yell it into the megaphone. Everyone in the room hears it, but only Person C pays attention. If Person B tries to talk at the exact same time, the two voices crash into each other, creating a garbled mess, and they both have to stop and try again.
 
@@ -468,7 +401,7 @@ Because of this, all devices connected to a Hub share the same bandwidth. If two
 
 Hubs were cheap and popular in the 1990s, but they are catastrophically inefficient. Today, they belong in museums. You cannot buy a Hub anymore; they have been entirely replaced by Switches.
 
-**The Switch: The Intelligent Traffic Cop (Layer 2)**
+## The Switch: The Intelligent Traffic Cop (Layer 2)
 
 If a Hub is a room full of megaphones, a **Switch** is a highly efficient telephone switchboard operator. 
 
@@ -486,7 +419,7 @@ This means Computer C and Computer D can be talking to each other at the exact s
 
 Switches are the backbone of all modern local networks (LANs). 
 
-**The Router: The Global Navigator (Layer 3)**
+## The Router: The Global Navigator (Layer 3)
 
 Switches are brilliant at moving traffic *within* a single local network. But they are completely blind to the outside world. A Switch only understands MAC addresses, which are only valid locally. If a Switch receives a packet destined for a Google server, it has no idea what to do with it.
 
@@ -502,7 +435,7 @@ Imagine you are mailing a letter.
 
 When your computer wants to load a webpage, it sends the data to the Switch. The Switch forwards it to the Router. The Router rips off the Layer 2 Ethernet frame, inspects the Layer 3 IP packet, consults its massive **Routing Table**, and decides which of its external internet connections is the best path to reach the destination. It then wraps the packet in a new frame and sends it on its way.
 
-**The Blurring Lines: Layer 3 Switches and Home Routers**
+## The Blurring Lines: Layer 3 Switches and Home Routers
 
 If the definitions above seem perfectly neat and tidy, prepare to be slightly annoyed by modern marketing and engineering.
 
@@ -517,7 +450,8 @@ On the consumer side, the box sitting in your living room that your ISP gave you
 So, the next time you look at a blinking network box, ask yourself: Is it moving data based on physical hardware addresses, or is it navigating the global map of IP addresses? That is the difference between switching and routing.
     `,
     date: "2024-07-21",
-    author: "David Chen",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Hardware", "Layer 1", "Layer 2", "Layer 3", "Switch", "Router"]
   },
   {
@@ -538,7 +472,7 @@ Yet, well over a decade after the official exhaustion of IPv4, if you check the 
 
 Why has the transition taken so long, and how does the new system actually work?
 
-**The Scale of IPv6**
+## The Scale of IPv6
 
 IPv6 doesn't just increase the address space a little bit. It expands it to an incomprehensible degree. 
 
@@ -553,7 +487,7 @@ To put that in perspective:
 Because the numbers are so large, IPv6 addresses look completely different. Instead of four decimal numbers (\`192.168.1.1\`), they are written as eight groups of four hexadecimal digits, separated by colons:
 \`2001:0db8:85a3:0000:0000:8a2e:0370:7334\`
 
-**Simplifying the Protocol**
+## Simplifying the Protocol
 
 IPv6 wasn't just designed to solve the space issue. Engineers took the opportunity to clean up decades of technical debt in the IP protocol.
 
@@ -561,7 +495,7 @@ IPv6 wasn't just designed to solve the space issue. Engineers took the opportuni
 2. **Simplified Headers:** The IPv4 packet header is complex and variable in length, making it hard for routers to process quickly. The IPv6 header is streamlined and has a fixed length. Even though the addresses are much larger, routers can actually process IPv6 packets faster because the math is simpler.
 3. **No More Broadcasts:** IPv4 relies heavily on "broadcasts" (shouting to every device on a subnet, like ARP does). This is incredibly noisy and inefficient. IPv6 eliminates broadcasts entirely, replacing them with highly efficient "Multicast" (sending only to devices that explicitly want to listen).
 
-**The Great Barrier: Lack of Backward Compatibility**
+## The Great Barrier: Lack of Backward Compatibility
 
 If IPv6 is so superior, why hasn't everyone switched? 
 
@@ -573,7 +507,7 @@ This created a massive chicken-and-egg problem.
 
 For years, nobody wanted to move first. 
 
-**How We Survive Today: Dual-Stack and CGNAT**
+## How We Survive Today: Dual-Stack and CGNAT
 
 To manage the incredibly slow transition, the industry relies on two major workarounds.
 
@@ -593,6 +527,7 @@ Major tech companies (Google, Facebook, Netflix) serve the vast majority of thei
 We are destined to live in a Dual-Stack world for at least another decade, waiting for the long tail of legacy corporate software and old hardware routers to finally retire. But the future—vast, complex, and hexadecimal—is already here.
     `,
     date: "2024-07-24",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["IPv4", "IPv6", "Layer 3", "Internet Architecture"]
   },
@@ -608,7 +543,7 @@ The answer is almost always yes. But having a firewall and being secure are two 
 
 They both act as security guards, but they operate at entirely different layers of the OSI model and look for entirely different threats.
 
-**The Network Firewall (The Bouncer)**
+## The Network Firewall (The Bouncer)
 
 A traditional Network Firewall operates primarily at **Layer 3 (Network)** and **Layer 4 (Transport)**. 
 
@@ -627,7 +562,7 @@ If a hacker wants to attack a web server, they don't try to break through the bl
 
 The hacker then sends a malicious SQL Injection command buried deep inside the HTTP request. The Network Firewall is completely oblivious. The web server executes the command, and the database is breached.
 
-**The Web Application Firewall (The Detective)**
+## The Web Application Firewall (The Detective)
 
 To stop these sophisticated, payload-based attacks, we need a different kind of security guard. We need a **WAF (Web Application Firewall)**.
 
@@ -670,7 +605,8 @@ Modern enterprise security requires both.
 By combining Layer 3/4 filtering with Layer 7 inspection, you create a layered security posture—Defense in Depth—that keeps both the front door and the conversations inside secure.
     `,
     date: "2024-07-28",
-    author: "Elena Rostova",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Security", "WAF", "Firewall", "Layer 7"]
   },
   {
@@ -687,7 +623,7 @@ But beyond the marketing names, what is actually changing under the hood when yo
 
 To understand wireless evolution, we have to look at how radios handle congestion, because Wi-Fi is essentially just highly complex two-way radio.
 
-**The Early Days: One at a Time**
+## The Early Days: One at a Time
 
 In the early generations of Wi-Fi (up through Wi-Fi 4 / 802.11n), routers had a fundamental limitation: **They could only talk to one device at a exact moment in time.**
 
@@ -695,7 +631,7 @@ If you had a laptop, a phone, and a smart TV connected to the same router, the r
 
 Because it happened in milliseconds, it felt seamless. But as people added dozens of smart home devices to their networks, this "round-robin" approach created massive bottlenecks. The router was constantly starting and stopping, wasting precious time coordinating who gets to speak next.
 
-**Wi-Fi 5 (802.11ac): Bigger Pipes and MU-MIMO**
+## Wi-Fi 5 (802.11ac): Bigger Pipes and MU-MIMO
 
 Wi-Fi 5 introduced several major upgrades. 
 
@@ -706,7 +642,7 @@ For the first time, a router with multiple antennas could physically shape its r
 
 However, in Wi-Fi 5, MU-MIMO only worked for **downloads** (router to device). Uploads were still strictly one-at-a-time.
 
-**Wi-Fi 6 (802.11ax): The Efficiency Revolution**
+## Wi-Fi 6 (802.11ax): The Efficiency Revolution
 
 While Wi-Fi 5 was all about increasing top speed for a few devices, Wi-Fi 6 was completely redesigned to solve the problem of **dense congestion**. Think of an airport terminal or a stadium with thousands of phones trying to connect at once.
 
@@ -721,7 +657,7 @@ In older Wi-Fi, battery-powered devices (like smart sensors or phones) had to co
 
 Furthermore, Wi-Fi 6 allows MU-MIMO to work in **both directions** (uploads and downloads), and it brings the efficiency upgrades back to the 2.4 GHz band, which Wi-Fi 5 had mostly ignored.
 
-**Wi-Fi 6E and Wi-Fi 7: The Future**
+## Wi-Fi 6E and Wi-Fi 7: The Future
 
 Just as Wi-Fi 6 was rolling out, the FCC opened up a massive new chunk of radio spectrum for unlicensed use: the **6 GHz band**. 
 
@@ -729,12 +665,13 @@ Just as Wi-Fi 6 was rolling out, the FCC opened up a massive new chunk of radio 
 
 **Wi-Fi 7 (802.11be)**, which is just beginning to hit the market, takes this further. Its headline feature is **Multi-Link Operation (MLO)**. Instead of a device connecting to the router on 2.4 GHz *or* 5 GHz *or* 6 GHz, Wi-Fi 7 allows a phone or laptop to connect across *all three bands simultaneously*, aggregating the bandwidth for truly staggering speeds and near-zero latency, rivaling hardwired Ethernet.
 
-**The Takeaway**
+## The Takeaway
 
 When you buy a newer router, you aren't just buying "faster internet." Your ultimate speed is still limited by the cable coming into your house from the ISP. What you are buying is a much smarter, more efficient radio traffic controller that can juggle 50 different devices without breaking a sweat.
     `,
     date: "2024-08-01",
-    author: "Chris Vance",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Wi-Fi", "Layer 1", "Layer 2", "Wireless", "Hardware"]
   },
   {
@@ -751,7 +688,7 @@ But if you open up a terminal on Linux or a configuration panel on Windows, you 
 
 How is this possible? And if it's so easy to fake, how can networks rely on MAC addresses for anything?
 
-**The Software Trumps the Hardware**
+## The Software Trumps the Hardware
 
 The key to understanding MAC spoofing is understanding the difference between the physical hardware and the operating system (OS) driver.
 
@@ -767,24 +704,24 @@ Because the software controls the frame construction, you can simply tell the op
 
 The hardware card is completely dumb. It doesn't check the frame to ensure the source MAC matches its own BIA. It just dutifully transmits whatever the OS hands it. 
 
-**Why Spoof a MAC Address?**
+## Why Spoof a MAC Address?
 
 Why would anyone want to change their MAC address? 
 
-**1. Evading Captive Portals and Time Limits:**
+## 1. Evading Captive Portals and Time Limits:
 Have you ever used free airport or hotel WiFi that limits you to "30 minutes of free access"? How do they know you've been on for 30 minutes? They track your MAC address. 
 If your time runs out, you can simply spoof a new, random MAC address. To the hotel's network, you instantly look like a brand new laptop that just walked in the door, and your 30-minute timer starts over.
 
-**2. Bypassing MAC Filtering Security:**
+## 2. Bypassing MAC Filtering Security:
 Some lazy network administrators try to secure their WiFi networks using **MAC Filtering**. They configure the router with a whitelist: "Only allow these three specific MAC addresses to connect."
 A hacker sitting in a car outside can use a WiFi sniffer to passively listen to the encrypted traffic flying through the air. Even if the data is encrypted, the MAC addresses in the radio frames are always sent in plain text. The hacker sees that a legitimate device (e.g., \`00:11:22:33:44:55\`) is talking to the router. The hacker then spoofs their own MAC to match the legitimate one, and suddenly the router allows them onto the network. This is why MAC filtering is considered security theater, not actual security.
 
-**3. Anonymity and Privacy (MAC Randomization):**
+## 3. Anonymity and Privacy (MAC Randomization):
 Spoofing isn't just for hackers; it's now a standard privacy feature built into iOS, Android, and Windows. 
 When you walk through a shopping mall with your phone's WiFi turned on, your phone constantly broadcasts probe requests looking for known networks. Historically, these requests contained your real MAC address. Retailers used listening devices to track your physical movements through the mall based on your unique MAC. 
 To stop this, modern phones now automatically spoof a random, fake MAC address every time they connect to a new public WiFi network, making physical tracking impossible.
 
-**The Limitations of Spoofing**
+## The Limitations of Spoofing
 
 While MAC spoofing is incredibly easy, its effects are strictly limited to the local network (Layer 2). 
 
@@ -795,7 +732,8 @@ You cannot use MAC spoofing to hide your identity from a website on the internet
 So, while your hardware address is indeed physically burned into silicon, in the world of software-defined networking, that physical reality is nothing more than a polite suggestion.
     `,
     date: "2024-08-04",
-    author: "David Chen",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["MAC Address", "Layer 2", "Security", "Spoofing"]
   },
   {
@@ -810,7 +748,7 @@ To make this patchwork function, these networks must talk to each other and shar
 
 BGP is the protocol that makes the global internet possible. It is also horrifyingly insecure by design, leading to a phenomenon known as **BGP Hijacking**. 
 
-**The Honor System of the Internet**
+## The Honor System of the Internet
 
 To understand how BGP can be hijacked, you have to understand how BGP routes traffic.
 
@@ -822,7 +760,7 @@ Here is the fatal flaw in BGP: **There is no built-in verification.**
 
 When AS12345 announces that it owns those IP addresses, the neighboring routers just *believe them*. BGP was designed in the 1980s by a small group of researchers who all knew and trusted each other. They didn't build cryptographic authentication into the protocol because they couldn't fathom a scenario where a network operator would maliciously lie about what IPs they owned.
 
-**The Hijack**
+## The Hijack
 
 Because BGP operates on the honor system, any network operator connected to the internet can theoretically claim to own any IP address on earth.
 
@@ -834,7 +772,7 @@ BGP routers use several metrics to choose the best path, but the primary metric 
 
 Suddenly, if a customer in Asia tries to log into the US bank, their internet provider's routers look at the BGP map and send the traffic directly to the rogue ISP in Eastern Europe instead of the real bank in New York.
 
-**What Happens Next?**
+## What Happens Next?
 
 Once the rogue ISP has stolen the traffic, they have several options:
 
@@ -842,7 +780,7 @@ Once the rogue ISP has stolen the traffic, they have several options:
 2. **The Imposter (Phishing):** The rogue ISP routes the traffic to a fake server they control that looks exactly like the bank's website. If the users ignore SSL warnings (or if the attackers manage to spoof certificates), they can steal usernames and passwords.
 3. **The Man-in-the-Middle (Espionage):** This is the most dangerous. The rogue ISP receives the traffic, quietly records a copy of it, and then uses a hidden, secondary connection to forward the traffic back to the real US bank. The connection still works. The user logs in successfully. Neither the user nor the bank realizes that their traffic just took a massive detour through a hostile country and was completely wiretapped.
 
-**Famous Incidents**
+## Famous Incidents
 
 BGP Hijacks happen constantly. Some are malicious, while others are just catastrophic typos by tired engineers.
 
@@ -850,7 +788,7 @@ BGP Hijacks happen constantly. Some are malicious, while others are just catastr
 - **The MyEtherWallet Heist (2018):** Hackers managed to hijack the BGP route for Amazon's Route 53 DNS service. By stealing Amazon's traffic, they redirected users trying to log into a cryptocurrency wallet (MyEtherWallet) to a fake server in Russia, stealing roughly $150,000 in cryptocurrency before the hijack was stopped.
 - **State-Sponsored Routing:** Cybersecurity firms routinely observe massive chunks of US and European internet traffic inexplicably taking detours through state-owned telecoms in China or Russia for brief periods of time, strongly suggesting state-sponsored espionage via BGP manipulation.
 
-**Fixing the Flaw: RPKI**
+## Fixing the Flaw: RPKI
 
 Engineers are desperately trying to fix BGP using a system called **RPKI (Resource Public Key Infrastructure)**. 
 
@@ -859,77 +797,9 @@ RPKI adds cryptographic signatures to BGP announcements. When a router receives 
 While RPKI is the definitive solution to BGP hijacking, adoption is entirely voluntary. As of 2024, only about half of the global internet actively enforces RPKI. Until that number approaches 100%, the internet will remain vulnerable to anyone willing to stand up and confidently lie to a router.
     `,
     date: "2024-08-07",
-    author: "Chris Vance",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["BGP", "Routing", "Security", "Layer 3"]
-  },
-  {
-    id: "53",
-    slug: "osi-model-vs-tcp-ip-model",
-    title: "OSI Model vs TCP/IP Model: Why Do We Have Two Maps?",
-    excerpt: "You spend weeks memorizing the 7 layers of the OSI model, only to find out that working engineers actually use a 4-layer TCP/IP model. Here is why both exist and how they compare.",
-    content: `
-If you take a networking class or study for a certification like the CompTIA Network+ or Cisco CCNA, you will spend a massive amount of time memorizing the **OSI (Open Systems Interconnection) Model**. 
-
-You will memorize the 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application. You will use mnemonics like *"Please Do Not Throw Sausage Pizza Away."*
-
-And then, you will graduate, get a job in a data center, and discover a frustrating truth: The internet is not actually built on the OSI model. 
-
-The modern internet is built entirely on the **TCP/IP Model**. 
-
-So why do we have two different models? Why do we force students to learn a 7-layer model when the actual software powering the globe only uses 4 layers? 
-
-**A Brief History of the Protocol Wars**
-
-To understand the two models, we have to go back to the late 1970s and early 1980s. The concept of computer networking was exploding, but it was incredibly fragmented. IBM computers could only talk to IBM computers. Apple computers could only talk to Apple computers. 
-
-Everyone realized the world needed a universal standard. Two massive competing efforts emerged.
-
-1. **The OSI Project:** Led by the International Organization for Standardization (ISO), a massive bureaucratic body in Europe. They wanted to design the perfect, philosophically flawless, highly structured networking model before anyone actually wrote the code. They spent years arguing in committees, dividing networking into 7 highly specific, rigorously defined layers.
-
-2. **The ARPANET/DoD Project:** Led by a scrappy group of researchers funded by the US Department of Defense (including Vint Cerf and Bob Kahn). They didn't care about philosophical perfection; they just wanted to get military and university computers talking to each other immediately. They quickly hacked together a set of practical protocols called TCP and IP.
-
-The OSI committee was still drafting theoretical documents while the TCP/IP engineers were already actively sending emails across the country. By the time the OSI protocols were finally finished and ready to be deployed, the world had already universally adopted TCP/IP. The OSI protocols were dead on arrival.
-
-**Comparing the Layers**
-
-The TCP/IP model was built practically, so it only has **4 layers**. Let's compare how they map to the 7 theoretical layers of OSI.
-
-**1. The Network Access Layer (TCP/IP) vs Layers 1 & 2 (OSI)**
-- **OSI:** Strictly separates the Physical cables (Layer 1) from the MAC addresses and framing (Layer 2).
-- **TCP/IP:** Combines them into a single "Network Access" (or Link) layer. The TCP/IP developers basically said, "We don't care if it's copper, fiber, or satellite. Just give us a physical link that can move bits, and we'll handle the rest."
-
-**2. The Internet Layer (TCP/IP) vs Layer 3 (OSI)**
-- **OSI Layer 3 (Network):** Handles logical addressing and routing.
-- **TCP/IP Internet Layer:** This is an exact 1:1 match. This is where the Internet Protocol (IP) lives. It handles IP addresses and routing.
-
-**3. The Transport Layer (TCP/IP) vs Layer 4 (OSI)**
-- **OSI Layer 4 (Transport):** Handles end-to-end reliability and port numbers.
-- **TCP/IP Transport Layer:** Another exact 1:1 match. This is where TCP and UDP live.
-
-**4. The Application Layer (TCP/IP) vs Layers 5, 6, & 7 (OSI)**
-- **OSI:** Strictly separates the connection management (Layer 5: Session), the data formatting and encryption (Layer 6: Presentation), and the actual user protocol (Layer 7: Application).
-- **TCP/IP:** Smashes all three together into a single, massive **Application Layer**. The TCP/IP philosophy dictates that the network should just move data; any complex logic regarding sessions, encryption, or formatting should be handled strictly by the software application itself (like the web browser). 
-
-**So Why Do We Still Teach OSI?**
-
-If TCP/IP won the war, and the OSI protocols are dead, why do we still memorize the 7-layer OSI model?
-
-Because while the OSI *protocols* failed, the OSI *model* is a vastly superior teaching and troubleshooting tool.
-
-The 4-layer TCP/IP model is too broad. If an engineer says, "We have an Application Layer problem," in the TCP/IP model, that could mean a dropped session, a failed SSL certificate, or a broken HTTP GET request. 
-
-The OSI model gives engineers a much more precise vocabulary. 
-- If a fiber optic cable is cut, it's a **Layer 1** problem.
-- If a switch is misconfigured with the wrong VLAN, it's a **Layer 2** problem.
-- If a router is sending traffic to the wrong IP, it's a **Layer 3** problem.
-- If a firewall is blocking port 443, it's a **Layer 4** problem.
-- If an SSL certificate is expired, it's a **Layer 6** problem.
-
-The TCP/IP model is the reality of the code running on your computer. But the OSI model provides the vocabulary that network engineers actually use to talk to each other when trying to fix it.
-    `,
-    date: "2024-08-10",
-    author: "Elena Rostova",
-    tags: ["OSI Model", "TCP/IP", "Networking Basics", "History"]
   },
   {
     id: "54",
@@ -945,7 +815,7 @@ To fix it, tutorials always tell you to log into your router and configure **Por
 
 But what exactly is Port Forwarding? Why is it necessary, and is it dangerous to poke holes in your network?
 
-**The Barrier: NAT and the Default Firewall**
+## The Barrier: NAT and the Default Firewall
 
 To understand Port Forwarding, we must quickly revisit **NAT (Network Address Translation)**.
 
@@ -1009,7 +879,8 @@ If you forward a port for a video game server, and that video game server softwa
 Port Forwarding is safe *only* if the specific software application listening on that internal port is secure, fully updated, and requires strong authentication. You are effectively shifting the security responsibility from the router directly onto the application itself.
     `,
     date: "2024-08-13",
-    author: "Jamie Lin",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Port Forwarding", "NAT", "Layer 4", "Router", "Security"]
   },
   {
@@ -1030,7 +901,7 @@ This is the **Key Distribution Problem**, and for hundreds of years, it was the 
 
 To solve it, the internet relies on a combination of two entirely different cryptographic systems: **Symmetric Encryption** and **Asymmetric Encryption**.
 
-**Symmetric Encryption: Fast but Fragile**
+## Symmetric Encryption: Fast but Fragile
 
 Symmetric encryption is the traditional form of cryptography. It uses the **exact same key** to both lock (encrypt) and unlock (decrypt) the data. 
 
@@ -1040,7 +911,7 @@ Algorithms like **AES (Advanced Encryption Standard)** use symmetric encryption.
 
 But symmetric encryption cannot solve the key distribution problem. If you and the bank have never communicated before, there is no secure way to establish a shared symmetric key over a public network.
 
-**Asymmetric Encryption: The Mathematical Miracle**
+## Asymmetric Encryption: The Mathematical Miracle
 
 In the 1970s, mathematicians solved the problem by inventing **Asymmetric Encryption** (also known as Public Key Cryptography). 
 
@@ -1052,7 +923,7 @@ Here is the magic mathematical property that makes it work: **If you lock a piec
 
 Algorithms like **RSA** and **Elliptic Curve Cryptography (ECC)** use asymmetric encryption.
 
-**How They Work Together (The TLS Handshake)**
+## How They Work Together (The TLS Handshake)
 
 When you connect to your bank's website using HTTPS (which uses the TLS protocol), the two systems combine the strengths of both encryption types. 
 
@@ -1070,7 +941,7 @@ Here is exactly what happens during the first milliseconds of your connection to
     *(If a hacker intercepts this message, it is useless to them. It is locked with the bank's Public Key. The ONLY thing in the universe that can unlock it is the bank's Private Key, which is safely hidden on the bank's secure servers).*
 6. **The Unlocking:** The bank receives the message and uses its Private Key to decrypt it, revealing the Session Key.
 
-**The Transition to Symmetric**
+## The Transition to Symmetric
 
 At this exact moment, a miracle has occurred. Both your laptop and the bank now possess the exact same secret Session Key, and nobody else on the internet knows what it is, even though it was transmitted over public cables.
 
@@ -1081,6 +952,7 @@ For the rest of your banking session, your laptop and the bank server use the li
 This hybrid approach—using the slow, brilliant math of Asymmetric encryption to safely deliver the fast, efficient keys of Symmetric encryption—is the fundamental foundation of trust on the modern internet.
     `,
     date: "2024-08-16",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["Encryption", "Security", "TLS", "Cryptography", "Layer 6"]
   },
@@ -1096,7 +968,7 @@ Why do we need a mask? Why can't we just use the IP address by itself?
 
 Because an IP address is actually two completely different things mashed together into one number. The Subnet Mask is the decoder ring that tells your computer how to split them apart.
 
-**The Two Halves of an IP Address**
+## The Two Halves of an IP Address
 
 Every IP address is divided into two sections:
 1. **The Network Portion:** Like the zip code and street name on a piece of mail. It identifies the general neighborhood.
@@ -1166,7 +1038,8 @@ CIDR simply counts how many binary "1"s are in the subnet mask from left to righ
 When you see an IP written as \`192.168.1.50/24\`, that slash-24 is exactly the same thing as the subnet mask. It tells you exactly where the network ends and the host begins.
     `,
     date: "2024-08-19",
-    author: "Chris Vance",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Subnetting", "IP Addressing", "Layer 3", "CIDR"]
   },
   {
@@ -1185,7 +1058,7 @@ TCP is meticulous. It establishes a strict connection (the 3-way handshake), num
 
 But as the modern web evolved, TCP's meticulous nature became its greatest weakness. To fix it, the engineers at Google (and later the IETF) created **QUIC** and **HTTP/3**. 
 
-**The Problem with TCP: Head-of-Line Blocking**
+## The Problem with TCP: Head-of-Line Blocking
 
 When you load a modern webpage, you aren't just downloading one HTML file. You are downloading dozens of images, CSS files, and JavaScript libraries simultaneously over a single TCP connection. 
 
@@ -1197,7 +1070,7 @@ TCP slams on the brakes. The 5th, 6th, and 7th boxcars arrive safely at your com
 
 This is called **Head-of-Line Blocking**. A single lost packet for a minor image completely halts the loading of the essential CSS and JavaScript that were right behind it. On a spotty mobile network, this makes websites feel incredibly sluggish.
 
-**The Solution: Moving to UDP**
+## The Solution: Moving to UDP
 
 To fix this, engineers realized they had to bypass TCP entirely. But they couldn't just use raw UDP, because UDP drops packets entirely, which would result in corrupted webpages.
 
@@ -1211,7 +1084,7 @@ If we return to the train analogy, QUIC is like putting the files on separate tr
 
 There is no Head-of-Line Blocking. The webpage renders the text and styling instantly, and the missing image just pops in a second later when it finally arrives.
 
-**Zero Round-Trip Time (0-RTT)**
+## Zero Round-Trip Time (0-RTT)
 
 HTTP/3 solves another massive problem: the handshake delay.
 
@@ -1225,7 +1098,7 @@ QUIC integrates the cryptographic handshake (TLS 1.3) directly into the transpor
 
 Even better, if you have visited the website before, QUIC remembers the cryptographic parameters. It can perform a **0-RTT (Zero Round-Trip Time)** resumption. Your browser essentially sends the cryptographic "hello" and the HTTP request for the webpage in the exact same initial packet. The server starts sending the webpage immediately. 
 
-**The Transition is Invisible**
+## The Transition is Invisible
 
 The brilliant part of HTTP/3 is that it requires absolutely no changes to the actual websites. Web developers don't have to rewrite their code. 
 
@@ -1234,7 +1107,8 @@ The transition is handled entirely by the web browsers (Chrome, Edge, Firefox) a
 TCP will never truly die; it is still the perfect protocol for countless applications. But for the World Wide Web, the era of TCP dominance is quietly coming to an end.
     `,
     date: "2024-08-22",
-    author: "Elena Rostova",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["HTTP/3", "QUIC", "TCP", "UDP", "Web Performance"]
   },
   {
@@ -1249,7 +1123,7 @@ To achieve this, network engineers build physical loops. They wire Switch A to S
 
 But there is a fatal flaw in Layer 2 (Ethernet) switching. **Layer 2 has no concept of a loop.**
 
-**The Anatomy of a Broadcast Storm**
+## The Anatomy of a Broadcast Storm
 
 Remember that when a switch receives a broadcast frame (like an ARP request), its job is to flood that frame out of every single port except the one it came in on.
 
@@ -1267,7 +1141,7 @@ This is a **Broadcast Storm**, and it is the most terrifying event in a Layer 2 
 
 *(Note: Layer 3 IP routing solves this problem elegantly with the "Time to Live" (TTL) field. Every time a router passes a packet, it subtracts 1 from the TTL. If it hits 0, the packet dies. Layer 2 Ethernet frames do not have a TTL field. They will spin forever.)*
 
-**The Hero: Radia Perlman and STP**
+## The Hero: Radia Perlman and STP
 
 In 1985, a computer scientist named Radia Perlman invented an elegant algorithm to solve this problem: the **Spanning Tree Protocol (STP)**.
 
@@ -1275,18 +1149,18 @@ The goal of STP is simple: allow network engineers to physically wire as many re
 
 When you turn on a group of switches, they don't immediately start forwarding traffic. They pause. They begin sending special diagnostic frames to each other called **BPDUs (Bridge Protocol Data Units)**.
 
-**Step 1: Electing the Root**
+## Step 1: Electing the Root
 The switches compare their Bridge IDs (a combination of a priority number and their MAC address). The switch with the lowest ID wins the election and becomes the **Root Bridge**. Think of the Root Bridge as the center of the universe—the top of the tree.
 
-**Step 2: Finding the Shortest Path**
+## Step 2: Finding the Shortest Path
 Every other switch in the network now calculates the shortest, fastest path back to the Root Bridge. The port that points toward the Root Bridge becomes their **Root Port**. 
 
-**Step 3: Blocking the Loops**
+## Step 3: Blocking the Loops
 If a switch realizes that it has *multiple* paths to get to the Root Bridge (meaning there is a physical loop), it makes a drastic decision. It takes the slower, redundant port and puts it into a **Blocking State**. 
 
 The switch physically shuts down data transmission on that port. To the computers on the network, that cable effectively does not exist. The loop is broken. The network is now a clean, mathematical "tree" with no circles.
 
-**The Magic of Failover**
+## The Magic of Failover
 
 So why wire the redundant cable at all if STP is just going to block it?
 
@@ -1296,7 +1170,7 @@ If the primary cable gets cut by a backhoe, the switch immediately notices that 
 
 It instantly looks at its blocked port, transitions it to a **Forwarding State**, and traffic begins flowing over the redundant backup cable. The network heals itself. 
 
-**Modern Evolution: RSTP**
+## Modern Evolution: RSTP
 
 The original STP invented in 1985 was brilliant, but slow. When a topology changed, it took up to 50 seconds for the switches to calculate the new tree and unblock a port. In modern networking, 50 seconds of downtime is an eternity. 
 
@@ -1305,7 +1179,8 @@ Today, networks use **Rapid Spanning Tree Protocol (RSTP)**. The core algorithm 
 STP is the silent guardian of the enterprise network. It is the math that allows us to build unbreakable, redundant infrastructures without accidentally destroying them in the process.
     `,
     date: "2024-08-25",
-    author: "David Chen",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["STP", "Layer 2", "Switching", "Network Loops"]
   },
   {
@@ -1320,14 +1195,14 @@ You built a strong perimeter (the moat) using massive edge Firewalls and VPNs. I
 
 Once an employee got inside the castle, they could ping servers, access internal applications, and freely roam the corporate LAN.
 
-**The Death of the Perimeter**
+## The Death of the Perimeter
 
 In the modern era, the Castle and Moat model has completely collapsed for two main reasons:
 
 1. **The Cloud and Remote Work:** Where exactly is the perimeter anymore? Half of your employees are working from coffee shops on laptops they own, and half of your servers are hosted in AWS or Azure data centers. There is no single "inside" to protect anymore.
 2. **Lateral Movement:** If a hacker manages to trick one employee into downloading malware via a phishing email, the hacker is now "inside" the moat. Because the internal network implies trust, the hacker can freely move laterally, jumping from the employee's laptop to the HR database to the Domain Controller, stealing everything. 
 
-**Enter Zero Trust**
+## Enter Zero Trust
 
 Zero Trust is not a specific software product you can buy. It is a fundamental shift in security philosophy. 
 
@@ -1337,7 +1212,7 @@ In a Zero Trust Architecture (ZTA), the concept of a "trusted internal network" 
 
 Therefore, an IP address or a physical network location (like being plugged into a port in the CEO's office) grants you absolutely zero privileges. 
 
-**How Zero Trust Works in Practice**
+## How Zero Trust Works in Practice
 
 If network location no longer implies trust, how do people get any work done?
 
@@ -1354,7 +1229,7 @@ When an employee attempts to access the internal payroll system, a **Trust Broke
 
 Only if all of these conditions are met does the Trust Broker create a highly encrypted, temporary, 1-to-1 connection between the employee's laptop and the payroll server. 
 
-**Micro-segmentation**
+## Micro-segmentation
 
 What happens to the underlying network?
 
@@ -1367,7 +1242,8 @@ If a hacker compromises a laptop, they can't scan the network. They can't move l
 Zero Trust is incredibly difficult to implement because it requires knowing exactly who your users are, what devices they own, and exactly what resources they need to do their jobs. It is a massive administrative undertaking. But in a world where phishing is rampant and the perimeter has dissolved, it is the only way to build a truly resilient enterprise.
     `,
     date: "2024-08-28",
-    author: "Elena Rostova",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Zero Trust", "Security", "Architecture", "Identity"]
   },
   {
@@ -1388,7 +1264,7 @@ MPLS is essentially a massive, private internet owned by the telecom. It doesn't
 
 The problem? MPLS is astonishingly expensive. A 10-Megabit MPLS line could cost thousands of dollars a month per branch. 
 
-**The Cloud Breaks the Model**
+## The Cloud Breaks the Model
 
 For 20 years, the MPLS model worked perfectly. All branch traffic was routed privately back to Headquarters. If a branch needed to go to the public internet, it went to Headquarters first, passed through the massive corporate firewall, and went out to the web. (This is called "hair-pinning").
 
@@ -1400,7 +1276,7 @@ Suddenly, it made zero sense for a branch office in California to send its Offic
 
 The traditional Hub-and-Spoke WAN architecture was obsolete.
 
-**Enter SD-WAN**
+## Enter SD-WAN
 
 **SD-WAN (Software-Defined Wide Area Network)** is the technology replacing MPLS. 
 
@@ -1412,7 +1288,7 @@ The SD-WAN software creates secure, encrypted VPN tunnels across the public inte
 
 But here is where the "Software-Defined" magic happens:
 
-**Dynamic Path Selection**
+## Dynamic Path Selection
 
 The SD-WAN appliances are incredibly smart. They constantly measure the health of every single internet connection. They ping the VPN tunnels hundreds of times a second, measuring latency, jitter, and packet loss.
 
@@ -1423,18 +1299,19 @@ The network engineer configures policies centrally via a cloud dashboard:
 
 If the branch manager is on a VoIP phone call, the SD-WAN box looks at the connections. It sees the Comcast line has a bit of jitter right now. In a fraction of a millisecond, it moves the live phone call over to the Fiber line. The user never hears a drop. If a backhoe cuts the fiber line, the box instantly moves all traffic to the 5G backup. 
 
-**Local Breakout**
+## Local Breakout
 
 Because the SD-WAN box often has a built-in firewall, it solves the Cloud problem. When an employee tries to access Office 365, the SD-WAN box says, "This doesn't need to go to Headquarters. It's safe." It drops the traffic directly onto the local internet (Local Breakout), drastically improving performance for cloud apps.
 
-**The Telecom Disruption**
+## The Telecom Disruption
 
 SD-WAN is essentially a massive abstraction layer. It separates the network logic from the physical transport. It treats the underlying ISPs as nothing more than dumb, interchangeable pipes. 
 
 By combining cheap public internet with intelligent software routing and encryption, corporations can achieve the reliability of MPLS at a fraction of the cost, while vastly improving performance for modern cloud applications.
     `,
     date: "2024-09-02",
-    author: "Jamie Lin",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["SD-WAN", "MPLS", "WAN", "Enterprise Networking"]
   }
  ];

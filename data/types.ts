@@ -16,6 +16,8 @@ export interface BlogPost {
   excerpt: string;
   content: string;
   date: string;
+  /** ISO date (YYYY-MM-DD) when the article was last substantially updated */
+  dateModified?: string;
   author: string;
   tags: string[];
   faq?: BlogFaq[];

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useDeferredValue, useMemo } from 'react';
+import { Suspense, useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { blogs } from '@/data/blogs';
@@ -11,14 +12,35 @@ import { Search, Calendar, User, ArrowRight } from 'lucide-react';
 
 const POSTS_PER_PAGE = 30;
 
-export default function BlogsPage() {
-  const [searchTerm, setSearchTerm] = useState('');
+function BlogsPageContent() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const initialSearch = searchParams.get('search') ?? '';
+
+  const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // useDeferredValue defers expensive filtering so the input stays responsive (INP fix)
   const deferredSearch = useDeferredValue(searchTerm);
 
-  // useMemo avoids re-filtering on every render unrelated to search changes
+  useEffect(() => {
+    setSearchTerm(searchParams.get('search') ?? '');
+  }, [searchParams]);
+
+  const updateSearchUrl = useCallback(
+    (value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (value.trim()) {
+        params.set('search', value.trim());
+      } else {
+        params.delete('search');
+      }
+      const query = params.toString();
+      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    },
+    [pathname, router, searchParams]
+  );
+
   const filteredBlogs = useMemo(
     () =>
       blogs.filter(
@@ -31,7 +53,6 @@ export default function BlogsPage() {
     [deferredSearch]
   );
 
-  // Calculate pagination
   const totalPages = Math.ceil(filteredBlogs.length / POSTS_PER_PAGE);
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
   const currentBlogs = filteredBlogs.slice(startIndex, startIndex + POSTS_PER_PAGE);
@@ -49,9 +70,7 @@ export default function BlogsPage() {
 
       <main className="flex-grow pt-32 pb-16 md:pt-40 md:pb-24 px-4">
         <div className="max-w-7xl mx-auto">
-          {/* Header Section */}
           <div className="text-center mb-12">
-            {/* H1 rendered as a plain element (not motion.h1) so crawlers always see it */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-fade-in">
               OSI Model Insights
             </h1>
@@ -64,7 +83,6 @@ export default function BlogsPage() {
               Explore our latest articles, deep dives, and tutorials on the OSI Model and computer networking.
             </motion.p>
 
-            {/* Search Bar */}
             <motion.div
               className="relative max-w-xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
@@ -82,73 +100,72 @@ export default function BlogsPage() {
                 placeholder="Search articles by title or tag..."
                 value={searchTerm}
                 onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setCurrentPage(1); // Reset to first page on search
+                  const value = e.target.value;
+                  setSearchTerm(value);
+                  setCurrentPage(1);
+                  updateSearchUrl(value);
                 }}
               />
             </motion.div>
           </div>
 
-          {/* Blog Grid */}
           {currentBlogs.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {currentBlogs.map((blog, index) => {
                 const author = getAuthorByName(blog.author);
                 return (
-                <motion.div
-                  key={blog.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="bg-card/40 backdrop-blur-md border border-border/40 rounded-2xl overflow-hidden hover:bg-card/60 transition-all flex flex-col h-full group"
-                >
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {blog.tags.map((tag) => (
-                        <span key={tag} className="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <Link href={`/blogs/${blog.slug}`}>
-                      <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                        {blog.title}
-                      </h2>
-                    </Link>
-                    <p className="text-foreground/70 mb-6 line-clamp-3 flex-grow">
-                      {blog.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between text-sm text-foreground/60 pt-4 border-t border-border/20 mt-auto">
-                      <div className="flex items-center gap-4">
-                        <span className="flex items-center gap-1">
-                          <User className="w-4 h-4" />
-                          {author?.website ? (
-                            <a
-                              href={author.website}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                  <motion.div
+                    key={blog.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="bg-card/40 backdrop-blur-md border border-border/40 rounded-2xl overflow-hidden hover:bg-card/60 transition-all flex flex-col h-full group"
+                  >
+                    <div className="p-6 flex flex-col flex-grow">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {blog.tags.map((tag) => (
+                          <span key={tag} className="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <Link href={`/blogs/${blog.slug}`}>
+                        <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                          {blog.title}
+                        </h2>
+                      </Link>
+                      <p className="text-foreground/70 mb-6 line-clamp-3 flex-grow">
+                        {blog.excerpt}
+                      </p>
+                      <div className="flex items-center justify-between text-sm text-foreground/60 pt-4 border-t border-border/20 mt-auto">
+                        <div className="flex items-center gap-4">
+                          <span className="flex items-center gap-1">
+                            <User className="w-4 h-4" />
+                          {author ? (
+                            <Link
+                              href="/author"
                               className="hover:text-primary transition-colors"
                               onClick={(e) => e.stopPropagation()}
                             >
                               {blog.author}
-                            </a>
+                            </Link>
                           ) : (
                             blog.author
                           )}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                        </span>
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Calendar className="w-4 h-4" />
+                            {new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="px-6 pb-6 mt-auto">
-                    <Link href={`/blogs/${blog.slug}`} className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
-                      Read Article <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </motion.div>
+                    <div className="px-6 pb-6 mt-auto">
+                      <Link href={`/blogs/${blog.slug}`} className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+                        Read Article <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -158,7 +175,6 @@ export default function BlogsPage() {
             </div>
           )}
 
-          {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex justify-center items-center gap-2 mt-16">
               <button
@@ -199,5 +215,19 @@ export default function BlogsPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function BlogsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-background flex items-center justify-center text-foreground/60">
+          Loading articles…
+        </div>
+      }
+    >
+      <BlogsPageContent />
+    </Suspense>
   );
 }

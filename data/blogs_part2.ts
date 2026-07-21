@@ -13,7 +13,7 @@ But the truth is much heavier. The internet is immensely, stubbornly physical. A
 
 If you want to truly understand networking, you have to start here. Because if Layer 1 fails, nothing else matters. No IP addresses, no TCP handshakes, no HTTP requests. Just a dead connection.
 
-**The Job of the Physical Layer**
+## The Job of the Physical Layer
 
 Every piece of data on your computer—whether it's a high-definition movie, a video game, or a simple text message—is stored as binary code. A seemingly endless sequence of 1s and 0s. 
 
@@ -25,7 +25,7 @@ The job of the Physical Layer is to take those abstract 1s and 0s and convert th
 
 This process of converting data into physical signals is called **encoding** or **modulation**. The Physical Layer doesn't care what the data means. It doesn't know what an IP address is, and it doesn't care if it's transmitting a funny cat picture or top-secret banking data. It just sees 1s and 0s, and its only job is to blast them out as fast and accurately as possible.
 
-**Copper: The Old Reliable**
+## Copper: The Old Reliable
 
 For decades, the backbone of local networks has been copper cabling. If you've ever plugged your computer into a router, you've probably used a **Twisted Pair cable** (like Cat5e or Cat6).
 
@@ -35,7 +35,7 @@ In the early days of telephony, crosstalk meant you could sometimes hear your ne
 
 But copper has a fundamental limitation: **attenuation**. As an electrical signal travels down a wire, it naturally loses energy due to the resistance of the metal. If a copper Ethernet cable is much longer than 100 meters (about 330 feet), the signal degrades so much that the receiving computer can't reliably tell the 1s from the 0s. 
 
-**Fiber Optics: The Speed of Light**
+## Fiber Optics: The Speed of Light
 
 To go faster and further, we had to stop using electricity and start using light. Enter **fiber optic cables**.
 
@@ -47,7 +47,7 @@ Fiber has two massive advantages over copper:
 
 Fiber comes in two main flavors. **Multi-mode fiber** uses a thicker core and bounces multiple beams of light down the tube simultaneously. It's cheaper but only works over shorter distances (like inside a single building or data center). **Single-mode fiber** uses an incredibly thin core that guides a single beam of laser light straight down the middle. This is what's used for long-haul connections between cities and countries.
 
-**The Deep Ocean Backbone**
+## The Deep Ocean Backbone
 
 This brings us to the most spectacular part of the Physical Layer: the submarine cables. 
 
@@ -57,7 +57,7 @@ Laying these cables is a monumental engineering effort. Specially designed ships
 
 These cables occasionally break. Underwater earthquakes, underwater landslides, and yes, even the occasional shark bite (though this is rare today thanks to better shielding) can sever a connection. When this happens, a repair ship has to sail out, drop a grapple miles down, hook the severed ends, haul them up to the deck, splice the microscopic glass fibers back together by hand, and drop the cable back down. It's tedious, expensive, and completely vital to the survival of the global internet.
 
-**The Takeaway**
+## The Takeaway
 
 The next time you stream a 4K video to your phone, take a moment to appreciate the sheer physical reality of what's happening. 
 
@@ -66,7 +66,8 @@ Your phone is catching invisible radio waves out of the air. Those waves are pic
 All of this happens in milliseconds. And it's all built on Layer 1.
     `,
     date: "2024-05-02",
-    author: "Elena Rostova",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["OSI Model", "Layer 1", "Hardware", "Fiber Optics"]
   },
   {
@@ -85,7 +86,7 @@ To answer this, we need to look at how data actually moves across the internet. 
 
 Let's break that down with an analogy.
 
-**The Post Office Analogy**
+## The Post Office Analogy
 
 Imagine you want to send a letter to your friend in another city. 
 
@@ -99,7 +100,7 @@ These physical handoffs are governed by the **MAC Address**. The MAC address rep
 
 When you hand the letter to the mail carrier, the final destination (IP address) hasn't changed. But the immediate physical recipient (MAC address) is the mail carrier. When the mail carrier hands it to the sorting facility, the final destination (IP) is still the same, but the immediate physical recipient (MAC) is the sorting facility.
 
-**The Physical Identity: MAC Addresses**
+## The Physical Identity: MAC Addresses
 
 MAC stands for **Media Access Control**. A MAC address is a physical identifier burned into your device's Network Interface Card (NIC) when it is manufactured at the factory. 
 
@@ -109,7 +110,7 @@ Because MAC addresses are hardcoded into the hardware, they generally do not cha
 
 MAC addresses operate at **Layer 2 (the Data Link Layer)** of the OSI model. They are only useful on a **local network**. Your home router knows the MAC addresses of all the devices in your house, but a router halfway across the world has absolutely no idea what your MAC address is, nor does it care. 
 
-**The Logical Identity: IP Addresses**
+## The Logical Identity: IP Addresses
 
 IP stands for **Internet Protocol**. An IP address is a logical identifier assigned to your device by the network you are currently connected to.
 
@@ -117,7 +118,7 @@ Unlike a MAC address, your IP address changes constantly. When you are at home, 
 
 IP addresses operate at **Layer 3 (the Network Layer)** of the OSI model. They are hierarchical and routable. Just like a postal code tells the post office which city and neighborhood a letter belongs to, an IP address tells internet routers which continent, country, ISP, and specific network a packet of data belongs to.
 
-**How They Work Together**
+## How They Work Together
 
 Let's look at what happens when your laptop tries to load a web page from a server on the other side of the country.
 
@@ -131,7 +132,7 @@ Let's look at what happens when your laptop tries to load a web page from a serv
 
 This process repeats dozens of times. The **IP address never changes** during the journey—it remains the steadfast north star guiding the packet to its ultimate destination. But the **MAC address changes at every single hop**, as the packet is physically handed from one piece of hardware to the next.
 
-**Summary**
+## Summary
 
 We need both addresses because the internet operates on two fundamental realities. 
 
@@ -142,7 +143,8 @@ Second, at the end of the day, data has to travel across physical wires or immed
 Together, they make the modern internet possible.
     `,
     date: "2024-05-05",
-    author: "David Chen",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["OSI Model", "Layer 2", "Layer 3", "Networking Basics"]
   },
   {
@@ -157,7 +159,7 @@ It works, so why question it?
 
 But understanding what that string of numbers actually does is one of those "aha" moments in networking. It bridges the gap between knowing *that* IP addresses work and knowing *how* they work.
 
-**The Problem: Who is Local and Who is Remote?**
+## The Problem: Who is Local and Who is Remote?
 
 To understand subnet masks, we have to revisit how computers talk to each other. 
 
@@ -170,7 +172,7 @@ But how does your computer know if 192.168.1.50 is local or remote? Just looking
 
 This is where the **Subnet Mask** comes in.
 
-**Splitting the IP Address in Half**
+## Splitting the IP Address in Half
 
 Every IP address is actually composed of two distinct parts:
 1. **The Network Portion:** Identifies the specific network the device belongs to (like the street name).
@@ -194,7 +196,7 @@ So, if we overlay the mask on the IP address:
 
 Thanks to the subnet mask, your computer now knows that its network is 192.168.1, and its specific ID on that network is 10.
 
-**Making the Decision**
+## Making the Decision
 
 Now we go back to the original problem. Your computer (192.168.1.10 with mask 255.255.255.0) wants to talk to 192.168.1.50.
 
@@ -208,7 +210,7 @@ Now imagine you want to visit a website at 142.250.190.46. Your computer applies
 
 That is the magic of the subnet mask. It is a mathematical filter that allows a device to instantly determine whether an IP address is a local neighbor or a distant stranger.
 
-**Looking Under the Hood: Binary**
+## Looking Under the Hood: Binary
 
 To truly appreciate subnet masks, you have to look at them in binary, because computers don't read "255". They read 1s and 0s. 
 
@@ -223,7 +225,7 @@ Since 255.255.255.0 has exactly twenty-four 1s, we write it as **/24**.
 
 So, 192.168.1.10/24 tells you everything you need to know in a few characters: "My IP is 192.168.1.10, and the first 24 bits represent the network."
 
-**Why Change the Subnet Mask?**
+## Why Change the Subnet Mask?
 
 If 255.255.255.0 works perfectly fine at home, why would anyone ever use a different subnet mask? 
 
@@ -239,13 +241,14 @@ Now, 16 bits are reserved for the network, and 16 bits are available for the hos
 
 Conversely, if an engineer is connecting two routers directly together with a single wire, they only need two IP addresses. Giving them a full /24 network would waste 252 IP addresses. Instead, they use a 255.255.255.252 mask (a /30), which provides exactly two usable addresses.
 
-**The Architecture of the Internet**
+## The Architecture of the Internet
 
 Subnetting—the process of manipulating the mask to break large networks into smaller ones or combine small ones into larger ones—is how the internet scales. It allows organizations to efficiently hand out IP addresses without wasting them, keeping global routing tables manageable.
 
 So next time you see 255.255.255.0, you'll know it's not just a random string of maximum values. It's the fence that defines the borders of your digital neighborhood.
     `,
     date: "2024-05-08",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["IP Addressing", "Subnetting", "Networking Basics", "Layer 3"]
   },
@@ -269,7 +272,7 @@ How does the laptop discover the physical address of the device when it only has
 
 It uses a protocol called **ARP (Address Resolution Protocol)**. It is one of the oldest, simplest, and most critical protocols in existence. Without ARP, local networks simply would not function.
 
-**How ARP Works: Shouting in a Crowded Room**
+## How ARP Works: Shouting in a Crowded Room
 
 The way ARP solves this problem is almost comically simple. It essentially stands up in a crowded room and shouts.
 
@@ -290,7 +293,7 @@ The printer then crafts a direct, private reply called an **ARP Reply**, sending
 
 Your laptop receives the reply, sighs with relief, slaps the newly discovered MAC address onto its pending data packet, and finally sends the print job. 
 
-**The ARP Cache: Because Shouting gets Annoying**
+## The ARP Cache: Because Shouting gets Annoying
 
 If your laptop had to broadcast an ARP Request for every single packet it ever sent, your local network would be overwhelmed with devices constantly shouting at each other. Network performance would plummet.
 
@@ -327,7 +330,8 @@ ARP exists in a strange limbo in the OSI model. It uses MAC addresses (Layer 2) 
 It's a small, chatty, overly trusting protocol. You never see it working. But without ARP constantly translating the logical world into physical reality in the background, the entire internet would instantly grind to a halt.
     `,
     date: "2024-05-12",
-    author: "Jamie Lin",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["ARP", "Networking Protocols", "Layer 2", "Security"]
   },
   {
@@ -344,7 +348,7 @@ A packet of data doesn't contain a map. It only contains its final destination (
 
 This process is called **routing**. It is the core function of the internet. And the mechanism behind it—how routers learn the roads and choose the best paths—is a fascinating mix of algorithmic efficiency and human politics.
 
-**The Routing Table: A Router's Brain**
+## The Routing Table: A Router's Brain
 
 Inside every router is a database called a **Routing Table**. 
 
@@ -360,7 +364,7 @@ But when your packet reaches an ISP's core router, things get vastly more compli
 
 How does an ISP router learn all these paths? It talks to other routers.
 
-**Dynamic Routing: Routers Gossiping**
+## Dynamic Routing: Routers Gossiping
 
 In the early days of networking, administrators used to type routing tables by hand. If a new cable was plugged in, a human had to update the router. Today, with the internet constantly shifting, cables breaking, and new networks coming online, manual configuration is impossible. 
 
@@ -375,7 +379,7 @@ But OSPF only works when all the routers are owned by the same people and trust 
 
 To route data *between* these competing networks, the internet relies on a very different beast.
 
-**BGP: The Protocol That Runs the Internet**
+## BGP: The Protocol That Runs the Internet
 
 The internet is divided into thousands of independent networks called **Autonomous Systems (AS)**. Comcast is an AS. Google is an AS. The University of Oxford is an AS. 
 
@@ -392,7 +396,7 @@ For example, an ISP might configure its BGP routers with rules like:
 
 Because BGP relies entirely on trust between network administrators, it is famously fragile. 
 
-**When BGP Breaks**
+## When BGP Breaks
 
 When a network administrator makes a typo in a BGP configuration, it can break the internet. 
 
@@ -404,14 +408,15 @@ Because of how BGP works, routers around the world updated their tables and star
 
 Similar incidents happen almost every year. A small ISP in a remote country accidentally announces that they own the IP addresses for Google or Amazon, and huge swaths of global traffic are suddenly routed into the abyss. 
 
-**The Chaos that Works**
+## The Chaos that Works
 
 Routing is a miracle of decentralized engineering. There is no central authority telling data where to go. Trillions of packets are bouncing across the globe right now, navigating a maze of fiber optic cables, guided entirely by machines gossiping with each other based on trust, math, and business contracts.
 
 It is messy, it is political, and it occasionally breaks spectacularly. But overwhelmingly, the system works.
     `,
     date: "2024-05-15",
-    author: "Chris Vance",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Routing", "BGP", "Layer 3", "Internet Architecture"]
   },
   {
@@ -430,7 +435,7 @@ UDP does not guarantee delivery. It doesn't care if the packets arrive out of or
 
 So why on earth does UDP exist? Why would anyone ever choose a protocol that explicitly allows data to be lost?
 
-**The Cost of Reliability**
+## The Cost of Reliability
 
 To understand the value of UDP, you have to understand the cost of TCP.
 
@@ -442,7 +447,7 @@ Your computer receives 1, 2, and 4. Because it is using TCP, it cannot show you 
 
 This is exactly what you want for a web page, an email, or a bank transfer. You cannot have a banking app that says, "We successfully transferred $10,000, but we lost the packet containing who we sent it to. Oh well!" You need 100% accuracy.
 
-**When Missing Data Doesn't Matter**
+## When Missing Data Doesn't Matter
 
 Now let's imagine a completely different scenario: a live Zoom call.
 
@@ -456,7 +461,7 @@ For live video and audio, it is vastly better to simply drop the missing data an
 
 This is where UDP shines. UDP says, "I am going to blast these packets at the destination as fast as humanly possible. If some get lost, keep going."
 
-**Common Uses for UDP**
+## Common Uses for UDP
 
 Because UDP is lightweight and lightning-fast, it is the protocol of choice for any application where speed is more important than perfect accuracy:
 
@@ -468,7 +473,7 @@ Because UDP is lightweight and lightning-fast, it is the protocol of choice for 
 
 4. **DHCP:** When your computer joins a network and asks for an IP address, it uses UDP. 
 
-**Wait, So Developers Can Just Choose?**
+## Wait, So Developers Can Just Choose?
 
 Yes! When software developers write a network application, they open something called a "socket." They explicitly tell the operating system, "I want to open a TCP socket," or "I want to open a UDP socket."
 
@@ -476,7 +481,7 @@ The choice dictates the entire architecture of the app. If you choose TCP, the o
 
 For example, many modern games use UDP for character movement (where speed is critical), but they write custom logic on top of UDP to guarantee the delivery of important events, like a player picking up an item or chat messages.
 
-**The Future: QUIC**
+## The Future: QUIC
 
 For decades, the internet was neatly divided: TCP for reliable data, UDP for fast data. 
 
@@ -491,6 +496,7 @@ QUIC is now an official standard (often referred to as HTTP/3), and a massive pe
 So, while TCP is still the king of reliability, the fast, messy, "throw it and hope" paperboy protocol is quietly taking over the modern web.
     `,
     date: "2024-05-18",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["UDP", "TCP", "Transport Layer", "Networking Basics"]
   },
@@ -514,7 +520,7 @@ So... why does the internet still work? Why can you still buy a new phone today,
 
 The answer is **NAT: Network Address Translation**.
 
-**Public vs Private IP Addresses**
+## Public vs Private IP Addresses
 
 Before NAT, the rule of the internet was simple: Every single device that touches the internet must have a unique, globally routable IP address. 
 
@@ -530,7 +536,7 @@ Here is the magic of private addresses: *They don't have to be globally unique.*
 
 My laptop can be \`192.168.1.15\`. Your phone can be \`192.168.1.15\`. Millions of devices around the world can be \`192.168.1.15\` at the exact same time, and it doesn't cause a conflict because those addresses are entirely contained within their respective local networks. They never touch the public internet.
 
-**The Role of the Router**
+## The Role of the Router
 
 But if your laptop has a private address that can't be routed on the internet, how does it load a web page from Google?
 
@@ -552,7 +558,7 @@ The packet goes out to Google. Google sees a request coming from \`203.0.113.50\
 
 The router receives the webpage, checks its NAT Table, and says, "Ah, yes! This is the response for that request 192.168.1.15 made earlier." It rewrites the destination address on the packet back to the Private IP and sends it to your laptop.
 
-**Why This Saved the Internet**
+## Why This Saved the Internet
 
 Think about what NAT just accomplished. 
 
@@ -560,7 +566,7 @@ You might have 50 devices in your house—phones, tablets, smart speakers, lapto
 
 This single concept dramatically reduced the global demand for IP addresses. Entire corporate office buildings with thousands of computers are hiding behind just a handful of Public IP addresses. Without NAT, the IPv4 system would have collapsed two decades ago.
 
-**The Unintended Consequence: Security**
+## The Unintended Consequence: Security
 
 NAT was invented purely to save IP addresses. But it accidentally provided one of the greatest security features in networking history.
 
@@ -572,7 +578,7 @@ Unless your router is explicitly expecting a response (based on its NAT Table) o
 
 This means NAT acts as an extremely effective default firewall. It hides the entire internal structure of your network from the outside world.
 
-**The Real Solution: IPv6**
+## The Real Solution: IPv6
 
 As brilliant as NAT is, it is ultimately a hack. It requires routers to actively modify packets in transit, which violates some of the original architectural principles of the internet (specifically, the end-to-end principle). It makes peer-to-peer applications (like multiplayer gaming and torrenting) much more difficult to engineer, requiring complex workarounds like STUN and TURN servers.
 
@@ -585,7 +591,8 @@ This provides enough addresses for every grain of sand on Earth to have its own 
 The transition to IPv6 is happening right now, but because NAT works so incredibly well, the transition has been painfully slow. We'll be relying on the magic of NAT for many years to come.
     `,
     date: "2024-05-22",
-    author: "David Chen",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["NAT", "IP Addressing", "IPv4", "Routers"]
   },
   {
@@ -602,7 +609,7 @@ In reality, a firewall doesn't look like a wall. It looks like a spreadsheet. It
 
 Let's strip away the Hollywood nonsense and look at what a firewall actually is, how it works, and why it is the foundational layer of modern cybersecurity.
 
-**The Bouncer at the Door**
+## The Bouncer at the Door
 
 At its core, a firewall is a network security device (it can be physical hardware, or it can be software running on a server) that monitors incoming and outgoing network traffic.
 
@@ -622,23 +629,23 @@ This is known as **Implicit Deny**. It means: "If a packet arrives and it does n
 
 This is the fundamental philosophy of network security: block absolutely everything by default, and only open the specific, narrow pathways that are absolutely necessary for the business to function.
 
-**Types of Firewalls: From Simple to Smart**
+## Types of Firewalls: From Simple to Smart
 
 Over the decades, firewalls have evolved to become increasingly intelligent. They generally fall into a few different generations:
 
-**1. Packet-Filtering Firewalls (The Old Guard)**
+## 1. Packet-Filtering Firewalls (The Old Guard)
 The earliest firewalls were "stateless packet filters." They looked at every packet in isolation. They checked the Source IP, the Destination IP, and the Port Number. If the packet matched a rule, it went through. 
 
 The problem with stateless firewalls is that they have no memory. If you send a request out to a web server, the web server sends a response back. The firewall sees the response packet arrive, but because it doesn't remember that *you* initiated the conversation, it might block the response. To fix this, administrators had to leave massive ranges of ports permanently open, which was a huge security risk.
 
-**2. Stateful Inspection Firewalls (The Standard)**
+## 2. Stateful Inspection Firewalls (The Standard)
 This changed everything. A stateful firewall actually keeps track of active connections. 
 
 When your computer initiates a connection to a web server, the stateful firewall logs it in a "State Table." When the web server sends the response back, the firewall checks the table, realizes this packet is part of an established, legitimate conversation, and dynamically allows it through. 
 
 This means the firewall can keep all incoming ports completely closed to the outside world, while still allowing internal users to browse the web normally. Almost all modern home routers and basic corporate firewalls use stateful inspection.
 
-**3. Next-Generation Firewalls (NGFW)**
+## 3. Next-Generation Firewalls (NGFW)
 Hackers eventually realized that attacking the ports was getting too hard. So they started hiding their attacks *inside* allowed traffic. 
 
 If a firewall has a rule allowing all web traffic (Port 443), it will happily let a packet through. But what if that web traffic packet contains a malicious SQL Injection command aimed at the company database? A standard stateful firewall doesn't care; it only checks the port, not the contents of the payload.
@@ -647,7 +654,7 @@ Next-Generation Firewalls (NGFW) solve this. They don't just look at the envelop
 
 An NGFW can recognize specific applications. It can say, "I see this traffic is using Port 443, but I also see that it is a Skype video call, not a web page." It connects to cloud databases to scan the actual files being downloaded for known malware signatures in real-time. It can block access to specific URLs. It is a highly intelligent, computationally expensive security guard.
 
-**Firewalls in Everyday Life**
+## Firewalls in Everyday Life
 
 You interact with firewalls every day, whether you know it or not.
 
@@ -655,7 +662,7 @@ You interact with firewalls every day, whether you know it or not.
 - **Your Operating System:** Windows, macOS, and Linux all have built-in software firewalls (like Windows Defender Firewall). They protect your specific machine from malicious traffic originating from *inside* your local network—for example, if your roommate's laptop gets infected with a worm that tries to spread to your computer over the WiFi.
 - **Cloud Firewalls:** When a company hosts servers on AWS or Azure, they use "Security Groups" or Web Application Firewalls (WAF) to tightly control exactly which servers can talk to which other servers. 
 
-**What Firewalls Can't Do**
+## What Firewalls Can't Do
 
 For all their power, firewalls are not a silver bullet. 
 
@@ -663,14 +670,15 @@ A firewall cannot protect against a threat that bypassed it entirely. If an empl
 
 Similarly, a firewall cannot protect against social engineering. If a hacker sends a perfectly legitimate-looking phishing email to an employee, and the employee willingly clicks the link and types in their password, the firewall will happily allow the traffic to pass. From the firewall's perspective, it was just standard, encrypted web traffic requested by an authorized user.
 
-**The Reality of Network Security**
+## The Reality of Network Security
 
 Real hacking isn't punching through a glowing wall. Real hacking is meticulously scanning a firewall from the outside, discovering that an administrator accidentally left Port 3389 (Remote Desktop) open, and then systematically guessing passwords until one works. 
 
 And real network security isn't writing a magic algorithm. It's the boring, unglamorous work of maintaining tight firewall rules, regularly reviewing logs, patching software, and making sure that the bouncer at the door only ever lets the right packets in.
     `,
     date: "2024-05-26",
-    author: "Elena Rostova",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Security", "Firewalls", "Networking Basics", "Cybersecurity"]
   },
   {
@@ -691,7 +699,7 @@ When a packet arrives, how does your computer know where to send it? How does it
 
 The answer lies in one of the most critical concepts in the Transport Layer: **Ports**.
 
-**The Apartment Building Analogy**
+## The Apartment Building Analogy
 
 We've used postal analogies before, and it works perfectly here too.
 
@@ -705,7 +713,7 @@ In networking, the apartment number is the **Port**.
 
 Every network-connected application running on your computer is assigned a specific port number. When a packet arrives at your computer's IP address, the operating system looks at the destination port number stamped on the packet, finds the application living in that "apartment," and slides the data under the door.
 
-**The Port Numbers**
+## The Port Numbers
 
 A port is simply a 16-bit number. This means there are exactly **65,535** possible ports on any computer. 
 
@@ -722,7 +730,7 @@ When you type \`https://google.com\` into your browser, you aren't just connecti
 
 If you were to run a web server on your own computer, you would tell the server software to "listen" on Port 443. Any traffic arriving at your IP address bound for Port 443 would be routed directly to your web server software.
 
-**Ephemeral Ports: The Client's Side**
+## Ephemeral Ports: The Client's Side
 
 We've established that servers listen on well-known ports. But what about your laptop, the client?
 
@@ -737,7 +745,7 @@ When Google replies, it sets the destination to \`192.168.1.10:54321\`. When the
 
 If you open a second tab to a different website, the OS assigns it a new ephemeral port, say 54322. This is how you can have dozens of connections open simultaneously without any data getting crossed.
 
-**Putting it Together: The Socket**
+## Putting it Together: The Socket
 
 In programming, the combination of an IP Address and a Port Number is called a **Socket**. 
 
@@ -747,7 +755,7 @@ If IP addresses are Layer 3 (Network Layer) and Ports are Layer 4 (Transport Lay
 
 When a software developer writes a multiplayer game, they write code to open a socket, bind it to a specific port, and listen for incoming data. The operating system handles all the complex routing, MAC address resolution, and physical electrical signals. The developer just waits for data to pop out of the socket.
 
-**Port Forwarding: A Practical Example**
+## Port Forwarding: A Practical Example
 
 Understanding ports instantly explains a common networking headache: Port Forwarding.
 
@@ -761,12 +769,13 @@ To fix this, you log into your router and set up a **Port Forwarding rule**. You
 
 Now, when your friend connects, the router knows exactly which internal "apartment" to send the data to.
 
-**Summary**
+## Summary
 
 Without ports, a computer could only do one network-related task at a time. Ports are the unsung organizational heroes of the internet. They bring order to the chaos of incoming packets, ensuring that your game updates, your emails, and your streaming music all arrive exactly where they belong, all at the same time.
     `,
     date: "2024-05-30",
-    author: "Jamie Lin",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Ports", "Transport Layer", "TCP/IP", "Networking Basics"]
   },
   {
@@ -785,7 +794,7 @@ To an average user, a broken connection is a black box of frustration. But to a 
 
 If you want to understand networking, you need to know how to use these tools. Let's open the command line and get to work.
 
-**The Sonar of the Internet: Ping**
+## The Sonar of the Internet: Ping
 
 The concept of Ping is lifted directly from submarine warfare. A submarine sends out a burst of sound (a "ping") and waits to hear the echo. If it hears an echo, it knows something is out there. By timing how long the echo took to return, it knows how far away the object is.
 
@@ -865,7 +874,8 @@ Ping and Traceroute are the magnifying glasses of the network world. They take t
 The next time your connection drops, don't just stare at the spinning wheel. Open a terminal, run a ping, and find out exactly what's going on behind the scenes.
     `,
     date: "2024-06-02",
-    author: "David Chen",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Debugging", "Ping", "Traceroute", "ICMP", "Command Line"]
   },
   {
@@ -886,7 +896,7 @@ To fix this, engineers created a protocol to automate the process: **DHCP (Dynam
 
 DHCP is the friendly, automated receptionist of the networking world. When you walk into the building, it hands you a badge (an IP address) and tells you where the exits are (the Default Gateway). 
 
-**The DORA Process: A Lightning-Fast Negotiation**
+## The DORA Process: A Lightning-Fast Negotiation
 
 When your laptop connects to a new network, it has no IP address. Because it has no IP address, it cannot communicate using standard IP routing. It is effectively blind and deaf. 
 
@@ -896,24 +906,24 @@ It uses the same trick we discussed in the ARP blog: it shouts. It sends a broad
 
 The entire DHCP negotiation happens in four distinct steps, famously remembered by the acronym **DORA**: Discover, Offer, Request, Acknowledge.
 
-**Step 1: Discover (The Shout)**
+## Step 1: Discover (The Shout)
 Your laptop connects to the WiFi. It immediately formats a tiny packet called a **DHCP Discover** message. Because it doesn't have an IP address, it sets its source IP to \`0.0.0.0\`. It sets the destination IP to the broadcast address \`255.255.255.255\` (meaning "everyone on this network"). 
 The message essentially says: *"Hello! I am a new device with MAC address AA:AA:AA. Is there a DHCP server out there who can give me an IP address?"*
 
-**Step 2: Offer (The Reply)**
+## Step 2: Offer (The Reply)
 Somewhere on your network (usually inside your home router) sits a DHCP Server. The server hears the Discover broadcast. It looks at its internal pool of available IP addresses. Let's say \`192.168.1.50\` is free.
 The server formats a **DHCP Offer** message and broadcasts it back (or sends it directly to the MAC address): *"Hello AA:AA:AA. I am a DHCP server. I can offer you the IP address 192.168.1.50."*
 
-**Step 3: Request (The Acceptance)**
+## Step 3: Request (The Acceptance)
 Your laptop receives the Offer. It likes what it sees. But it doesn't just quietly start using the IP address. Why? Because there might be *multiple* DHCP servers on a large corporate network, and the laptop might have received multiple offers simultaneously. 
 The laptop must explicitly choose one. It broadcasts a **DHCP Request** message: *"Attention everyone! I am officially accepting the offer of 192.168.1.50 from DHCP Server X. All other servers, please take back your offers."*
 
-**Step 4: Acknowledge (The Final Handshake)**
+## Step 4: Acknowledge (The Final Handshake)
 The chosen DHCP Server hears the Request. It permanently marks \`192.168.1.50\` as "in use" in its database so it doesn't accidentally hand it out to anyone else. It then sends a final **DHCP Acknowledgment (ACK)** back to the laptop: *"Confirmed. The IP address is yours. Here is your Subnet Mask, your Router address, and your DNS servers. Have a nice day."*
 
 The laptop applies the settings, and you are officially on the internet. This entire four-step DORA process usually takes less than half a second.
 
-**The Concept of the Lease**
+## The Concept of the Lease
 
 There is a catch. When the DHCP server hands you an IP address, it doesn't give it to you forever. It **leases** it to you. 
 
@@ -925,7 +935,7 @@ By using leases, the DHCP server knows that if a device leaves the airport, its 
 
 If you are sitting at home on your laptop for two days straight, you won't lose your connection. At the halfway point of the lease (e.g., 12 hours into a 24-hour lease), your laptop quietly sends a private message to the DHCP server asking to renew the lease. The server says yes, and the 24-hour timer resets. 
 
-**Static IPs vs Dynamic IPs**
+## Static IPs vs Dynamic IPs
 
 Because DHCP is so convenient, almost all consumer devices (phones, laptops, smart TVs) use it. We call these **Dynamic IP addresses**, because they can technically change every time the lease expires (though most routers try to give you the same IP back if possible).
 
@@ -937,11 +947,12 @@ For these devices, network administrators bypass DHCP and configure a **Static I
 
 Alternatively, a cleaner method is a **DHCP Reservation**. The admin tells the DHCP server: "Whenever you see the specific MAC address of the printer, always offer it 192.168.1.100. Never give that IP to anyone else." This combines the reliability of a Static IP with the centralized management of DHCP.
 
-**Conclusion**
+## Conclusion
 
 DHCP is one of those invisible protocols that makes the modern, mobile internet possible. Without it, moving from your house, to a coffee shop, to your office would require a degree in network administration just to get online. Thanks to DORA, it's just a click of a button.
     `,
     date: "2024-06-05",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["DHCP", "IP Addressing", "Networking Protocols", "Layer 7"]
   },
@@ -970,7 +981,7 @@ The entire global internet is actually built on a competing, simpler framework c
 
 So why do we spend so much time learning a 7-layer model when the internet only uses 4 layers? To understand this, we have to look at the history of how the internet was built, and the difference between theory and practice.
 
-**The Birth of the Models**
+## The Birth of the Models
 
 In the 1970s and 1980s, computer networking was a proprietary nightmare. If a company bought IBM computers, they could only talk to other IBM computers using IBM's proprietary protocols. If they bought DEC computers, they used DEC protocols. The computers literally could not speak to each other.
 
@@ -982,7 +993,7 @@ Two separate groups set out to solve this problem at roughly the same time.
 
 **Group 2:** The US Department of Defense (specifically DARPA). They took a very pragmatic, bottom-up approach. They were funding a messy, real-world experiment called ARPANET. Their philosophy was: "Let's just write code that actually works right now, and we'll figure out the architecture later." This chaotic, practical engineering resulted in the protocols TCP and IP, which organically formed the 4-layer **TCP/IP Model**.
 
-**The TCP/IP Model Explained**
+## The TCP/IP Model Explained
 
 While the OSI Model has 7 layers, the TCP/IP Model condensed the concepts into just 4 much broader layers:
 
@@ -991,7 +1002,7 @@ While the OSI Model has 7 layers, the TCP/IP Model condensed the concepts into j
 3. **Transport Layer:** This maps to OSI Layer 4 (Transport). It handles TCP, UDP, and port numbers.
 4. **Application Layer:** This combines OSI Layers 5, 6, and 7 (Session, Presentation, and Application). It handles everything the software does—HTTP, DNS, encryption, data formatting, etc.
 
-**Why TCP/IP Won the War**
+## Why TCP/IP Won the War
 
 Throughout the 1980s, there was a massive industry battle over which standard would run the world. The governments and major telecom corporations heavily backed the pristine OSI Model. 
 
@@ -1001,7 +1012,7 @@ While the OSI committees were still arguing over the theoretical definitions of 
 
 By the time the OSI protocols were finally finished, TCP/IP had already taken over the world. The battle was over. The internet was a TCP/IP network. 
 
-**So Why Do We Still Teach OSI?**
+## So Why Do We Still Teach OSI?
 
 If the TCP/IP Model won, why does every network engineer still talk about the OSI Model? Why do we say "Layer 2 Switch" or "Layer 7 Firewall" instead of using the TCP/IP terms?
 
@@ -1018,7 +1029,7 @@ When a website won't load, a network engineer uses the OSI model to troubleshoot
 
 The OSI model gives the entire IT industry a shared vocabulary. When a security vendor sells a "Layer 7 Web Application Firewall," everyone immediately knows exactly what that means—it inspects HTTP traffic, not just IP addresses. 
 
-**The Best of Both Worlds**
+## The Best of Both Worlds
 
 Ultimately, you need to understand both. 
 
@@ -1029,7 +1040,8 @@ But you need the **OSI Model** to understand how to *think* about networking. It
 The internet was built by pragmatists, but it is maintained using the map drawn by theorists.
     `,
     date: "2024-06-08",
-    author: "Elena Rostova",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["OSI Model", "TCP/IP", "Networking History", "Architecture"]
   },
   {
@@ -1053,7 +1065,7 @@ If you plug all 200 of these devices into the same giant switch, you have a mass
 
 Furthermore, with 200 devices constantly sending out ARP broadcasts and other noisy background traffic, the network performance will start to degrade. 
 
-**The Old Solution: Physical Separation**
+## The Old Solution: Physical Separation
 
 In the 1990s, the solution to this problem was brutal but effective: physical separation. 
 
@@ -1068,7 +1080,7 @@ This works perfectly for security. But it is an absolute nightmare for cost and 
 
 There had to be a better way to separate networks logically without relying on physical hardware separation. 
 
-**The Modern Solution: VLANs**
+## The Modern Solution: VLANs
 
 The solution is the **Virtual Local Area Network (VLAN)**.
 
@@ -1093,7 +1105,7 @@ If a computer plugged into Port 5 (VLAN 10) sends a broadcast message, the switc
 
 From a security and routing perspective, a VLAN is indistinguishable from a physically separate network. To allow VLAN 10 to talk to VLAN 20, you must route the traffic through a Layer 3 router or a Layer 3 switch with strict firewall rules, just as if they were separate buildings.
 
-**The Magic of VLAN Tagging (802.1Q)**
+## The Magic of VLAN Tagging (802.1Q)
 
 Assigning physical ports to a single VLAN is great, but it introduces a new problem. 
 
@@ -1115,7 +1127,7 @@ Switch B receives the frame, reads the tag, says "Ah, this is for the Executives
 
 Because the tag is added and removed dynamically by the switches, the computers themselves have absolutely no idea that VLANs even exist. As far as your laptop is concerned, it's just plugged into a normal network.
 
-**Why VLANs are Essential**
+## Why VLANs are Essential
 
 Today, VLANs are the foundation of all enterprise network design. They solve three massive problems simultaneously:
 
@@ -1126,7 +1138,8 @@ Today, VLANs are the foundation of all enterprise network design. They solve thr
 VLANs are the ultimate proof of a core networking philosophy: whenever physical reality becomes too expensive or cumbersome, solve it with software abstraction.
     `,
     date: "2024-06-12",
-    author: "David Chen",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["VLAN", "Layer 2", "Switching", "Network Design"]
   },
   {
@@ -1141,7 +1154,7 @@ But strip away the flashy marketing, and a VPN—a **Virtual Private Network**�
 
 To understand what a VPN really is, we have to look under the hood at exactly how it manipulates the OSI model and your routing tables.
 
-**The Original Purpose: The Corporate Tunnel**
+## The Original Purpose: The Corporate Tunnel
 
 Let's go back to the late 1990s. You work for a massive corporation headquartered in New York. The company has highly secure, internal servers holding sensitive financial data. These servers are on a private internal network (\`10.0.0.x\`). They are absolutely not connected to the public internet, meaning you can only access them if your computer is physically plugged into a wall port inside the New York office.
 
@@ -1153,7 +1166,7 @@ The answer is the Virtual Private Network.
 
 A VPN creates a secure, encrypted "tunnel" through the chaotic public internet, directly connecting your laptop in London to the corporate firewall in New York. Once the tunnel is established, your laptop acts as if a massive, invisible Ethernet cable was run across the Atlantic Ocean and plugged directly into the New York office switch.
 
-**How the Tunnel Actually Works: Encapsulation**
+## How the Tunnel Actually Works: Encapsulation
 
 Let's look at the exact mechanics of how a VPN achieves this magic. It uses a technique called **Encapsulation**.
 
@@ -1178,7 +1191,7 @@ When the packet arrives at the New York VPN Server, the server rips off the oute
 
 The VPN server then injects this inner packet into the internal corporate network. The financial server receives it, processes it, and replies. The return trip happens in exactly the same encapsulated reverse order.
 
-**Commercial VPNs: Shifting the Trust**
+## Commercial VPNs: Shifting the Trust
 
 This corporate "tunneling" is the original and purest form of a VPN. But what about the commercial VPNs (like NordVPN, ExpressVPN, or Private Internet Access) that consumers use today?
 
@@ -1209,7 +1222,8 @@ Furthermore, a VPN does not protect you from tracking cookies, browser fingerpri
 A VPN is a brilliant feat of network engineering. By encrypting packets and wrapping them inside other packets, it creates a private tunnel through public infrastructure. It is essential for corporate security and excellent for bypassing local network restrictions. But it is not a magic invisibility cloak.
     `,
     date: "2024-06-15",
-    author: "Chris Vance",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["VPN", "Security", "Encryption", "Routing"]
   },
   {
@@ -1234,7 +1248,7 @@ DNS only maps a domain name to an IP address. You can technically use DNS to poi
 
 To properly distribute massive amounts of traffic across multiple servers, you need a dedicated traffic cop. You need a **Load Balancer**.
 
-**The Role of the Traffic Cop**
+## The Role of the Traffic Cop
 
 A Load Balancer is a server (or a specialized piece of hardware) that sits right at the edge of your network, facing the public internet. 
 
@@ -1244,7 +1258,7 @@ When a user's web request arrives, the Load Balancer accepts the connection. It 
 
 To the end-user, it looks like they are talking to one unbelievably fast supercomputer. In reality, they are talking to a traffic cop who is quietly distributing the work among a small army of regular computers.
 
-**Algorithms: How Does It Choose?**
+## Algorithms: How Does It Choose?
 
 How does the Load Balancer decide which server gets the next request? Network engineers can configure them with different mathematical algorithms based on the application's needs:
 
@@ -1252,7 +1266,7 @@ How does the Load Balancer decide which server gets the next request? Network en
 2. **Least Connections:** The load balancer keeps a real-time tally of how many active connections each server currently has. If Server A is bogged down handling 50 complex file downloads, but Server B only has 5 active connections, the next request is sent to Server B.
 3. **IP Hash:** The load balancer runs the user's IP address through a mathematical formula (a hash) to determine which server to use. The beauty of this method is that a specific user will *always* be sent to the exact same server every time they visit. This is crucial for applications that store user state (like shopping carts) locally in the server's memory rather than in a central database.
 
-**The Ultimate Superpower: Health Checking**
+## The Ultimate Superpower: Health Checking
 
 Distributing traffic is great, but the absolute greatest superpower of a Load Balancer is **Health Checking**.
 
@@ -1272,7 +1286,7 @@ The users never see an error page. They never experience a timeout. The site rem
 
 This is the secret to "High Availability." When a company like Netflix or Amazon claims 99.999% uptime, it's not because their servers never crash. Their servers crash by the hundreds every single day. They achieve high availability because their load balancers hide the carnage from the users, flawlessly routing traffic around the broken pieces.
 
-**Layer 4 vs Layer 7 Load Balancing**
+## Layer 4 vs Layer 7 Load Balancing
 
 Load balancers operate at different layers of the OSI model, and the choice matters deeply.
 
@@ -1285,11 +1299,12 @@ For example, a Layer 7 load balancer can say:
 
 Almost all modern web architectures use a mix of both. Layer 4 load balancers handle the massive initial flood of global traffic, and Layer 7 load balancers handle the surgical routing inside the data center.
 
-**Conclusion**
+## Conclusion
 
 If a single server is a chef in a kitchen, a Load Balancer is the Maitre D' standing at the front of the restaurant. It greets the guests, figures out which waiter is the least stressed, and seats the guest at the optimal table. Without it, the kitchen would collapse in chaos.
     `,
     date: "2024-06-20",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["Load Balancing", "Architecture", "High Availability", "Layer 4", "Layer 7"]
   },
@@ -1307,7 +1322,7 @@ The answer is **BGP (Border Gateway Protocol)**. BGP is the routing protocol tha
 
 Without BGP, the internet as we know it would shatter into tens of thousands of disconnected, isolated islands. 
 
-**Autonomous Systems (The Islands)**
+## Autonomous Systems (The Islands)
 
 To understand BGP, you have to understand that "the internet" is not a single, cohesive entity owned by anyone. 
 
@@ -1319,7 +1334,7 @@ Every AS is assigned a unique number, called an **ASN**. There are currently abo
 
 Inside an Autonomous System, the network administrators are gods. They can route traffic however they want. But when traffic needs to leave Comcast and go to Google, they need a way to communicate. They need a protocol to exchange maps.
 
-**How BGP Builds the Map**
+## How BGP Builds the Map
 
 BGP is fundamentally a gossip protocol. 
 
@@ -1338,7 +1353,7 @@ Bob's ISP logs this. Now, when Bob types the website URL into his browser, his h
 
 This gossiping happens continuously, thousands of times a second, between all 75,000 Autonomous Systems. Over time, every major router on the internet builds a massive, global map of exactly which AS owns which IP addresses, and the shortest "AS Path" to reach them.
 
-**The Fragility of BGP**
+## The Fragility of BGP
 
 BGP is brilliant, but it has a terrifying flaw: **It operates almost entirely on blind trust.**
 
@@ -1354,7 +1369,7 @@ Suddenly, millions of internet users trying to reach Google are routed into the 
 
 This isn't theoretical. It happens multiple times a year. In 2008, Pakistan accidentally hijacked all global traffic destined for YouTube while trying to censor it domestically. In 2021, Facebook completely vanished from the internet for 6 hours because a routine maintenance script accidentally wiped all of Facebook's BGP routes, telling the world that Facebook's IP addresses no longer existed.
 
-**Fixing the Flaw: RPKI**
+## Fixing the Flaw: RPKI
 
 For decades, the internet ran on this handshake-and-trust system. But as cyber warfare and accidental outages became more common, the industry realized we needed a way to verify BGP announcements.
 
@@ -1364,12 +1379,13 @@ RPKI is essentially cryptography for BGP. It ties a specific block of IP address
 
 If a tiny ISP in Russia suddenly announces, "I am the path for Amazon's IP addresses," the surrounding routers can now check the RPKI database. They will see that the digital signature for Amazon's IPs does not match the Russian ISP's ASN. The routers will reject the BGP announcement as fraudulent, preventing the hijack from spreading.
 
-**Conclusion**
+## Conclusion
 
 BGP is the ultimate example of the internet's original design philosophy: decentralized, resilient, and built on trust. While that trust is occasionally abused or broken by human error, the fact that 75,000 independent, competing corporations successfully use BGP to flawlessly route trillions of packets a day is a staggering achievement of human cooperation.
     `,
     date: "2024-06-25",
-    author: "Elena Rostova",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["BGP", "Routing", "Layer 3", "Internet Architecture"]
   },
   {
@@ -1386,15 +1402,15 @@ But Unicast is incredibly inefficient for certain types of tasks. Over the decad
 
 Let's break them down.
 
-**Unicast: 1-to-1**
+## Unicast: 1-to-1
 As mentioned, this is standard communication. It is a private telephone call between two people. If a server wants to send a video stream to 100 different people using Unicast, the server has to duplicate the video 100 times and send 100 separate streams of data out of its network port. This consumes massive bandwidth.
 
-**Broadcast: 1-to-All**
+## Broadcast: 1-to-All
 We discussed Broadcasts in the ARP and DHCP blogs. A Broadcast is a packet sent to the special address \`255.255.255.255\`. 
 It is someone standing in the middle of an office with a megaphone shouting, "IS ANYONE HERE THE PRINTER?" 
 Every single computer on the local network is forced to stop what it's doing, listen to the packet, and process it. Because broadcasts are so noisy and disruptive, routers absolutely refuse to forward them. A broadcast packet will never, ever leave your local network.
 
-**Multicast: 1-to-Many (Subscribers Only)**
+## Multicast: 1-to-Many (Subscribers Only)
 Imagine you are running a live corporate training video for 5,000 employees in an office building. 
 If you use Unicast, your server crashes trying to send 5,000 copies of the video. If you use Broadcast, you flood the entire network, and people who aren't even watching the video have their computers slowed down processing the junk traffic.
 
@@ -1403,7 +1419,7 @@ Multicast is like a radio station. The server sends out *only one* stream of dat
 If a computer wants to watch the video, it "tunes in" to that IP address by telling the local network switch, "Hey, I want to subscribe to this multicast group." 
 The network switches and routers do all the hard work. They take the single incoming stream of video and duplicate it *only* down the specific cables where there are active subscribers. The people who didn't subscribe hear nothing. It is incredibly efficient.
 
-**Anycast: 1-to-Nearest (The Magic Trick)**
+## Anycast: 1-to-Nearest (The Magic Trick)
 Unicast, Broadcast, and Multicast all make logical sense. 
 
 **Anycast** breaks the fundamental rule of networking. In Anycast, you take a single IP address—for example, \`8.8.8.8\` (Google's Public DNS)—and you assign that exact same IP address to 500 different physical servers located all over the globe.
@@ -1434,7 +1450,8 @@ Anycast is the secret weapon of **CDNs (Content Delivery Networks)** like Cloudf
 Anycast takes the chaotic, decentralized nature of the internet and turns it into a feature rather than a bug.
     `,
     date: "2024-06-28",
-    author: "David Chen",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Anycast", "Multicast", "Routing", "BGP"]
   },
   {
@@ -1453,7 +1470,7 @@ More than 25 years later, global IPv6 adoption is only hovering around 45%.
 
 Why is it taking so long? Why is the technology industry, which normally obsoletes hardware every three years, completely failing to upgrade the most foundational protocol of the internet?
 
-**The Brilliance of IPv6**
+## The Brilliance of IPv6
 
 First, we must acknowledge that IPv6 is an engineering masterpiece. It doesn't just add more addresses; it fixes dozens of subtle flaws in the aging IPv4 protocol.
 
@@ -1462,7 +1479,7 @@ First, we must acknowledge that IPv6 is an engineering masterpiece. It doesn't j
 - **Smarter Routing:** The IPv6 packet header was redesigned to be vastly simpler and more efficient for core internet routers to process, speeding up global traffic.
 - **Auto-Configuration:** IPv6 devices don't necessarily need a DHCP server to get an address. Using a feature called SLAAC (Stateless Address Autoconfiguration), a device can plug into a network, listen to the router, and mathematically generate its own globally unique IP address instantly.
 
-**The Fatal Flaw: Lack of Backward Compatibility**
+## The Fatal Flaw: Lack of Backward Compatibility
 
 If IPv6 is so great, what went wrong?
 
@@ -1472,7 +1489,7 @@ An IPv4 computer cannot talk to an IPv6 computer. An IPv4 router cannot process 
 
 This meant there was no easy "upgrade path." You couldn't just slowly phase it in. To transition to IPv6, a network administrator had to run both protocols simultaneously (a setup called **Dual-Stack**). The router needed an IPv4 address to talk to the old internet, and an IPv6 address to talk to the new internet.
 
-**The Economic Problem**
+## The Economic Problem
 
 Because there was no backward compatibility, there was no economic incentive to upgrade.
 
@@ -1486,7 +1503,7 @@ The CTO denies the budget.
 
 And because the corporations didn't upgrade their websites, the Internet Service Providers (ISPs) saw no reason to upgrade their home routers. And because the ISPs didn't upgrade, the consumer electronics companies saw no reason to force IPv6 on their devices. It was a massive, global Mexican standoff.
 
-**The Savior and the Villain: NAT**
+## The Savior and the Villain: NAT
 
 The other reason the transition stalled was that we invented a Band-Aid: **NAT (Network Address Translation)**.
 
@@ -1494,21 +1511,22 @@ As we discussed in a previous blog, NAT allowed millions of home networks and co
 
 NAT was supposed to be a temporary hack to buy us a few years to deploy IPv6. Instead, it worked so incredibly well that it removed the urgency of the crisis entirely. Why spend millions upgrading to IPv6 when a $50 home router with NAT solves the IP shortage instantly?
 
-**The Tipping Point**
+## The Tipping Point
 
 So what finally started pushing the needle toward IPv6 in recent years? 
 
 1. **Mobile Networks:** Smartphones exploded. A single cellular carrier in India or China might have 500 million subscribers. You cannot use NAT to hide 500 million phones behind a few IPv4 addresses; the overhead is too massive. The cellular networks *had* to switch to IPv6. If you are reading this on 4G or 5G right now, you are almost certainly using an IPv6 address.
 2. **The Black Market for IPv4:** Because there are no new IPv4 addresses available, a massive black market emerged. Today, a single IPv4 address sells for around $40. If a new cloud hosting company wants to buy a block of 65,000 IPv4 addresses, it will cost them over $2.5 million just for the numbers. IPv6 addresses are virtually free. The economics finally flipped.
 
-**The Future**
+## The Future
 
 We are currently in the messy middle. Major tech giants (Google, Facebook, Netflix) and cellular providers are almost entirely IPv6. But thousands of smaller websites, corporate VPNs, and legacy systems are stubbornly clinging to IPv4. 
 
 We will likely be living in a Dual-Stack world for another decade. The transition to IPv6 is the largest infrastructure upgrade in human history, and it proves that in technology, having the mathematically superior solution is only half the battle; the other half is convincing the accountants to pay for it.
     `,
     date: "2024-07-02",
-    author: "Chris Vance",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["IPv6", "IPv4", "Network Architecture", "History"]
   },
   {
@@ -1530,7 +1548,7 @@ This architecture is brilliant for fetching static documents, articles, and imag
 
 But it is absolutely terrible for the modern, dynamic web.
 
-**The Problem of Real-Time Data**
+## The Problem of Real-Time Data
 
 Imagine you are trying to build a real-time web application, like a live stock market ticker, a multiplayer browser game, or a chat application like Slack. 
 
@@ -1546,7 +1564,7 @@ This works, but it is brutally inefficient. If 10,000 people are using your chat
 
 We needed a way to break the rules of HTTP. We needed a persistent, two-way connection. We needed **WebSockets**.
 
-**The WebSocket Handshake**
+## The WebSocket Handshake
 
 Introduced as a formal standard in 2011, the WebSocket protocol (\`ws://\` or \`wss://\` for secure) is a massive paradigm shift in web development. 
 
@@ -1556,7 +1574,7 @@ The server receives this HTTP request, sees the \`Upgrade: websocket\` header, a
 
 At that exact moment, the polite rules of HTTP are thrown out the window. The TCP connection is kept wide open.
 
-**Full-Duplex Communication**
+## Full-Duplex Communication
 
 Once the WebSocket is open, you have a **Full-Duplex** connection. This means two things:
 1. Both the client and the server can send messages to each other at any time, independently.
@@ -1566,7 +1584,7 @@ If a new chat message arrives at the server, the server simply shoves it down th
 
 Because WebSockets don't have to constantly send bulky HTTP headers (like cookies and User-Agent strings) with every single message, the payload size drops dramatically. A WebSocket frame can be as small as 2 bytes of overhead, compared to hundreds of bytes of overhead for a standard HTTP request.
 
-**When NOT to use WebSockets**
+## When NOT to use WebSockets
 
 When junior developers first learn about WebSockets, they often think, *"This is amazing! It's so fast! I'm going to use WebSockets for everything!"*
 
@@ -1578,7 +1596,7 @@ In the WebSocket model, if you have 10,000 users, the server must keep 10,000 TC
 
 Furthermore, WebSockets break traditional caching. A CDN like Cloudflare can cache a standard HTTP response (like a JPEG image) and serve it to millions of users without ever bothering your server. You cannot cache WebSocket data streams.
 
-**The Golden Rule**
+## The Golden Rule
 
 The rule of thumb for modern architecture is:
 - Use **HTTP (REST/GraphQL)** for fetching data, submitting forms, and loading documents. 
@@ -1587,7 +1605,8 @@ The rule of thumb for modern architecture is:
 By combining the scalable, stateless nature of HTTP with the persistent, low-latency power of WebSockets, we get the incredibly responsive web applications we take for granted today.
     `,
     date: "2024-07-06",
-    author: "Jamie Lin",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["WebSockets", "HTTP", "Layer 7", "Web Development"]
   },
   {
@@ -1606,7 +1625,7 @@ Without QoS, network routers treat every single packet of data exactly the same.
 
 Most of the time, routers process packets so fast that this doesn't matter. But what happens when the network gets congested?
 
-**The Impact of Congestion**
+## The Impact of Congestion
 
 Let's say your home internet connection can handle 100 Megabits per second. 
 Your roommate decides to torrent a massive file, utilizing 99 Mbps. The network is completely saturated.
@@ -1620,18 +1639,18 @@ Two things happen:
 For a file download, delayed or dropped packets are fine. TCP just resends them. The download takes 5 minutes instead of 4. No one cares. 
 For real-time voice and video, dropped packets destroy the application entirely.
 
-**Enter Quality of Service (QoS)**
+## Enter Quality of Service (QoS)
 
 Network administrators use QoS to fundamentally change the rules of the router. QoS allows the router to look at the packets, identify what type of data they contain, and prioritize the "ambulances" over the "semi-trucks."
 
 How does it work?
 
-**1. Classification and Marking**
+## 1. Classification and Marking
 Before packets leave a device, they are inspected and marked. Deep inside the IP Header (Layer 3), there is a tiny field originally called the ToS (Type of Service) byte, now commonly used for **DSCP (Differentiated Services Code Point)**. 
 
 When Zoom creates a voice packet, it stamps a highly prioritized DSCP code on the envelope (usually a code called \`EF\` or Expedited Forwarding). When Steam downloads a game, it leaves the code blank (Best Effort).
 
-**2. Queuing (The VIP Line)**
+## 2. Queuing (The VIP Line)
 When the packets arrive at a QoS-enabled router, the router doesn't just shove them into one giant FIFO line. It has multiple separate queues. 
 
 It looks at the DSCP markings. 
@@ -1645,7 +1664,7 @@ Even if your roommate is downloading a file at maximum speed, filling up the Nor
 
 Your Zoom call is flawless. Your roommate's download takes an extra 0.5 seconds. Everyone wins.
 
-**QoS on the Global Internet (Or Lack Thereof)**
+## QoS on the Global Internet (Or Lack Thereof)
 
 QoS sounds like magic. So why doesn't everything on the internet use it?
 
@@ -1662,7 +1681,8 @@ On the open internet, Net Neutrality principles largely dictate that all packets
 So QoS remains an incredibly powerful tool, but it is a local one. It protects your critical data on the treacherous journey from your laptop to the edge of your network, ensuring it gets onto the internet highway as fast as possible. Once it's on the highway, it's at the mercy of the traffic.
     `,
     date: "2024-07-10",
-    author: "Elena Rostova",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["QoS", "Networking Theory", "Latency", "Layer 3"]
   }
 ];

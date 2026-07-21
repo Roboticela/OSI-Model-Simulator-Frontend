@@ -105,16 +105,6 @@ export default function RootLayout({
         {/* Preconnect to speed up third-party scripts */}
         <link rel="preconnect" href="https://www.clarity.ms" />
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
-        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
-        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-
-        {/* Google AdSense */}
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9014031373485007"
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
-        />
 
         {/* Google tag (gtag.js) */}
         <Script

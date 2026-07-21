@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogFaqAccordion from '@/components/BlogFaq';
 import { blogs } from '@/data/blogs';
+import { enrichBlogPost } from '@/data/blogDefaults';
 import { getAuthorByName } from '@/data/authors';
 import { APP_URL } from '@/lib/appLinks';
 import Link from 'next/link';
@@ -119,7 +120,7 @@ function getRelatedPosts(blog: (typeof blogs)[number]) {
   if (blog.relatedSlugs?.length) {
     return blog.relatedSlugs
       .map((slug) => blogs.find((b) => b.slug === slug))
-      .filter((b): b is (typeof blogs)[number] => Boolean(b) && b.slug !== blog.slug)
+      .filter((b): b is (typeof blogs)[number] => b != null && b.slug !== blog.slug)
       .slice(0, 6);
   }
 
@@ -142,15 +143,16 @@ export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
   const resolvedParams = await params;
-  const blog = blogs.find((b) => b.slug === resolvedParams.slug);
+  const rawBlog = blogs.find((b) => b.slug === resolvedParams.slug);
 
-  if (!blog) {
+  if (!rawBlog) {
     return {
       title: 'Article Not Found – OSI Model Simulator Blog',
       description: 'The requested article could not be found. Browse our full collection of networking and OSI model articles.',
     };
   }
 
+  const blog = enrichBlogPost(rawBlog);
   const author = getAuthorByName(blog.author);
   const seoTitle =
     blog.title.length <= 55
@@ -162,11 +164,13 @@ export async function generateMetadata(
       ? blog.excerpt
       : `${blog.excerpt} Topics covered: ${blog.tags.join(', ')}. A detailed networking guide from OSI Model Simulator.`;
 
+  const modified = blog.dateModified ?? blog.date;
+
   return {
     title: seoTitle,
     description,
-    authors: author?.website
-      ? [{ name: author.name, url: author.website }]
+    authors: author
+      ? [{ name: author.name, url: '/author' }]
       : [{ name: blog.author }],
     alternates: {
       canonical: `/blogs/${blog.slug}`,
@@ -177,6 +181,7 @@ export async function generateMetadata(
       type: 'article',
       url: `/blogs/${blog.slug}`,
       publishedTime: new Date(blog.date).toISOString(),
+      modifiedTime: new Date(modified).toISOString(),
       tags: blog.tags,
       siteName: 'OSI Model Simulator',
     },
@@ -190,15 +195,17 @@ export async function generateMetadata(
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const blog = blogs.find((b) => b.slug === resolvedParams.slug);
+  const rawBlog = blogs.find((b) => b.slug === resolvedParams.slug);
 
-  if (!blog) {
+  if (!rawBlog) {
     notFound();
   }
 
+  const blog = enrichBlogPost(rawBlog!);
   const author = getAuthorByName(blog.author);
   const toc = extractToc(blog.content);
   const relatedPosts = getRelatedPosts(blog);
+  const modified = blog.dateModified ?? blog.date;
 
   const blogSchema = {
     '@context': 'https://schema.org',
@@ -210,8 +217,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       name: blog.author,
       ...(author
         ? {
-            ...(author.website ? { url: author.website } : {}),
+            url: `${BASE_URL}/author`,
             jobTitle: author.title,
+            ...(author.website ? { sameAs: [author.website] } : {}),
           }
         : {}),
     },
@@ -221,7 +229,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       url: 'https://roboticela.com',
     },
     datePublished: new Date(blog.date).toISOString(),
-    dateModified: new Date(blog.date).toISOString(),
+    dateModified: new Date(modified).toISOString(),
     url: `${BASE_URL}/blogs/${blog.slug}`,
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -289,15 +297,10 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             <div className="flex flex-wrap items-center gap-6 text-sm md:text-base text-foreground/60 pb-8 border-b border-border/40 mb-8">
               <span className="flex items-center gap-2">
                 <User className="w-5 h-5" />
-                {author?.website ? (
-                  <a
-                    href={author.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-primary transition-colors font-medium"
-                  >
+                {author ? (
+                  <Link href="/author" className="hover:text-primary transition-colors font-medium">
                     {blog.author}
-                  </a>
+                  </Link>
                 ) : (
                   blog.author
                 )}
@@ -311,19 +314,26 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             {author && (
               <div className="mb-8 p-5 rounded-2xl border border-border/40 bg-background/50">
                 <p className="text-sm uppercase tracking-wide text-foreground/50 mb-1">Written by</p>
-                {author.website ? (
-                  <a
-                    href={author.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-lg font-semibold text-foreground hover:text-primary transition-colors"
-                  >
-                    {author.name}
-                  </a>
-                ) : (
-                  <p className="text-lg font-semibold text-foreground">{author.name}</p>
-                )}
+                <Link href="/author" className="text-lg font-semibold text-foreground hover:text-primary transition-colors">
+                  {author.name}
+                </Link>
                 <p className="text-foreground/70 mt-1">{author.title}</p>
+                <p className="text-foreground/60 text-sm mt-3 leading-relaxed line-clamp-3">{author.bio}</p>
+                <div className="mt-3 flex flex-wrap gap-4 text-sm">
+                  <Link href="/author" className="text-primary font-medium hover:underline">
+                    Author profile
+                  </Link>
+                  {author.website && (
+                    <a
+                      href={author.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary font-medium hover:underline"
+                    >
+                      {author.website.replace(/^https?:\/\//, '')}
+                    </a>
+                  )}
+                </div>
               </div>
             )}
 
@@ -355,7 +365,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 <div>
                   <h2 className="text-xl font-bold text-foreground mb-2">Try it in the simulator</h2>
                   <p className="text-foreground/70 mb-4">
-                    See how packets move through the OSI layers — including Layer 3 (Network) concepts like IP addressing — in the interactive OSI Model Simulator.
+                    {blog.tags.some((t) => /layer\s*3|ip|routing|subnet/i.test(t))
+                      ? 'See Layer 3 (Network) concepts like IP addressing and routing visualized as packets move through the stack.'
+                      : blog.tags.some((t) => /layer\s*4|tcp|udp|transport/i.test(t))
+                        ? 'Watch Transport-layer behavior (TCP/UDP concepts) as data is encapsulated in the OSI Model Simulator.'
+                        : blog.tags.some((t) => /layer\s*1|physical|cable|fiber|wifi/i.test(t))
+                          ? 'Connect Physical-layer ideas to the full path of a message as it travels through every OSI layer.'
+                          : 'See how packets move through the OSI layers in the interactive OSI Model Simulator while you study this topic.'}
                   </p>
                   <a
                     href={APP_URL}

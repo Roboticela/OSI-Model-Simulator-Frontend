@@ -87,6 +87,7 @@ Understanding packets, cables, IP, DNS, and open standards helps you diagnose ou
 Use this article as a reference entry point, then practice with the [OSI Model Simulator](https://app.osi-model-simulator.roboticela.com) and the related guides linked above.
     `,
     date: "2024-04-20",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["Internet Basics", "Networking", "Beginners", "Infrastructure"],
     relatedSlugs: [
@@ -186,7 +187,7 @@ There's a little box in most of our homes — maybe white, maybe black, maybe bl
 
 But very few people actually understand what's happening inside that little box, or what happens in the invisible space between the router and your laptop when you load a YouTube video. Let's change that. This is the full story of how WiFi works — written in plain English, I promise.
 
-**What Is WiFi, Fundamentally?**
+## What Is WiFi, Fundamentally?
 
 WiFi is a way of transmitting data through the air using **radio waves**. That's the honest, simple answer. Your device — your phone, your laptop, your smart TV — has a small antenna and a radio transmitter inside it. The router in your home also has antennas and a radio transmitter. These devices communicate by sending carefully modulated radio waves back and forth to each other.
 
@@ -194,7 +195,7 @@ The word "WiFi" itself doesn't actually stand for anything meaningful. It was in
 
 WiFi is technically defined by the **IEEE 802.11 standards**. These standards have evolved dramatically over the years, which is why you see terms like WiFi 4, WiFi 5, and WiFi 6 — each one representing a newer, faster generation of the technology. The actual standard names behind these are things like 802.11n, 802.11ac, and 802.11ax, but those are pretty hard to say at dinner parties, so the industry settled on the numbered branding.
 
-**Radio Waves and Frequencies**
+## Radio Waves and Frequencies
 
 Radio waves are a form of electromagnetic radiation — the same fundamental phenomenon that includes light, X-rays, and microwaves. The difference between these is their **frequency**: how many wave cycles occur per second, measured in Hertz (Hz).
 
@@ -206,7 +207,7 @@ WiFi operates on a few specific frequency bands, most commonly **2.4 GHz** and *
 
 Modern routers often support both bands simultaneously, a configuration called **dual-band**. Some premium routers are even **tri-band**, adding a second 5 GHz band to handle more devices at once. The newest WiFi 6E standard adds a **6 GHz band**, offering even more bandwidth and less interference.
 
-**How Data Becomes Radio Waves**
+## How Data Becomes Radio Waves
 
 This is the part that requires a little bit of patience, but it's genuinely fascinating once it clicks.
 
@@ -220,7 +221,7 @@ This is why modern WiFi can achieve such high speeds — it's like replacing a s
 
 Each subcarrier itself uses a technique called **Quadrature Amplitude Modulation, or QAM**, to encode multiple bits per symbol. WiFi 6 uses 1024-QAM, meaning each symbol can represent 10 bits at once. Compare that to older WiFi standards that used 64-QAM (6 bits per symbol) and you can immediately see why newer WiFi is so much faster.
 
-**The Access Point and the Client**
+## The Access Point and the Client
 
 A WiFi network has two key roles: the **access point** (usually your router) and the **client** (your phone, laptop, etc.).
 
@@ -230,7 +231,7 @@ When your device scans for WiFi networks, it's listening for these beacon frames
 
 Once connected, communication between your device and the access point follows a fairly complex protocol for taking turns. Since radio is a shared medium — everyone in range is using the same air — the devices need a way to avoid talking over each other. This is handled by a mechanism called **CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance)**. Before transmitting, a device listens to make sure no one else is currently transmitting. If the channel is clear, it waits a small random amount of time and then sends. This randomness prevents all devices from immediately jumping in at the same moment when the channel frees up.
 
-**Channels: Why Your Neighbor's WiFi Matters**
+## Channels: Why Your Neighbor's WiFi Matters
 
 Within each frequency band, WiFi is divided into **channels** — slices of the frequency spectrum. On 2.4 GHz, there are 14 channels available (though only 11 are permitted in the US). The problem is that these channels overlap significantly. If your router is on Channel 6 and your neighbor's is also on Channel 6, you're both competing for the same piece of spectrum.
 
@@ -240,7 +241,7 @@ The 5 GHz band has far more non-overlapping channels available — over 20 in ma
 
 Modern routers often have a feature called **Dynamic Frequency Selection (DFS)** that automatically scans for the least-congested channel and switches to it. This is one of the quiet background features that makes modern WiFi much more pleasant than it was a decade ago.
 
-**What Slows WiFi Down?**
+## What Slows WiFi Down?
 
 Understanding how WiFi works makes it much easier to understand why it sometimes doesn't work very well. The most common culprits:
 
@@ -254,13 +255,13 @@ Understanding how WiFi works makes it much easier to understand why it sometimes
 
 **Half-Duplex Nature:** Standard WiFi is half-duplex on each radio — a device can either send or receive at any given moment, but not both simultaneously. (Some newer WiFi 6 features try to address this, but it's still a factor.) This is less efficient than wired Ethernet, which is full-duplex.
 
-**WiFi 6 and the Future**
+## WiFi 6 and the Future
 
 WiFi 6 (802.11ax) brought significant improvements designed for the modern reality of many, many connected devices. It introduced techniques like **OFDMA (Orthogonal Frequency Division Multiple Access)**, which allows the router to talk to multiple devices at the same time — not just one at a time. It also introduced **Target Wake Time (TWT)**, which allows IoT devices to schedule their transmissions in advance, dramatically reducing battery usage for smart home gadgets.
 
 WiFi 6E extended these improvements into the 6 GHz band, offering a huge amount of new, clean spectrum. And WiFi 7, which began rolling out in 2024, pushes things even further with 320 MHz channels and theoretical speeds in the tens of gigabits per second.
 
-**Wrapping It All Up**
+## Wrapping It All Up
 
 So here's what's actually happening when you connect to WiFi. Your device finds the router's beacon signals, authenticates, and joins the network. When you request a web page, your device modulates that request into carefully organized radio waves at 2.4 or 5 GHz. The waves travel through the air at the speed of light, absorbed and bounced by obstacles along the way. The router picks up those waves with its antennas, demodulates the signal back into data, and sends it over a wired connection to your ISP and then to the internet. The response comes back the same way in reverse.
 
@@ -269,7 +270,8 @@ It all happens in milliseconds, invisibly, constantly, in every home and office 
 That little blinking box in your living room is doing something genuinely remarkable, even when it frustrates you with a dropped signal. Give it a little credit.
     `,
     date: "2024-04-22",
-    author: "Jamie Lin",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["WiFi", "Wireless Networking", "Radio Waves", "IEEE 802.11"]
   },
   {
@@ -286,13 +288,13 @@ This worked fine when the network had a few hundred machines. It became complete
 
 Something had to change. And in 1983, a computer scientist named Paul Mockapetris invented the solution: the **Domain Name System, or DNS**. It is still running today, largely unchanged in its core design, serving trillions of lookups every single day. It is one of the most elegantly designed systems in all of computer science.
 
-**What DNS Does, Simply Stated**
+## What DNS Does, Simply Stated
 
 DNS translates human-friendly names — like \`www.google.com\` — into machine-friendly IP addresses — like \`142.250.185.78\`. Your browser needs the IP address to actually connect to the server. Humans need the domain name because nobody wants to memorize a string of numbers for every website they visit.
 
 It's exactly like a phonebook. You know your friend's name, you look it up, and you get their phone number. You know a website's name, you look it up, and you get its IP address. The comparison is so apt that "the phonebook of the internet" has become the standard informal description of DNS.
 
-**The Hierarchy: It's a Tree, Not a Flat List**
+## The Hierarchy: It's a Tree, Not a Flat List
 
 The genius of DNS is that it didn't try to replace the flat HOSTS.TXT file with a bigger, better flat file. Instead, it replaced it with a **distributed, hierarchical database** — a tree-shaped structure that delegates authority to different servers at different levels.
 
@@ -371,7 +373,8 @@ Now you know it exists. And honestly, the fact that it works as well as it does 
 Next time a website loads instantly, take a half second to appreciate the DNS lookup that just happened in the background. It earned it.
     `,
     date: "2024-04-25",
-    author: "Chris Vance",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["DNS", "Domain Names", "Networking", "Security"]
   },
   {
@@ -384,7 +387,7 @@ Every conversation starts with a greeting. You walk into a store, you nod at the
 
 Computers do the same thing. When your browser wants to connect to a web server to load a page, it doesn't just start blasting data at the server. It first goes through a careful, three-step introduction ritual called the **TCP three-way handshake**. It's one of the most elegant little pieces of protocol design in all of networking, and understanding it gives you genuine insight into how the reliable internet works.
 
-**Why TCP Needs a Handshake**
+## Why TCP Needs a Handshake
 
 First, let's remember what TCP actually is. TCP stands for **Transmission Control Protocol**, and it's one of the two dominant transport-layer protocols on the internet (the other being UDP). TCP's whole value proposition is **reliability**. It guarantees that data sent from one machine will arrive at the other machine:
 
@@ -394,7 +397,7 @@ First, let's remember what TCP actually is. TCP stands for **Transmission Contro
 
 To achieve this, TCP is a **connection-oriented** protocol. That means before any actual data is exchanged, the two sides have to establish a connection. They have to agree to talk. They have to synchronize some internal bookkeeping. And they do all of this with the three-way handshake.
 
-**The Problem TCP Is Solving**
+## The Problem TCP Is Solving
 
 Imagine you're trying to mail a package to someone you've never contacted before. You don't know if they're home. You don't know if the address is correct. You don't know if they can receive packages. Before you ship an expensive item, you might want to confirm they're ready to receive it.
 
@@ -406,13 +409,13 @@ TCP has the same problem, plus a few extras specific to networking:
 
 The three-way handshake solves all of these problems simultaneously.
 
-**The Three Steps**
+## The Three Steps
 
 Let's call our two parties the **Client** (your browser) and the **Server** (the web server). The client always initiates. Here is exactly what happens:
 
 ---
 
-**Step 1: SYN (Client → Server)**
+## Step 1: SYN (Client → Server)
 
 The client sends a special TCP packet called a **SYN** (short for "synchronize") to the server. This packet contains:
 
@@ -423,7 +426,7 @@ The client is essentially saying: *"Hey, I want to establish a connection. I'll 
 
 ---
 
-**Step 2: SYN-ACK (Server → Client)**
+## Step 2: SYN-ACK (Server → Client)
 
 If the server is listening on that port and willing to accept the connection, it responds with a **SYN-ACK** packet. This single packet does two things at once:
 
@@ -434,7 +437,7 @@ The server is saying: *"Got it! I acknowledge your starting sequence number X. I
 
 ---
 
-**Step 3: ACK (Client → Server)**
+## Step 3: ACK (Client → Server)
 
 The client receives the SYN-ACK and sends back a final **ACK** (acknowledgment) packet. This packet contains an ACK number of \`Y + 1\` (meaning: "I got your SYN, and I'm expecting byte Y+1 next from you").
 
@@ -444,7 +447,7 @@ The client is saying: *"Got it! I acknowledge your starting sequence number Y. W
 
 After this third step, the connection is established. Both sides know the other is reachable and ready. Both sides have exchanged and acknowledged their initial sequence numbers. Now the actual data transfer can begin.
 
-**Why Three Steps? Why Not Two or Four?**
+## Why Three Steps? Why Not Two or Four?
 
 This is a great question, and the answer reveals how cleverly the handshake was designed.
 
@@ -454,7 +457,7 @@ Could we do it in four steps? Technically, the SYN-ACK in step 2 could be split 
 
 Three steps is the minimum number required for **both sides to confirm that both sides can send and receive**. This is a fundamental insight in the theory of reliable communications. It's so fundamental that protocol designers have a term for it: the **minimum necessary asymmetric acknowledgment**. Three handshakes achieve mutual confirmation with the minimum number of round trips.
 
-**Sequence Numbers and Why They Matter**
+## Sequence Numbers and Why They Matter
 
 The sequence numbers established during the handshake are not just ceremonial — they're actively used throughout the entire connection.
 
@@ -464,7 +467,7 @@ This mechanism is what makes TCP reliable. No other transport protocol does this
 
 The sequence numbers also allow the receiver to handle **out-of-order delivery**. The internet doesn't guarantee that packets take the same path or arrive in the same order they were sent. Packets from the same connection might go through completely different routers and arrive in any sequence. Because TCP numbers every byte, the receiver can buffer out-of-order packets and reassemble them correctly before passing the data to the application layer.
 
-**SYN Floods: When Handshakes Become Weapons**
+## SYN Floods: When Handshakes Become Weapons
 
 The three-way handshake has a famous vulnerability that bad actors have exploited for decades: the **SYN flood attack**.
 
@@ -474,7 +477,7 @@ An attacker can exploit this by sending millions of SYN packets with fake (spoof
 
 The solution most servers use today is called **SYN cookies**. Instead of allocating memory when it receives a SYN, the server encodes all the necessary information into the SYN-ACK itself (as a cryptographically generated sequence number). It only allocates memory when it receives the client's ACK with that valid cookie. This means SYN floods can't exhaust server memory because the server isn't allocating anything until it gets the ACK.
 
-**TCP Connection Termination: The Four-Way Goodbye**
+## TCP Connection Termination: The Four-Way Goodbye
 
 Just as connections are established with a handshake, they need to be closed cleanly. TCP uses a **four-way goodbye** (sometimes called a four-way teardown or FIN handshake):
 
@@ -485,7 +488,7 @@ Just as connections are established with a handshake, they need to be closed cle
 
 Why four steps instead of three? Because TCP connections are **full-duplex** — each side has its own independent data stream in each direction. Each side must close its own stream independently. The server might need to send a little more data after receiving the client's FIN before it's ready to close.
 
-**Seeing It In Real Life**
+## Seeing It In Real Life
 
 You can actually watch TCP handshakes happen in real time using a free tool called **Wireshark**, which captures and displays all the network traffic on your machine.
 
@@ -493,7 +496,7 @@ Install Wireshark, start a capture, open any website in your browser, and then f
 
 Watching a handshake happen in real time on your own machine, for a website you just loaded, is a genuinely satisfying moment for anyone who's read about it and wants to see the theory in practice.
 
-**The Bottom Line**
+## The Bottom Line
 
 The TCP three-way handshake is a small, elegant piece of protocol design that solves a surprisingly tricky problem: how do two machines that have never communicated before establish a reliable, synchronized connection across an unreliable network?
 
@@ -502,6 +505,7 @@ Three packets. SYN. SYN-ACK. ACK. That's it. And on top of that tiny foundation,
 Every email you've sent. Every video you've streamed. Every banking transaction you've made. All of it started with two machines exchanging three packets and saying hello.
     `,
     date: "2024-04-28",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["TCP", "Three-Way Handshake", "Transport Layer", "Networking Fundamentals"]
   },
@@ -515,7 +519,7 @@ You've seen the padlock icon in your browser's address bar. You've probably noti
 
 This is genuinely important knowledge for anyone using the internet — which is everyone. Let's get into it.
 
-**HTTP: The Original Protocol, and Its Problem**
+## HTTP: The Original Protocol, and Its Problem
 
 HTTP stands for **HyperText Transfer Protocol**. It was created by Tim Berners-Lee in 1989 as part of his invention of the World Wide Web, and it's the protocol that defines how web browsers request pages from web servers and how those servers send the pages back.
 
@@ -527,7 +531,7 @@ Here's the threat: imagine you're at a coffee shop, connected to the public WiFi
 
 The internet needed encryption. That's where HTTPS came in.
 
-**HTTPS: HTTP with a Security Layer**
+## HTTPS: HTTP with a Security Layer
 
 HTTPS stands for **HTTP Secure**. It's the same HTTP protocol, but it adds an encryption layer called **TLS (Transport Layer Security)** — formerly known as SSL (Secure Sockets Layer), a name you still hear used informally even though SSL is technically deprecated.
 
@@ -539,7 +543,7 @@ When you visit an HTTPS website, your browser and the server perform what's call
 
 3. **Encryption:** All HTTP data sent after the handshake is encrypted with that shared key. Anyone intercepting the traffic sees only an unreadable stream of random-looking data.
 
-**TLS Certificates and Certificate Authorities**
+## TLS Certificates and Certificate Authorities
 
 The authentication step is one of the most interesting and complex parts of HTTPS. Let me explain how it works.
 
@@ -632,7 +636,8 @@ If you run a website, make sure it's using HTTPS. With Let's Encrypt and most ho
 The story of HTTPS is one of the most successful security improvements in the history of the internet. In about a decade, the web went from mostly unencrypted to almost entirely encrypted. That's genuinely rare good news in the world of cybersecurity. Enjoy it.
     `,
     date: "2024-05-01",
-    author: "Sam Rivera",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["HTTP", "HTTPS", "Security", "TLS", "Encryption"]
   },
   {
@@ -647,7 +652,7 @@ But the story of IP addresses is also a story of a design decision made in the 1
 
 This is the full story of IP addresses: what they are, how they work, why we nearly ran out, and what we're doing about it.
 
-**What Is an IP Address?**
+## What Is an IP Address?
 
 An IP address is a numerical label assigned to each device connected to a network. It serves two purposes:
 
@@ -656,7 +661,7 @@ An IP address is a numerical label assigned to each device connected to a networ
 
 The analogy to a postal address is quite good. Your home's street address identifies your specific building and its location relative to the postal grid — the street, the city, the country. An IP address does the same thing for a device on the internet. When your computer sends a packet of data, that packet contains your IP address as the "return address" and the destination's IP address as the "destination address." Routers along the way read the destination address and figure out the best route to get the packet there.
 
-**IPv4: The Original Format**
+## IPv4: The Original Format
 
 The **IPv4** format — version 4 of the Internet Protocol — was defined in 1981 and is still the most widely recognized. An IPv4 address looks like this: \`192.168.1.1\`.
 
@@ -669,7 +674,7 @@ Because each address is 32 bits, the total number of possible IPv4 addresses is 
 
 They were wrong.
 
-**The Exhaustion Problem**
+## The Exhaustion Problem
 
 The internet grew. Explosively. By the 1990s, ISPs were handing out IP addresses to consumers. Then businesses wanted multiple addresses. Then mobile phones arrived. Then the Internet of Things — smart TVs, security cameras, thermostats, light bulbs, cars. Each one needs an address.
 
@@ -689,7 +694,7 @@ Despite these mitigations, the inevitable happened. The **Internet Assigned Numb
 
 Today, getting a new block of IPv4 addresses essentially requires buying them from organizations that have unused allocations. Prices have risen significantly — a single IPv4 address can cost $30–50 or more on the secondary market. IPv4 scarcity is a real economic phenomenon.
 
-**IPv6: The Solution**
+## IPv6: The Solution
 
 The obvious solution was to create a new version of IP with a larger address space. That solution is **IPv6** (version 6 — version 5 was an experimental protocol that never reached widespread deployment).
 
@@ -700,11 +705,11 @@ IPv6 addresses are **128-bit numbers**. Instead of four groups of decimals, they
 
 The total number of possible IPv6 addresses is 2^128 — approximately **340 undecillion**. Written out, that's:
 
-**340,282,366,920,938,463,463,374,607,431,768,211,456**
+## 340,282,366,920,938,463,463,374,607,431,768,211,456
 
 To put that in perspective, that's enough addresses to give every atom on the surface of the earth its own IP address. Multiple times over. We will genuinely never run out of IPv6 addresses. The problem is solved for all practical eternity.
 
-**IPv6 Address Shorthand**
+## IPv6 Address Shorthand
 
 Those long IPv6 addresses can be shortened in a couple of ways:
 
@@ -772,6 +777,7 @@ Understanding IP addressing gives you power over your own technology. You can:
 The IP address is the bedrock of internet communication. Everything else — DNS, TCP, HTTP, all of it — builds on top of the fundamental layer of addressing. Understanding it is the first step to truly understanding how the internet works.
     `,
     date: "2024-05-05",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["IP Address", "IPv4", "IPv6", "Networking", "Internet Infrastructure"]
   },
@@ -787,7 +793,7 @@ In networking, the metaphor is almost perfect. A network firewall is a system �
 
 Firewalls have been a cornerstone of network security since the late 1980s. Every enterprise network has one. Every home router has one built in (though a rudimentary one). And understanding how they work is foundational to understanding cybersecurity.
 
-**Why Do We Need Firewalls?**
+## Why Do We Need Firewalls?
 
 The internet is a fundamentally open system. Any device connected to it can, in theory, attempt to communicate with any other device. This openness is what makes the internet so powerful and useful. It's also what makes it dangerous.
 
@@ -795,7 +801,7 @@ Without any filtering, every device on your network is exposed to the entire int
 
 A firewall is the first line of defense. It sits at the perimeter of your network and inspects all incoming and outgoing traffic, allowing what's legitimate and blocking what's suspicious or unauthorized.
 
-**How Firewalls Work: The Basic Concept**
+## How Firewalls Work: The Basic Concept
 
 Every piece of network traffic is structured in packets. Each packet has a header containing information about where it came from, where it's going, what protocol it's using, and what port it's destined for. A firewall reads this header information and compares it against a set of **rules** (sometimes called an **access control list, or ACL**).
 
@@ -807,11 +813,11 @@ Each rule says something like:
 
 Rules are processed in order, and the first matching rule determines what happens to the packet: it's either **allowed** (passed through) or **denied** (dropped). Most firewalls have a default rule at the end that blocks everything not explicitly allowed.
 
-**Generations of Firewalls**
+## Generations of Firewalls
 
 Firewall technology has evolved significantly over the decades. Understanding the generations helps you understand what modern firewalls can and can't do.
 
-**Generation 1: Packet Filtering Firewalls (Late 1980s)**
+## Generation 1: Packet Filtering Firewalls (Late 1980s)
 
 The earliest firewalls were simple **packet filters**. They inspected each packet in isolation and made decisions based purely on the packet header:
 - Source IP address
@@ -821,7 +827,7 @@ The earliest firewalls were simple **packet filters**. They inspected each packe
 
 Packet filters are fast and efficient because they're stateless — they don't remember anything about previous packets. But they have significant weaknesses. They can't tell if a packet is part of a legitimate established connection or if it's a malicious packet that happens to have an allowed source address. They can't look inside the packet payload at all.
 
-**Generation 2: Stateful Inspection Firewalls (Early 1990s)**
+## Generation 2: Stateful Inspection Firewalls (Early 1990s)
 
 **Stateful firewalls** were a major leap forward. Unlike packet filters, they maintain a **state table** — a record of all currently active connections passing through the firewall.
 
@@ -831,7 +837,7 @@ More importantly, stateful firewalls can detect packets that don't belong to any
 
 Stateful inspection became the standard approach and is still the foundation of most firewalls today.
 
-**Generation 3: Application Layer Firewalls / Proxy Firewalls**
+## Generation 3: Application Layer Firewalls / Proxy Firewalls
 
 As the web became more complex, attackers started hiding malicious traffic inside legitimate protocols. An attack might come in on port 80 (HTTP) — a port that any firewall would allow — but contain malicious payloads that exploited vulnerabilities in web servers.
 
@@ -841,7 +847,7 @@ Application layer firewalls work by acting as a proxy: when a client wants to co
 
 The downside is performance — deeply inspecting every packet is computationally expensive. Modern hardware and clever engineering have made this feasible, but it's always a consideration.
 
-**Generation 4: Next-Generation Firewalls (NGFWs)**
+## Generation 4: Next-Generation Firewalls (NGFWs)
 
 **Next-Generation Firewalls** are the current state of the art. They combine everything from the previous generations and add several powerful new capabilities:
 
@@ -857,7 +863,7 @@ The downside is performance — deeply inspecting every packet is computationall
 
 **User Identity Awareness:** Rather than just blocking based on IP addresses, NGFWs can identify which user is generating traffic and apply rules per-user or per-user-group.
 
-**The Types of Firewalls by Deployment**
+## The Types of Firewalls by Deployment
 
 Beyond the technical generations, firewalls are also categorized by where and how they're deployed:
 
@@ -869,7 +875,7 @@ Beyond the technical generations, firewalls are also categorized by where and ho
 
 **Web Application Firewalls (WAFs):** Specialized firewalls designed specifically to protect web applications. They understand the HTTP protocol deeply and can block attacks like SQL injection, cross-site scripting (XSS), and other web-specific attacks. WAFs sit in front of web servers and inspect all web traffic.
 
-**Common Firewall Configurations**
+## Common Firewall Configurations
 
 **Default Deny:** The most secure approach. Everything is blocked by default, and only explicitly allowed traffic is permitted. This requires more configuration work but provides strong security.
 
@@ -879,7 +885,7 @@ Most security professionals strongly advocate for a default deny posture, adding
 
 **DMZ (Demilitarized Zone):** A common network architecture pattern where servers that need to be accessible from the internet (web servers, mail servers) are placed in a separate network segment — the DMZ — that's between two firewalls. The outer firewall allows limited internet access to the DMZ. The inner firewall strictly controls what traffic from the DMZ can reach the internal network. This means even if a DMZ server is compromised, the attacker still faces another firewall to reach internal systems.
 
-**Firewall Limitations**
+## Firewall Limitations
 
 Firewalls are powerful, but they're not magic. They have important limitations:
 
@@ -891,14 +897,15 @@ Firewalls are powerful, but they're not magic. They have important limitations:
 
 **Zero-day exploits:** Firewalls that use signature-based detection can't block attacks that exploit previously unknown vulnerabilities, because there's no signature to match against yet.
 
-**The Bottom Line**
+## The Bottom Line
 
 A firewall is your network's gatekeeper. It's the system that looks at every packet trying to enter or leave and decides, based on a set of rules, whether to let it through or send it away. Modern firewalls are sophisticated, multi-layered systems capable of understanding applications, identifying threats, and adapting to the ever-evolving attack landscape.
 
 They're not perfect. They're not sufficient on their own. But they are absolutely necessary. No serious network — from a home router to a global enterprise — should be without one. And understanding how they work is the foundation of understanding network security.
     `,
     date: "2024-05-08",
-    author: "Jamie Lin",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Firewall", "Network Security", "Cybersecurity", "Networking"]
   },
   {
@@ -911,7 +918,7 @@ VPN ads are everywhere. YouTube pre-rolls, podcast sponsorships, browser pop-ups
 
 But underneath the hype, VPNs are actually a genuinely useful technology with a clear and specific set of things they do well. The key is understanding what they actually do, not what the ads imply. Let's start from the beginning.
 
-**What VPN Stands For**
+## What VPN Stands For
 
 VPN stands for **Virtual Private Network**. Every word in that name is meaningful:
 
@@ -923,7 +930,7 @@ VPN stands for **Virtual Private Network**. Every word in that name is meaningfu
 
 The original purpose of VPNs was completely unrelated to the consumer privacy use case you see advertised today. VPNs were invented for **corporate remote access**.
 
-**The Original Problem VPNs Solved**
+## The Original Problem VPNs Solved
 
 Imagine a company with offices in New York, London, and Tokyo. They have internal servers with sensitive data — HR systems, financial records, internal tools. These servers are on the company's private internal network, protected by firewalls. Employees at the New York office can access them freely because they're on the same network. But what about employees working from home? Or traveling?
 
@@ -933,11 +940,11 @@ VPNs solved this elegantly. An employee working from home installs a VPN client.
 
 This is still the primary use case for VPNs in corporate settings. When your company's IT department tells you to connect to VPN before accessing internal resources, this is what you're doing.
 
-**How a VPN Actually Works: The Technical Details**
+## How a VPN Actually Works: The Technical Details
 
 Let's trace what happens to your internet traffic without a VPN, and then with a VPN.
 
-**Without a VPN:**
+## Without a VPN:
 1. You type \`example.com\` into your browser.
 2. A DNS query goes to your ISP's DNS server asking for the IP address.
 3. Your browser sends a request to \`example.com\`'s IP address.
@@ -947,7 +954,7 @@ Let's trace what happens to your internet traffic without a VPN, and then with a
 
 Your ISP knows every site you visit. Anyone monitoring traffic on your network can see where it's going. Your public IP address reveals your rough geographic location and is visible to every server you connect to.
 
-**With a VPN:**
+## With a VPN:
 1. You connect to a VPN server. Your VPN client authenticates and establishes an encrypted tunnel to the VPN server.
 2. You type \`example.com\` into your browser.
 3. Your device's DNS query goes through the VPN tunnel to the VPN server's DNS resolver.
@@ -959,7 +966,7 @@ From your ISP's perspective, all they see is encrypted traffic going to one IP a
 
 From \`example.com\`'s perspective, the request came from the VPN server's IP address and location — not from your actual location. The website doesn't see your real IP address.
 
-**VPN Protocols: The Tunneling Technology**
+## VPN Protocols: The Tunneling Technology
 
 Different VPN implementations use different protocols to create and secure the tunnel. The main ones you'll encounter:
 
@@ -973,11 +980,11 @@ Different VPN implementations use different protocols to create and secure the t
 
 **PPTP:** A very old protocol that's been broken for years. Avoid it entirely.
 
-**What a VPN Actually Protects You From**
+## What a VPN Actually Protects You From
 
 Here's where we need to be precise and push back on some of the marketing claims.
 
-**What a VPN genuinely helps with:**
+## What a VPN genuinely helps with:
 
 **Public WiFi snooping:** On an unsecured public WiFi network, someone on the same network could potentially intercept your unencrypted traffic. A VPN encrypts all your traffic, making this interception useless. This is one of the most legitimate consumer use cases.
 
@@ -989,7 +996,7 @@ Here's where we need to be precise and push back on some of the marketing claims
 
 **Basic protection when using HTTP sites:** Since HTTPS has become nearly universal, this use case is largely obsolete, but a VPN adds encryption even on HTTP sites.
 
-**What a VPN does NOT protect you from:**
+## What a VPN does NOT protect you from:
 
 **Malware and viruses:** A VPN is not an antivirus. If you download malware, the VPN doesn't stop it from running. The ads that suggest VPNs protect you from "hackers" are misleading you. A VPN encrypts your traffic in transit; it doesn't scan for malicious software.
 
@@ -999,7 +1006,7 @@ Here's where we need to be precise and push back on some of the marketing claims
 
 **Your own data being shared:** If you're logged into a service, that service knows who you are regardless of your IP address.
 
-**The Trust Problem: Who Runs the VPN?**
+## The Trust Problem: Who Runs the VPN?
 
 This is the most important issue that VPN marketing glosses over. When you use a VPN, you're shifting your trust. Without a VPN, you trust your ISP not to snoop on your traffic. With a VPN, you're instead trusting the VPN provider.
 
@@ -1015,13 +1022,13 @@ Evaluating VPN providers requires looking at:
 
 Free VPN services are particularly problematic. Running VPN infrastructure is expensive. If you're not paying, the service is likely monetizing your data in some way — potentially the very browsing data you're trying to protect.
 
-**Setting Up a VPN**
+## Setting Up a VPN
 
 For consumers, the easiest option is a commercial VPN service. Popular options that have generally positive reputations in the security community include Mullvad, ProtonVPN, and IVPN. These are not endorsements — do your own research — but these names come up repeatedly in security researcher discussions.
 
 For corporate/personal technical use, you can self-host a VPN using software like WireGuard on a cloud server. This way, you're the VPN provider and you trust only yourself. Services like Tailscale and Algo make this much more accessible even for non-experts.
 
-**The Honest Assessment**
+## The Honest Assessment
 
 VPNs are useful, legitimate tools for specific privacy and access use cases. They're most valuable on public WiFi, for circumventing ISP monitoring, and for geographic content access. They're less useful for the sweeping "protect you from all hackers and be completely anonymous" claims in the advertisements.
 
@@ -1030,7 +1037,8 @@ The most important thing to understand: a VPN moves your trust from your ISP to 
 Used thoughtfully, with a reputable provider and realistic expectations, a VPN is a valuable addition to a privacy-conscious internet user's toolkit. Used naively, based on flashy ad promises, it might just change who's watching you without actually making you any safer.
     `,
     date: "2024-05-12",
-    author: "Chris Vance",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["VPN", "Privacy", "Security", "Networking", "WireGuard"]
   },
   {
@@ -1045,7 +1053,7 @@ Most people use these terms interchangeably, or just call everything a "router."
 
 Let's start from scratch.
 
-**The Core Distinction**
+## The Core Distinction
 
 Here's the one-sentence version:
 
@@ -1054,7 +1062,7 @@ Here's the one-sentence version:
 
 That's it. Everything else is detail that elaborates on this core difference. But let's explore that detail because it's where things get interesting.
 
-**Hubs: The Stone Age of Networking**
+## Hubs: The Stone Age of Networking
 
 Before we get to switches, let's briefly mention **hubs**, because understanding why hubs were bad helps you understand why switches are good.
 
@@ -1070,7 +1078,7 @@ This creates two problems:
 
 Hubs were mostly obsolete by the early 2000s. Switches replaced them almost entirely.
 
-**Switches: Smart Traffic Directors**
+## Switches: Smart Traffic Directors
 
 A **network switch** is essentially a smart hub — but it's smarter in a very specific and important way. Instead of broadcasting every message to every port, a switch **learns** which device is on which port and sends traffic only to the specific port where the destination device is connected.
 
@@ -1090,7 +1098,7 @@ The result of this learning behavior is enormous:
 
 **Privacy:** Traffic goes only to the intended recipient. Plugging a sniffer into one port only lets you see traffic to and from that specific port's device.
 
-**Switches Operate at Layer 2**
+## Switches Operate at Layer 2
 
 In OSI model terms, switches operate at **Layer 2 (Data Link Layer)**. They make their forwarding decisions based on **MAC addresses** — the hardware addresses burned into network interface cards.
 
@@ -1098,7 +1106,7 @@ MAC addresses are **flat** — they don't have a hierarchical structure that ind
 
 This is where routers come in.
 
-**Routers: The Traffic Managers Between Networks**
+## Routers: The Traffic Managers Between Networks
 
 A **router** operates at **Layer 3 (Network Layer)** and makes decisions based on **IP addresses**, which unlike MAC addresses *do* encode location information in a hierarchical way.
 
@@ -1112,7 +1120,7 @@ The routing table is a critical data structure. It maps destination network addr
 - **OSPF (Open Shortest Path First):** Used within a single organization's network (called an autonomous system)
 - **BGP (Border Gateway Protocol):** The protocol of the internet — how ISPs and large networks share routing information with each other. BGP is what makes it possible for a packet to find its way from your home network through your ISP, through backbone networks, across continents, and to a server anywhere on earth.
 
-**The Home Router: A Device Wearing Many Hats**
+## The Home Router: A Device Wearing Many Hats
 
 The "router" in your home is almost certainly not a pure router. It's a combination device that includes:
 
@@ -1127,13 +1135,13 @@ All of this in one little box. That's impressive (and also why home routers can 
 
 In enterprise networks, these functions are separated. There are dedicated switches for wired connections. Dedicated access points for WiFi. Dedicated routers for network-to-network connectivity. Dedicated firewalls for security. Each device is specialized for its job and can be upgraded or replaced independently.
 
-**Layer 3 Switches: The Blurry Middle Ground**
+## Layer 3 Switches: The Blurry Middle Ground
 
 Modern networking has a class of devices called **Layer 3 switches** that blur the boundary between switches and routers. These are high-speed switches that also have routing capabilities — they can make forwarding decisions based on IP addresses, not just MAC addresses, at switch-level speeds.
 
 Layer 3 switches are common in enterprise networks for routing between VLANs (virtual LANs) within a single building or campus. They're faster than traditional routers for intra-network routing but lack some of the advanced features of full routers (like sophisticated WAN connectivity options or complex routing protocol support).
 
-**VLANs: When Switches Get Logical**
+## VLANs: When Switches Get Logical
 
 While we're on the topic of switches, VLANs deserve a mention. A **VLAN (Virtual LAN)** is a way to logically segment a single physical switch into multiple separate, isolated virtual networks.
 
@@ -1141,7 +1149,7 @@ Imagine a company with 100 employees and a 48-port switch. The IT team might wan
 
 VLANs are a fundamental enterprise networking tool and a key reason why a single physical switch can be so flexible.
 
-**A Practical Summary**
+## A Practical Summary
 
 If you're setting up a home network: your combined router/switch/AP device handles everything. If you need more wired ports, buy an **unmanaged switch** (cheap, plug-and-play) and connect it to your router.
 
@@ -1152,7 +1160,8 @@ If you're studying for a networking certification: understanding the OSI layers 
 The bottom line: switches connect devices within a network. Routers connect networks to each other. Both are essential, complementary pieces of the networking puzzle. And the little box in your living room is secretly doing both jobs simultaneously.
     `,
     date: "2024-05-15",
-    author: "Sam Rivera",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Routers", "Switches", "Networking Hardware", "Layer 2", "Layer 3"]
   },
   {
@@ -1167,7 +1176,7 @@ But here's the thing: subnetting is not actually that complicated. It has maybe 
 
 So let's start there. Why does subnetting exist? What problem does it solve?
 
-**The Problem: Networks Get Too Big**
+## The Problem: Networks Get Too Big
 
 Imagine a network with 1,000 computers all on the same network segment. Every time one computer needs to find another computer's MAC address (a process called ARP), it sends a **broadcast** — a message to every single device on the network. With 1,000 devices, that's a lot of broadcast traffic. And all 1,000 devices have to receive and process every single broadcast, even if 999 of them have nothing to do with it. This is called **broadcast traffic**, and it can become a serious performance problem as networks grow.
 
@@ -1175,7 +1184,7 @@ There's also a security concern. On a flat network, a compromised machine can re
 
 The solution is to break the large network into smaller, more manageable pieces — **subnets** (sub-networks). Each subnet is its own little island. Broadcast traffic stays within the subnet. To communicate between subnets, traffic must go through a router. Routers create natural boundaries that contain broadcast storms and allow security policies to be enforced between segments.
 
-**IP Addresses and Binary: A Quick Review**
+## IP Addresses and Binary: A Quick Review
 
 Subnetting works on binary (base 2) arithmetic, so we need a quick foundation.
 
@@ -1191,7 +1200,7 @@ In subnetting, an IP address is divided into two parts:
 
 A **subnet mask** determines where the boundary between these two portions falls.
 
-**Subnet Masks: Drawing the Line**
+## Subnet Masks: Drawing the Line
 
 A subnet mask is also a 32-bit number, written in the same dotted-decimal format as an IP address. But in binary, a subnet mask is always a series of consecutive 1s followed by consecutive 0s. No 1s after the 0s, no mixing.
 
@@ -1208,7 +1217,7 @@ So with a subnet mask of \`255.255.255.0\` and the IP address \`192.168.1.100\`:
 
 This tells you the device is on the network \`192.168.1.0\` and is specifically host number 100 within that network.
 
-**CIDR Notation: A Shorthand**
+## CIDR Notation: A Shorthand
 
 Writing out the full subnet mask every time is verbose. There's a shorthand called **CIDR notation (Classless Inter-Domain Routing)** that just writes the number of 1-bits in the mask after the IP address, separated by a slash.
 
@@ -1308,6 +1317,7 @@ Flashcards, subnetting practice websites, and just doing problems by hand all wo
 That moment when it clicks — when the binary math stops feeling abstract and starts feeling like a clear, logical system — is genuinely satisfying. Subnetting is one of those networking skills that feels like a superpower once you've mastered it. And it's not as far away as it might seem from where you're starting.
     `,
     date: "2024-05-18",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["Subnetting", "IP Addressing", "CIDR", "Networking Fundamentals"]
   },
@@ -1323,11 +1333,11 @@ The difference isn't magic. It's knowing how to use a handful of diagnostic tool
 
 Let's go through each one in detail.
 
-**Ping: Is Anyone Home?**
+## Ping: Is Anyone Home?
 
 \`ping\` is the most basic network diagnostic tool. It tests whether a destination host is reachable over the network and measures the **round-trip time (RTT)** — how long it takes for a packet to travel from your machine to the destination and back.
 
-**How it works:**
+## How it works:
 
 Ping uses the **ICMP (Internet Control Message Protocol)** — a protocol that lives at Layer 3 (Network Layer), the same layer as IP. When you run \`ping example.com\`, your computer sends ICMP Echo Request packets to the destination. If the destination is reachable and not blocking ICMP, it responds with ICMP Echo Reply packets. Ping reports how long each round trip took.
 
@@ -1493,7 +1503,8 @@ The reason these tools are so powerful is that they test specific things at spec
 Network troubleshooting is part science, part detective work. These tools are your magnifying glass and your fingerprint kit. Learn to use them fluently, and you'll be the person in the room who can diagnose a network problem in 30 seconds while everyone else is still guessing.
     `,
     date: "2024-05-20",
-    author: "Jamie Lin",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Troubleshooting", "Ping", "Traceroute", "DNS", "Nslookup", "Networking Tools"]
   },
   {
@@ -1508,7 +1519,7 @@ What do you do? You hire more bakers. And you put someone at the front who direc
 
 That's load balancing. And it's exactly how the internet's biggest services stay up and responsive when millions of users hit them simultaneously.
 
-**The Fundamental Problem**
+## The Fundamental Problem
 
 A single web server has limits. It has a finite amount of CPU, RAM, and network bandwidth. It can handle a certain number of simultaneous connections before it slows down, and beyond that it starts dropping requests or failing entirely.
 
@@ -1516,7 +1527,7 @@ For a small website, this is fine. Most personal blogs and small business sites 
 
 The solution is to run many servers in parallel, and use a **load balancer** to distribute incoming requests across them.
 
-**What a Load Balancer Does**
+## What a Load Balancer Does
 
 A load balancer sits in front of a group of servers (called a **server pool** or **server farm** or **backend**) and acts as the single entry point for all incoming traffic. Clients connect to the load balancer's IP address. The load balancer receives each request and forwards it to one of the backend servers, then returns the server's response to the client.
 
@@ -1524,7 +1535,7 @@ From the client's perspective, they're talking to one server at the load balance
 
 The load balancer's job is to make sure no single backend server gets overwhelmed while others sit idle — to distribute the work as evenly as efficiently as possible.
 
-**Load Balancing Algorithms**
+## Load Balancing Algorithms
 
 The core question for any load balancer: *which server should handle this request?* Different algorithms make different tradeoffs:
 
@@ -1545,7 +1556,7 @@ Cons: Doesn't account for request complexity. If request #1 takes 5ms and reques
 
 **Random:** Literally picks a random server. Surprisingly effective at large scale due to the law of large numbers — with many requests, random selection approximates even distribution.
 
-**Session Persistence (Sticky Sessions)**
+## Session Persistence (Sticky Sessions)
 
 This is a nuanced topic worth understanding. Many web applications are **stateful** — they store information about a user's session on the server itself (in memory or in local files). This was the original and still common pattern.
 
@@ -1555,12 +1566,12 @@ For such applications, if a user's requests are sent to different servers, each 
 
 The cleaner architectural solution is **stateless design**: store all session state in a shared external store (like Redis or a database) that all servers can access. Then it doesn't matter which server handles which request — they all have access to the same session information. This is much more flexible and resilient. Modern application architectures strongly favor stateless design for this reason.
 
-**Types of Load Balancers**
+## Types of Load Balancers
 
-**Layer 4 Load Balancers (Transport Layer):**
+## Layer 4 Load Balancers (Transport Layer):
 These operate at the TCP/UDP level and make routing decisions based on IP addresses and port numbers — without looking at the content of the traffic. They're very fast and efficient because they don't need to parse application-level protocols. The tradeoff is they can't make decisions based on the content of requests (you can't say "send all requests for /api to server group A and all requests for /static to server group B" at Layer 4).
 
-**Layer 7 Load Balancers (Application Layer):**
+## Layer 7 Load Balancers (Application Layer):
 These operate at the HTTP level and can make routing decisions based on the actual content of requests — the URL, headers, cookies, request body. This enables sophisticated routing:
 - Send requests for \`/api/*\` to the API server pool
 - Send requests for \`/images/*\` to the image server pool
@@ -1571,7 +1582,7 @@ Layer 7 load balancers are more flexible but require more processing, making the
 
 Most modern load balancers in production use are Layer 7 because the flexibility is worth the cost.
 
-**Health Checks: Knowing When a Server Is Down**
+## Health Checks: Knowing When a Server Is Down
 
 An intelligent load balancer doesn't just distribute traffic blindly. It continuously monitors the health of backend servers through **health checks**.
 
@@ -1581,7 +1592,7 @@ If a server fails a health check (or several consecutive checks), the load balan
 
 This is a critical feature for **high availability**. With a load balancer and health checks, the failure of one or several backend servers is handled automatically, transparently, without any manual intervention and without users experiencing an outage.
 
-**Content Delivery Networks (CDNs): Load Balancing at Global Scale**
+## Content Delivery Networks (CDNs): Load Balancing at Global Scale
 
 When we talk about load balancing at the largest scale — serving users across the entire world with minimal latency — we're talking about **CDNs (Content Delivery Networks)**.
 
@@ -1591,7 +1602,7 @@ For a user in Tokyo, their request goes to a CDN edge server in Tokyo or nearby 
 
 CDN providers like Cloudflare, Akaike, Fastly, and AWS CloudFront use sophisticated **Anycast routing** — multiple servers sharing the same IP address globally, with the network automatically routing each user to the geographically nearest one.
 
-**Load Balancing in Cloud Environments**
+## Load Balancing in Cloud Environments
 
 Modern cloud platforms make load balancing almost trivially easy to deploy:
 
@@ -1601,7 +1612,7 @@ Modern cloud platforms make load balancing almost trivially easy to deploy:
 
 These managed services handle all the operational complexity — hardware maintenance, software updates, scaling — and integrate with auto-scaling groups that automatically add or remove backend servers based on load.
 
-**Auto-Scaling: The Partner Technology**
+## Auto-Scaling: The Partner Technology
 
 Load balancing works best in combination with **auto-scaling**. Instead of provisioning enough servers to handle your peak load at all times (expensive), auto-scaling automatically adjusts the number of servers based on current demand.
 
@@ -1609,7 +1620,7 @@ During a traffic spike, auto-scaling launches new server instances. The load bal
 
 This combination — load balancer + auto-scaling + cloud infrastructure — is the foundation of how modern web services handle massive, variable traffic loads economically and reliably.
 
-**The Invisible Infrastructure**
+## The Invisible Infrastructure
 
 Load balancers are essentially invisible from a user's perspective. You never see them. They don't appear in a page's HTML. When Netflix handles 200 million concurrent streams, you see Netflix. You don't see the thousands of servers behind dozens of load balancers that are jointly serving your specific stream, along with everyone else's.
 
@@ -1620,7 +1631,8 @@ Understanding load balancing helps you understand not just how the internet hand
 Load balancing is one of the unglamorous, invisible pillars that holds the modern internet up. And now you know what it is.
     `,
     date: "2024-05-22",
-    author: "Sam Rivera",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Load Balancing", "Scalability", "CDN", "High Availability", "Web Architecture"]
   },
   {
@@ -1633,13 +1645,13 @@ Security is one of those topics where the more you learn, the more you realize h
 
 This isn't a guide for security professionals or penetration testers. This is a grounded, honest overview of the attacks that actually happen in the real world, why they work, and what you can do about them. Think of it as building a mental model for network security — not a comprehensive technical manual.
 
-**The Attacker's Mindset**
+## The Attacker's Mindset
 
 Before looking at specific attacks, it helps to understand how attackers generally think. They're not usually looking to specifically target you (unless you're a high-value individual or organization). Most attacks are opportunistic — automated tools scanning the internet for vulnerable systems, looking for low-hanging fruit. The attackers are often more interested in easy wins than in specifically going after one particular target.
 
 This is actually somewhat reassuring. It means that basic, well-implemented security measures — patching software, using strong passwords, enabling MFA — dramatically reduce your attack surface because most automated scanners will move on to easier targets.
 
-**Man-in-the-Middle (MitM) Attacks**
+## Man-in-the-Middle (MitM) Attacks
 
 In a man-in-the-middle attack, an attacker secretly positions themselves between two communicating parties — intercepting, and potentially modifying, the communication without either party knowing.
 
@@ -1647,13 +1659,13 @@ In a man-in-the-middle attack, an attacker secretly positions themselves between
 
 On a wired network, ARP poisoning is a common MitM technique. ARP maps IP addresses to MAC addresses. An attacker can send fake ARP messages telling devices that the attacker's MAC address is associated with the router's IP address. Traffic intended for the router flows to the attacker instead.
 
-**Defense:**
+## Defense:
 - Use HTTPS for all web traffic (the padlock matters)
 - Be skeptical of public WiFi networks — use a VPN on untrusted networks
 - Look for certificate warnings — if a site usually has a valid certificate and suddenly shows a warning, be suspicious
 - On enterprise networks, use dynamic ARP inspection (a switch-level security feature that validates ARP messages)
 
-**Denial of Service (DoS) and Distributed Denial of Service (DDoS) Attacks**
+## Denial of Service (DoS) and Distributed Denial of Service (DDoS) Attacks
 
 A DoS attack aims to make a service unavailable by overwhelming it with traffic or exploiting a vulnerability that crashes the service. A DDoS is the same thing but uses many distributed sources.
 
@@ -1661,25 +1673,25 @@ A DoS attack aims to make a service unavailable by overwhelming it with traffic 
 
 Protocol attacks (like SYN floods, discussed in the TCP article) exploit weaknesses in protocols rather than just sending huge volumes. Amplification attacks abuse UDP protocols (like DNS or NTP) where a small request generates a large response, sending that large response to the victim's IP.
 
-**Defense:**
+## Defense:
 - Use a DDoS protection service (Cloudflare, AWS Shield, Akamai, etc.) — these services absorb attacks by having massive bandwidth capacity and sophisticated traffic filtering
 - Configure rate limiting at the network perimeter
 - For SYN floods specifically, enable SYN cookies on servers
 - Work with your ISP — they can often filter attack traffic upstream
 
-**Port Scanning and Reconnaissance**
+## Port Scanning and Reconnaissance
 
 Attackers don't usually attack blindly. They first study their target — a process called **reconnaissance**. Port scanning is a key reconnaissance technique.
 
 **How it works:** Tools like Nmap send packets to a target's IP address on many different ports and analyze the responses to determine which ports are open (and therefore which services are running). An open SSH port (22) tells an attacker there's a remote access service. An open database port (3306 for MySQL) that shouldn't be public-facing is a red flag and an attractive target.
 
-**Defense:**
+## Defense:
 - Close all ports that don't need to be publicly accessible. Firewalls should default-deny all inbound traffic and only allow specific necessary services.
 - Change default port numbers for sensitive services (run SSH on port 2222 instead of 22, for example) — this is "security through obscurity" and not sufficient on its own, but it does reduce automated scanning hits
 - Use port knocking for very sensitive services — require a secret sequence of connection attempts before a port opens
 - Monitor for port scanning with intrusion detection systems
 
-**Password Attacks**
+## Password Attacks
 
 Many network services require authentication. Attackers know this and target authentication systems.
 
@@ -1689,14 +1701,14 @@ Many network services require authentication. Attackers know this and target aut
 
 **Credential stuffing:** Use lists of username/password pairs leaked from other data breaches. Because people reuse passwords across sites, credentials from a breach at one site work on others.
 
-**Defense:**
+## Defense:
 - Use strong, unique passwords for every service (a password manager makes this feasible)
 - Enable Multi-Factor Authentication (MFA) — even if an attacker has your password, they need the second factor
 - Implement account lockout policies (lock an account after N failed attempts)
 - Use CAPTCHA on login pages to slow automated attacks
 - Monitor authentication logs for unusual patterns (many failed attempts, logins from unusual locations)
 
-**SQL Injection**
+## SQL Injection
 
 This is one of the most common application-level attacks and it exploits poor coding practices rather than network-level weaknesses.
 
@@ -1706,24 +1718,24 @@ Classic example: A login form that checks \`SELECT * FROM users WHERE username='
 
 SQL injection can extract entire databases, modify data, delete records, and sometimes even execute commands on the server's operating system.
 
-**Defense:**
+## Defense:
 - Use **parameterized queries** (prepared statements) — the correct way to build database queries that prevents SQL injection entirely
 - Input validation — validate and sanitize all user input
 - Principle of least privilege — database accounts used by applications should have only the permissions they need, nothing more
 - Web Application Firewalls (WAFs) can detect and block common SQL injection patterns
 
-**Cross-Site Scripting (XSS)**
+## Cross-Site Scripting (XSS)
 
 Another application-level attack that's useful to understand.
 
 **How it works:** XSS occurs when an attacker injects malicious JavaScript into a web page that's then executed by other users' browsers. If a site allows user-submitted content (comments, profiles) and displays it without sanitization, an attacker can submit content containing \`<script>malicious code here</script>\`. When other users view the page, their browsers execute that code — which can steal session cookies, redirect users to malicious sites, or perform actions on behalf of the victim.
 
-**Defense:**
+## Defense:
 - Output encoding — when displaying user-submitted content, encode characters like \`<\` and \`>\` so they're displayed as text rather than interpreted as HTML
 - Content Security Policy (CSP) headers — tell browsers which scripts are allowed to run, blocking injected scripts
 - Input validation and sanitization
 
-**Phishing and Social Engineering**
+## Phishing and Social Engineering
 
 Technically not a "network" attack, but arguably the most effective attack in practice because it bypasses all technical controls by targeting the human.
 
@@ -1731,14 +1743,14 @@ Technically not a "network" attack, but arguably the most effective attack in pr
 
 No firewall or intrusion detection system catches a user who's been fooled into willingly handing over their password on a fake bank website. The technical controls are all bypassed.
 
-**Defense:**
+## Defense:
 - Security awareness training — teach users to recognize phishing attempts
 - Email authentication (SPF, DKIM, DMARC) — these DNS-based email security standards make it harder to spoof sender addresses
 - URL filtering — web proxies that block known malicious sites
 - MFA — even if credentials are phished, MFA prevents account takeover in most cases
 - Verify requests through a different channel — if an "IT department" email asks for your password, call IT to verify
 
-**Defense in Depth: The Security Philosophy**
+## Defense in Depth: The Security Philosophy
 
 The most important concept in network security is **defense in depth** — using multiple layers of security controls so that if any one layer fails, others remain.
 
@@ -1746,7 +1758,7 @@ A good security posture doesn't rely on a single firewall. It has firewalls, plu
 
 No security is perfect. Breaches happen to even well-defended organizations. The goal is to make attacks hard enough and expensive enough that opportunistic attackers move on, and sophisticated targeted attacks take long enough to detect and respond to.
 
-**The Most Important Practical Steps**
+## The Most Important Practical Steps
 
 If you're an individual:
 - Use a password manager and unique passwords for everything
@@ -1765,7 +1777,8 @@ If you manage a network:
 Security isn't a product you buy or a state you achieve. It's an ongoing process. But the fundamentals — patching, strong authentication, encryption in transit, least privilege, monitoring — get you most of the way there and protect against the vast majority of attacks that happen in the real world.
     `,
     date: "2024-05-25",
-    author: "Chris Vance",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Network Security", "Cybersecurity", "DDoS", "Phishing", "Defense in Depth"]
   },
   {
@@ -1778,7 +1791,7 @@ Email is one of those technologies that feels completely mundane until you start
 
 Behind that seamless experience is a surprisingly elegant system of multiple protocols, servers, and standards that have evolved over 50 years. Let's trace the complete journey of an email from the moment you hit Send to the moment it lands in someone's inbox.
 
-**The Key Protocols: SMTP, IMAP, POP3**
+## The Key Protocols: SMTP, IMAP, POP3
 
 Email is built on three main protocols, each handling a different part of the process:
 
@@ -1788,17 +1801,17 @@ Email is built on three main protocols, each handling a different part of the pr
 
 **POP3 (Post Office Protocol version 3):** An older protocol for *downloading* email from a server to your device. Unlike IMAP, POP3 typically downloads and deletes messages from the server. Less common now because it doesn't support accessing email from multiple devices.
 
-**The Journey of an Email**
+## The Journey of an Email
 
 Let's say you're using Gmail and you send an email to someone at Outlook (Microsoft's email service). Here's exactly what happens:
 
-**Step 1: You hit Send**
+## Step 1: You hit Send
 
 Your email client (the Gmail web interface, or the Gmail app) takes your composed message and formats it according to the email message standard (RFC 5322). This standard defines how email headers (From, To, Subject, Date, etc.) and body are structured.
 
 The formatted message is then submitted to Gmail's mail servers using **SMTP**, typically over port 587 (with authentication) or port 465 (SMTPS, SMTP over TLS). Your client authenticates with Gmail's server using your username and password. Without authentication, anyone could submit email claiming to be from anyone — which is exactly what spammers try to do.
 
-**Step 2: Gmail's Server Takes Over**
+## Step 2: Gmail's Server Takes Over
 
 Gmail's mail submission server receives your message and passes it internally to Gmail's outbound SMTP relay — the server responsible for actually sending mail to external services.
 
@@ -1807,7 +1820,7 @@ Before sending, Gmail performs several checks and adds information:
 - It may perform spam and malware checking on outbound mail
 - It adds cryptographic signatures (more on this shortly)
 
-**Step 3: DNS MX Record Lookup**
+## Step 3: DNS MX Record Lookup
 
 The Gmail relay needs to figure out where to deliver the email. The "To" address is \`someone@outlook.com\`. The part before the @ is the user (\`someone\`), and the part after is the domain (\`outlook.com\`). 
 
@@ -1935,6 +1948,7 @@ Messages, Slack, Teams, WhatsApp — each is a walled garden. Email is the open 
 The system isn't perfect. Spam is a nuisance. Security could be better. The protocols show their age. But as a piece of decentralized, open-standard communication infrastructure, email remains one of the internet's great success stories.
     `,
     date: "2024-05-28",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["Email", "SMTP", "IMAP", "DNS", "Mail Protocols", "Networking"]
   },
@@ -1948,13 +1962,13 @@ There's a famous saying in tech: "There is no cloud. It's just someone else's co
 
 But the networking that makes cloud computing possible is genuinely sophisticated — and increasingly, understanding cloud networking is a fundamental skill for developers, sysadmins, and architects. This is an honest, accessible walkthrough of how networking works in the major cloud platforms.
 
-**The Basic Cloud Networking Model**
+## The Basic Cloud Networking Model
 
 When you sign up with a cloud provider like AWS (Amazon Web Services), Azure (Microsoft), or Google Cloud (GCP), you're getting access to massive data centers — enormous buildings full of physical servers, storage, and networking equipment. The cloud provider owns and operates this hardware. You rent access to virtual slices of it.
 
 The key abstraction is **virtualization**. Physical servers are divided into virtual machines (VMs). Physical networks are divided into virtual networks. The whole cloud is a massive, software-defined layer running on top of physical infrastructure.
 
-**Virtual Private Cloud (VPC): Your Network in the Cloud**
+## Virtual Private Cloud (VPC): Your Network in the Cloud
 
 The foundational networking concept in every major cloud is the **VPC (Virtual Private Cloud)** — a logically isolated section of the cloud provider's network that you control.
 
@@ -2059,7 +2073,8 @@ The cloud abstracts away the complexity of that physical infrastructure — you 
 Understanding cloud networking means understanding both the elegant software abstractions (VPCs, security groups, managed services) and the physical realities they sit on. Together, they make it possible to build globally distributed, highly available, secure applications without owning a single piece of networking hardware.
     `,
     date: "2024-05-30",
-    author: "Sam Rivera",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Cloud Networking", "AWS", "Azure", "GCP", "VPC", "Cloud Architecture"]
   },
   {
@@ -2074,7 +2089,7 @@ In the real world, things break. Links go down. Routers misconfigure. A new firm
 
 The discipline of **network monitoring and observability** is how engineers stay ahead of these problems. It's the difference between finding out a service is down because users complain versus finding out thirty seconds after a metric exceeds a threshold, before most users have even noticed.
 
-**Monitoring vs. Observability: What's the Difference?**
+## Monitoring vs. Observability: What's the Difference?
 
 These terms are related but distinct:
 
@@ -2084,7 +2099,7 @@ These terms are related but distinct:
 
 In practice, both are important. Monitoring catches the known issues automatically. Observability provides the data you need to investigate the unknowns.
 
-**The Three Pillars of Observability**
+## The Three Pillars of Observability
 
 Modern observability is often described as having three pillars:
 
@@ -2094,7 +2109,7 @@ Modern observability is often described as having three pillars:
 
 **Traces:** Records of the path of individual requests through a distributed system. As a request passes through load balancers, application servers, databases, and microservices, each component adds to the trace. The result is a complete timeline of the request's journey, with timing for each step. Traces are essential for understanding latency problems in complex distributed systems.
 
-**Key Network Metrics to Monitor**
+## Key Network Metrics to Monitor
 
 Not all metrics are equally important. Here are the ones network engineers care about most:
 
@@ -2112,7 +2127,7 @@ Not all metrics are equally important. Here are the ones network engineers care 
 
 **BGP Session State:** For networks that peer with other networks using BGP, monitoring BGP session state is critical — a dropped BGP session means routes are withdrawn and traffic flows change dramatically.
 
-**SNMP: The Classic Protocol**
+## SNMP: The Classic Protocol
 
 The most established protocol for collecting network device metrics is **SNMP (Simple Network Management Protocol)**. SNMP is a protocol that allows a monitoring system (the **manager**) to query network devices (the **agents**) for statistics.
 
@@ -2122,7 +2137,7 @@ A monitoring system can **poll** (query) devices every few minutes for specific 
 
 SNMP has been around since the 1980s and is supported by virtually every network device. SNMPv3 added authentication and encryption, addressing the major security weaknesses of earlier versions. Despite being old, SNMP remains widely deployed.
 
-**Modern Alternatives to SNMP**
+## Modern Alternatives to SNMP
 
 SNMP's polling model has limitations: you poll every 5 minutes, you miss spikes that happen between polls. And the MIB structure is complex and inconsistent across vendors.
 
@@ -2132,7 +2147,7 @@ SNMP's polling model has limitations: you poll every 5 minutes, you miss spikes 
 
 Flow data is invaluable for understanding traffic patterns: "Where is all this bandwidth going?" "What are the top talkers on the network?" "Is there any unusual traffic to unusual destinations?" Unlike full packet capture (which is expensive and privacy-sensitive), flow data is summarized and manageable at scale.
 
-**Network Monitoring Tools and Platforms**
+## Network Monitoring Tools and Platforms
 
 The tooling ecosystem for network monitoring is large. A few key categories and examples:
 
@@ -2148,7 +2163,7 @@ The tooling ecosystem for network monitoring is large. A few key categories and 
 
 **Commercial NPMD (Network Performance Monitoring and Diagnostics):** SolarWinds, PRTG, Datadog (has strong network monitoring capabilities), Dynatrace. These tend to be more comprehensive and easier to set up than open-source alternatives, but come with significant cost.
 
-**Setting Up Effective Alerting**
+## Setting Up Effective Alerting
 
 Monitoring without alerting is just data collection. Alerting without careful thought generates alert fatigue — so many notifications that engineers learn to ignore them, defeating the purpose.
 
@@ -2164,7 +2179,7 @@ Principles for effective alerting:
 
 **Alert on anomalies, not just thresholds.** Machine learning-based anomaly detection can identify when a metric is behaving unusually compared to its historical pattern — even if it hasn't crossed a fixed threshold. This catches gradual degradation and unusual patterns that threshold-based alerting misses.
 
-**Capacity Planning: Looking Forward**
+## Capacity Planning: Looking Forward
 
 Monitoring isn't just about catching problems — it's about predicting them. **Capacity planning** uses historical trend data to forecast when resources will be exhausted.
 
@@ -2172,7 +2187,7 @@ If a network link is averaging 40% utilization today and growing 5% per month, i
 
 Trend data from monitoring systems feeds directly into capacity planning. This is why long-term metric retention matters even though old data seems less valuable — those historical trends are exactly what you need for capacity forecasting.
 
-**The Culture of Observability**
+## The Culture of Observability
 
 The best monitoring strategy in the world doesn't help if the culture doesn't support it. Teams that build observable systems from the start — instrumenting their code, logging meaningful events, defining SLOs (Service Level Objectives) and tracking them — are far more effective than teams that add monitoring as an afterthought when something breaks.
 
@@ -2187,7 +2202,8 @@ Networks are living systems. They grow, they change, they fail, they recover. Mo
 That's not just good engineering. That's the difference between keeping the lights on and building something you can actually be proud of.
     `,
     date: "2024-06-01",
-    author: "Chris Vance",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Network Monitoring", "Observability", "SNMP", "NetFlow", "Metrics", "Alerting"]
   },
   {
@@ -2200,7 +2216,7 @@ If you could go back to 1994 and tell someone — even a technology expert — w
 
 So what does the next decade bring? It's always dangerous to predict technology — many confidently predicted technologies have fizzled, and many transformative ones appeared with little warning. But there are several clear trajectories already well underway, and understanding them gives you a sense of where the networking field is heading.
 
-**WiFi 7: The Wireless Gigabit Era**
+## WiFi 7: The Wireless Gigabit Era
 
 WiFi 6 (802.11ax) was a significant improvement over its predecessors, primarily in how it handles many simultaneous devices through OFDMA and better scheduling. WiFi 6E extended this into the 6 GHz band, offering much more clean spectrum.
 
@@ -2213,7 +2229,7 @@ WiFi 6 (802.11ax) was a significant improvement over its predecessors, primarily
 
 In practice, real-world speeds are always significantly lower than theoretical maximums. But even at a fraction of that, WiFi 7 will make wired connections less necessary for most use cases.
 
-**5G and 6G: The Mobile Network Revolution**
+## 5G and 6G: The Mobile Network Revolution
 
 **5G** (Fifth Generation mobile networking) is already rolling out globally, though adoption is uneven. The promises of 5G — multi-gigabit speeds, millisecond latency, massive device density — are real but require specific conditions (mmWave spectrum, dense small cell deployment) that haven't been widely deployed everywhere.
 
@@ -2221,7 +2237,7 @@ The most interesting 5G developments are happening not in consumer mobile intern
 
 **6G** research is already underway (Shannon's law of physics always pushes the next generation of wireless). 6G is expected around 2030 and will likely operate in the sub-terahertz spectrum range, potentially offering speeds measured in hundreds of gigabits per second and even lower latency. Integrated satellite-terrestrial networks, AI-native design, and sensing capabilities (using the radio signal itself to sense the physical environment) are expected to be key features.
 
-**Starlink and Low-Earth Orbit Satellite Internet**
+## Starlink and Low-Earth Orbit Satellite Internet
 
 For most of the internet's history, satellite internet was a disappointing compromise: high latency (600ms+ round trips to geostationary satellites at 36,000km altitude), limited bandwidth, and high cost. Useful for remote areas with no alternatives, but not competitive with terrestrial internet.
 
@@ -2231,7 +2247,7 @@ As of 2024, Starlink has over 6,000 satellites on orbit and serves millions of c
 
 The limitation today is capacity: each satellite serves a finite area, and coverage is thinner in densely populated regions. As constellations grow and technology improves, this will improve. LEO satellite internet is likely to provide meaningful competition to terrestrial ISPs in rural and underserved areas within this decade.
 
-**Software-Defined Networking (SDN) Goes Mainstream**
+## Software-Defined Networking (SDN) Goes Mainstream
 
 We touched on SDN in the cloud networking section. It's the separation of the control plane (routing decisions) from the data plane (packet forwarding), with centralized software controlling the network. Cloud providers already run entirely on SDN internally. But SDN is increasingly moving into enterprise networking and carrier networks.
 
@@ -2239,7 +2255,7 @@ We touched on SDN in the cloud networking section. It's the separation of the co
 
 **Network Function Virtualization (NFV)** replaces physical network appliances (dedicated hardware firewalls, routers, load balancers) with software running on standard server hardware. Carriers are NFV-izing their core network functions. This makes networks more flexible and faster to deploy new services, though reliability engineering becomes more complex when you're running on software instead of purpose-built hardware.
 
-**AI and Machine Learning in Networking**
+## AI and Machine Learning in Networking
 
 AI/ML is touching every part of the technology stack, and networking is no exception.
 
@@ -2251,7 +2267,7 @@ AI/ML is touching every part of the technology stack, and networking is no excep
 
 **Network planning and design:** AI tools can analyze traffic patterns and suggest optimal network designs, predict the impact of changes, and automate the generation of configurations.
 
-**Zero Trust Networking: The Security Paradigm Shift**
+## Zero Trust Networking: The Security Paradigm Shift
 
 Traditional network security was based on a perimeter model: build a strong wall (the firewall) around your network, and everything inside is trusted. This model has fundamental weaknesses in a world where:
 - Users work from anywhere
@@ -2268,7 +2284,7 @@ Zero Trust networks continuously verify:
 
 Implementing Zero Trust is less about specific products and more about a philosophy that drives architectural decisions. But products like Google BeyondCorp (which Google built for its own internal network and subsequently commercialized), Zscaler, Cloudflare Access, and Palo Alto's Prisma Access implement Zero Trust architectures at scale.
 
-**Quantum Networking: Farther Out, But Real**
+## Quantum Networking: Farther Out, But Real
 
 Quantum computing poses a threat to current encryption: sufficiently powerful quantum computers could break the mathematical assumptions underlying RSA and elliptic curve cryptography. This has driven significant work on **post-quantum cryptography** — new algorithms that remain secure even against quantum computers. NIST (the National Institute of Standards and Technology) standardized the first post-quantum algorithms in 2024, and the long process of updating internet protocols and software to use them has begun.
 
@@ -2276,7 +2292,7 @@ More speculatively, **quantum networking** would use quantum entanglement to cre
 
 Quantum networking is unlikely to replace classical networking — the laws of physics make it expensive, short-range, and incapable of copying or amplifying signals (which is how conventional networks work). But it may provide extremely high-security channels for specific applications (government communications, financial transactions) within the next decade.
 
-**The Connectivity Gap: Who Gets Left Behind?**
+## The Connectivity Gap: Who Gets Left Behind?
 
 All this exciting technology comes with a sobering context: approximately 2.6 billion people globally still lack access to the internet. Even in wealthy countries, rural and lower-income communities often have significantly worse connectivity than urban areas.
 
@@ -2290,7 +2306,7 @@ Several initiatives aim to address this:
 
 How successfully these initiatives close the connectivity gap will be one of the defining questions of the next decade.
 
-**The Network Is Everywhere**
+## The Network Is Everywhere
 
 Perhaps the most significant trend is that the "network" as a distinct concept is becoming harder to define. Networking capabilities are embedded in everything — in cloud platforms, in operating systems, in development frameworks. The boundaries between networking, computing, and software are blurring.
 
@@ -2301,6 +2317,7 @@ The field is becoming more complex and more interesting. The people who navigate
 The internet is not done. It's barely started. The networks of 2034 will look back at the networks of 2024 the same way we look back at dial-up modems. The packet will keep on traveling.
     `,
     date: "2024-06-05",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["Future of Networking", "WiFi 7", "5G", "Zero Trust", "Quantum Networking", "Starlink"]
   },
@@ -2314,7 +2331,7 @@ If you're reading this on a desktop computer, or on a laptop with a cable plugge
 
 Ethernet. The protocol that wired the world. Let's talk about it.
 
-**The Original Problem**
+## The Original Problem
 
 In the early 1970s, Xerox PARC was a hotbed of computer science innovation — the team there invented things like the graphical user interface, the mouse, and laser printing, many of which would eventually appear in Apple and Microsoft products. They also had multiple computers they wanted to connect together.
 
@@ -2328,7 +2345,7 @@ Robert Metcalfe's solution was **CSMA/CD (Carrier Sense Multiple Access with Col
 
 The name "Ethernet" came from the old physics concept of "luminiferous ether" — the hypothetical medium through which light supposedly traveled. Metcalfe used it as a metaphor for the cable medium through which data travels.
 
-**Ethernet Spreads: From Coax to Twisted Pair**
+## Ethernet Spreads: From Coax to Twisted Pair
 
 Original Ethernet used thick coaxial cable ("thicknet") at 10 Mbps. Connecting to it required drilling into the cable and attaching a vampire tap — literally a spike that pierced through to the conductor. Not user-friendly.
 
@@ -2338,7 +2355,7 @@ The real breakthrough came with **10BASE-T** in 1990: Ethernet over **twisted-pa
 
 The naming convention became standardized: **[speed]BASE-[medium]**. So 10BASE-T means 10 Mbps, baseband signaling, over twisted-pair. 100BASE-TX is Fast Ethernet at 100 Mbps. 1000BASE-T is Gigabit Ethernet over copper. 10GBASE-SR is 10 Gigabit over short-range fiber.
 
-**The Speed Race**
+## The Speed Race
 
 Ethernet speeds have increased by roughly 10x every several years:
 
@@ -2353,7 +2370,7 @@ Ethernet speeds have increased by roughly 10x every several years:
 
 Each generation maintained backward compatibility — your 100 Mbps device can still connect to a Gigabit switch, it just negotiates down to 100 Mbps. This compatibility has been crucial to Ethernet's longevity.
 
-**The Ethernet Frame**
+## The Ethernet Frame
 
 Ethernet is a Layer 2 (Data Link) protocol. The fundamental unit of data in Ethernet is the **frame** — a structured package of bytes that contains the actual payload data along with the addressing and control information needed to deliver it across a local network.
 
@@ -2377,19 +2394,19 @@ The minimum frame size of 64 bytes (payload minimum of 46 bytes plus headers) wa
 
 **Jumbo Frames:** In data centers, many networks support jumbo frames with payloads up to 9000 bytes. Larger frames reduce the overhead of framing per byte of payload and reduce CPU interrupts for high-throughput applications. Jumbo frames require all network devices in the path to support them.
 
-**CSMA/CD and Its Obsolescence**
+## CSMA/CD and Its Obsolescence
 
 CSMA/CD — the original collision detection mechanism — was essential for original Ethernet's shared-bus topology. But as we discussed in the switches section, modern Ethernet networks use **switches** rather than hubs, and each device has a private full-duplex connection to the switch. With no shared collision domain, there are no collisions, and CSMA/CD is irrelevant.
 
 In fact, modern **full-duplex Ethernet** — where both sides can transmit simultaneously — technically doesn't need CSMA/CD at all. The 802.3 standard still defines CSMA/CD for backward compatibility, but every modern wired connection runs full-duplex and never invokes it.
 
-**Auto-Negotiation**
+## Auto-Negotiation
 
 When you plug an Ethernet cable between two devices, they don't just start transmitting at some assumed speed. They first go through **auto-negotiation** — a process defined in IEEE 802.3ab — where they exchange information about their capabilities and agree on the highest common speed and duplex mode.
 
 This is what makes your Gigabit NIC automatically negotiate 1 Gbps with a Gigabit switch, or fall back to 100 Mbps with an older switch. And it's why "duplex mismatch" — when one side is set to full-duplex manually and the other auto-negotiates to half-duplex — is a classic source of terrible Ethernet performance. Always use auto-negotiation on both ends.
 
-**Power over Ethernet (PoE)**
+## Power over Ethernet (PoE)
 
 **PoE** is a technology that delivers electrical power through Ethernet cables alongside data. A PoE switch can power IP cameras, WiFi access points, VoIP phones, and IoT devices through the same cable that carries the network connection — no separate power supply needed.
 
@@ -2397,7 +2414,7 @@ The IEEE 802.3af standard (PoE) delivers up to 15.4W per port. 802.3at (PoE+) de
 
 PoE has become enormously important for simplifying the deployment of wireless access points, which now typically get all their power and connectivity through a single cable run. It's also critical for IoT deployments where running separate power to every sensor or camera would be impractical.
 
-**Ethernet in Data Centers: Spine-Leaf Architecture**
+## Ethernet in Data Centers: Spine-Leaf Architecture
 
 Traditional enterprise networks were built in a hierarchical three-tier model: access switches at the edge, distribution switches in the middle, core switches at the top. This works well for typical office traffic patterns where most communication is between internal clients and central servers.
 
@@ -2411,7 +2428,7 @@ This creates a flat, non-blocking fabric where any server can communicate with a
 
 High-speed Ethernet (25 Gbps, 100 Gbps, 400 Gbps) runs on the connections between spines and leaves, while 10 or 25 Gbps typically connects to individual servers.
 
-**The Cable Standards: Categories and Capabilities**
+## The Cable Standards: Categories and Capabilities
 
 The "twisted pair" in twisted-pair Ethernet refers to the way the individual copper wires inside the cable are twisted together in pairs. The twisting dramatically reduces electromagnetic interference by canceling out noise (what's picked up on one twist is cancelled by the next).
 
@@ -2427,7 +2444,7 @@ Cable categories determine what speeds the cable can support:
 
 For new installations today, Cat6A is generally recommended — it supports 10 Gbps at full length and is future-proof for several generations of Ethernet speed improvements.
 
-**Fiber Optic Ethernet**
+## Fiber Optic Ethernet
 
 Copper Ethernet has limits in terms of distance. Gigabit Ethernet runs 100m on copper. 10 Gbps runs 55m on Cat6. For longer distances — between buildings, between floors, between data center rows — **fiber optic** cables are used.
 
@@ -2439,7 +2456,7 @@ Fiber sends data as light pulses through glass or plastic fibers, eliminating el
 
 The connectors used with fiber (LC, SC, MPO) are different from the RJ45 connectors used for copper — they're more fragile and require more careful handling.
 
-**Ethernet's Remarkable Longevity**
+## Ethernet's Remarkable Longevity
 
 Why has Ethernet lasted 50 years while other networking technologies have come and gone? Token Ring, ATM, FDDI — all had their adherents and have faded.
 
@@ -2455,7 +2472,8 @@ The prognosis for Ethernet is more of the same: continued speed increases (terab
 The cable running from your router to your computer is doing what Robert Metcalfe envisioned in 1973. That's a remarkable technological legacy — the kind that shapes the world so thoroughly that people stop noticing it's there at all.
     `,
     date: "2024-06-08",
-    author: "Jamie Lin",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Ethernet", "Networking Hardware", "Data Centers", "Layer 2", "Network History"]
   },
   {
@@ -2470,7 +2488,7 @@ The cause wasn't a hacker. It wasn't a server failure or a power outage. It was 
 
 BGP is so fundamental that when it breaks, nothing else matters.
 
-**What Is BGP?**
+## What Is BGP?
 
 BGP is the **routing protocol of the internet**. It's the protocol that allows different networks — your ISP's network, Google's network, Facebook's network, university networks, enterprise networks — to share routing information with each other and work out how to send traffic between them.
 
@@ -2478,7 +2496,7 @@ BGP stands for **Border Gateway Protocol** (currently version 4, defined in RFC 
 
 To understand BGP, you first need to understand the concept of an **Autonomous System (AS)**.
 
-**Autonomous Systems: The Building Blocks**
+## Autonomous Systems: The Building Blocks
 
 The internet is not one network. It's a collection of thousands of independently operated networks. Your ISP is a network. Google is a network. AWS is a network. University networks are networks. Cable companies, mobile carriers, CDN providers — each is its own independently operated network.
 
@@ -2488,7 +2506,7 @@ Within an AS, the network operator uses whatever routing protocol they want — 
 
 Between Autonomous Systems, BGP is the standardized protocol for exchanging routing information. This is called **Exterior Gateway Protocol (EGP)** routing.
 
-**How BGP Works**
+## How BGP Works
 
 BGP is a **path vector protocol**. When a router announces that it can reach a particular network, it includes the full list of AS numbers the packet would have to traverse to get there — the AS path. This path information serves two purposes:
 
@@ -2505,7 +2523,7 @@ Here's a simplified example:
 
 As announcements propagate, every AS learns paths to every IP prefix in the internet — and typically receives multiple different paths (through different sets of ASes). BGP selects the "best" path using a complex set of criteria.
 
-**iBGP vs. eBGP**
+## iBGP vs. eBGP
 
 There are two flavors of BGP:
 
@@ -2513,7 +2531,7 @@ There are two flavors of BGP:
 
 **iBGP (Internal BGP):** BGP sessions within a single Autonomous System. Large networks use iBGP to distribute the BGP routing information they learned from external peers to all internal routers. iBGP has a rule: BGP routes learned from an iBGP peer are not re-advertised to other iBGP peers (to prevent loops). This means every iBGP router must have a session with every other iBGP router — a **full mesh**. In large networks, this is managed with **route reflectors** — designated routers that re-advertise routes to other iBGP peers, reducing the full mesh requirement.
 
-**BGP Route Selection**
+## BGP Route Selection
 
 When a BGP router has multiple paths to the same destination (same IP prefix), it must choose one "best" path to actually use. BGP evaluates candidate paths against a list of criteria in order. The first criterion that differentiates paths wins:
 
@@ -2528,7 +2546,7 @@ When a BGP router has multiple paths to the same destination (same IP prefix), i
 
 These rules encode complex routing policy in a systematic way. Network engineers use local preference (rule 1) heavily to express "we prefer to send traffic out through ISP A rather than ISP B."
 
-**BGP Peering: How Networks Connect**
+## BGP Peering: How Networks Connect
 
 BGP sessions are established between specific pairs of routers that the network operators have agreed to connect. This agreement is called **peering**.
 
@@ -2540,7 +2558,7 @@ Networks peer in two primary ways:
 
 Direct peering often happens at **Internet Exchange Points (IXPs)** — physical facilities where many networks bring their routers and peer with each other over a shared switching fabric. The Amsterdam Internet Exchange (AMS-IX) and the DE-CIX Frankfurt are among the world's largest, carrying hundreds of terabits of traffic per second. Rather than paying transit for each network-to-network connection, networks at an IXP can peer with dozens or hundreds of others over a single physical connection.
 
-**BGP Security: A Known Weakness**
+## BGP Security: A Known Weakness
 
 BGP was designed in a more trusting era of the internet. It has a fundamental security weakness: there's no automatic verification that the network announcing a route actually has the right to announce it. Any BGP router can announce any IP prefix.
 
@@ -2552,13 +2570,13 @@ The proposed solution is **RPKI (Resource Public Key Infrastructure)** — a cry
 
 RPKI deployment has been growing but is still incomplete. As of 2024, significant portions of global route origins are covered by RPKI records, but not all networks enforce RPKI validation.
 
-**Route Leaks: A Related Problem**
+## Route Leaks: A Related Problem
 
 A **BGP route leak** is when a network re-advertises routes it shouldn't. A common scenario: a company has both a transit ISP and a peer. The company receives routes from both. Normally, you don't re-advertise your transit provider's routes to your peer (that would make you an unauthorized transit provider). If software misconfigures this and accidentally re-advertises those routes, traffic can be redirected unexpectedly.
 
 This is exactly what happened in 2015 when a small ISP in Oklahoma accidentally re-advertised hundreds of thousands of routes learned from their transit providers back to one of the largest internet exchanges in the US, briefly disrupting routing for major networks.
 
-**The Facebook Outage, Explained**
+## The Facebook Outage, Explained
 
 Back to October 2021. Facebook's internal infrastructure is an Autonomous System. Facebook's BGP routers announce their IP prefixes to the internet via their transit providers — so the world knows where to send traffic for Facebook's services.
 
@@ -2570,7 +2588,7 @@ The compounding tragedy: Facebook uses its own internal tools for remote access 
 
 The full restoration took about six hours. It was a stark reminder that BGP, and the humans who configure it, hold the internet together moment to moment.
 
-**Why We Should All Care About BGP**
+## Why We Should All Care About BGP
 
 You will probably never configure BGP. For most people in technology, understanding BGP means understanding that it exists, roughly how it works, and why it fails in spectacular ways.
 
@@ -2581,7 +2599,8 @@ The work of improving BGP security (RPKI, route leak prevention, better operatio
 The next time Facebook or another major service disappears for a few hours, there's a reasonable chance a BGP misconfiguration is somewhere in the chain of causes. And you'll now know what that means.
     `,
     date: "2024-06-12",
-    author: "Chris Vance",
+    dateModified: "2026-07-21",
+    author: "Muhammad Shahsawar Khan",
     tags: ["BGP", "Routing Protocols", "Internet Infrastructure", "Network Security", "Autonomous Systems"]
   },
   {
@@ -2594,7 +2613,7 @@ If you've read through this blog series, or stumbled across networking through s
 
 But "I want a networking career" is a destination with many possible starting points. This guide is an attempt to give you an honest, practical map — not a list of certifications to buy, not a vague "follow your passion," but an actual look at how people get into this field and what helps them succeed.
 
-**Is Networking the Right Path for You?**
+## Is Networking the Right Path for You?
 
 Before anything else, let's make sure this is actually a good fit. People who thrive in networking careers tend to share some characteristics:
 
@@ -2608,7 +2627,7 @@ Before anything else, let's make sure this is actually a good fit. People who th
 
 If those sound like you, let's talk about the actual path.
 
-**The Entry Points**
+## The Entry Points
 
 Unlike software engineering, where a portfolio of projects is often the primary credential, networking careers tend to build more strongly on certifications — standardized exams that verify you know specific technologies. This is because certifications are the language the industry uses to communicate competence, and because hands-on access to real networking equipment (before you have a job) is harder to get than access to a computer to write code.
 
@@ -2630,13 +2649,13 @@ The exam is not trivial, but it's attainable with focused study. The study mater
 
 **AWS/Azure/GCP Cloud Certifications:** As more infrastructure moves to the cloud, cloud networking skills are increasingly valuable. AWS Solutions Architect, Azure Administrator, or Google Cloud Associate Cloud Engineer are all respected credentials that often complement traditional networking knowledge.
 
-**The Certification Trap**
+## The Certification Trap
 
 A word of caution: certifications are a means to an end, not an end in themselves. Collecting certifications without building actual skills and experience is a common mistake. Employers can tell the difference between someone who crammed for a cert and someone who actually understands the material.
 
 Study for certifications deeply, not just "enough to pass." Build home labs. Practice on real (even if virtual) equipment. Understand the *why* behind the configurations, not just the *how*. When an interviewer asks you to explain OSPF, you should be able to explain what problem it solves, why it uses link-state rather than distance-vector, how it calculates paths — not just recite configuration commands.
 
-**Building Hands-On Skills**
+## Building Hands-On Skills
 
 Here's one of the great things about networking today: you don't need expensive physical hardware to get hands-on experience.
 
@@ -2650,7 +2669,7 @@ Here's one of the great things about networking today: you don't need expensive 
 
 **Actual hardware:** If you want real hardware experience, used Cisco routers and switches are remarkably cheap on eBay. A few hundred dollars can get you a lab with several switches and routers to practice on. This isn't necessary for getting started, but hands-on with real hardware is valuable.
 
-**Getting the First Job**
+## Getting the First Job
 
 The honest truth is that getting the first job without experience is the hardest part. Employers want experience; you need a job to get experience. This cycle is frustrating. Here's how people break it:
 
@@ -2666,7 +2685,7 @@ The honest truth is that getting the first job without experience is the hardest
 
 **Government and military:** The US military and various government agencies actively recruit networking and cybersecurity professionals, sometimes with less experience required than private sector equivalents. Veterans often transition into networking careers with the experience gained during service.
 
-**The Career Trajectory**
+## The Career Trajectory
 
 A typical networking career progression looks something like this, though there are many variations:
 
@@ -2682,7 +2701,7 @@ A typical networking career progression looks something like this, though there 
 
 **Management track:** Some engineers move into management — team leads, managers, directors. This is a choice, not a requirement. Many excellent engineers remain as individual contributors throughout their careers, progressing in seniority and compensation without moving into management.
 
-**What the Work Actually Looks Like Day-to-Day**
+## What the Work Actually Looks Like Day-to-Day
 
 Different networking roles have very different day-to-day experiences.
 
@@ -2694,7 +2713,7 @@ A **cloud networking engineer** at a tech company might spend most of their time
 
 A **network security engineer** focuses on firewalls, intrusion detection, security monitoring, incident response, and threat hunting. Heavy overlap with the cybersecurity domain.
 
-**Stay Current: The Learning Never Stops**
+## Stay Current: The Learning Never Stops
 
 Networking evolves. The technology you learn today will be supplemented by new technologies, new protocols, new architectures. What you know stays relevant longer than in some other tech fields (Ethernet and TCP/IP are timeless), but new skills are always required.
 
@@ -2712,6 +2731,7 @@ Networking is a career built on curiosity. The engineers who advance fastest are
 If this series of blog posts has lit that spark of curiosity for you — welcome. The field is a good one. And there's always more to learn.
     `,
     date: "2024-06-15",
+    dateModified: "2026-07-21",
     author: "Muhammad Shahsawar Khan",
     tags: ["Networking Career", "Certifications", "CCNA", "Career Advice", "Getting Started"]
   }
