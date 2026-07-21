@@ -6,89 +6,175 @@ export const blogs1: BlogPost[] = [
     id: "1",
     slug: "what-is-the-internet-really",
     title: "What Is the Internet, Really? A Beginner's Honest Guide",
-    excerpt: "Everyone uses the internet every single day, but very few people actually know what it is. Let's peel back the curtain and look at the real thing — no jargon, no fluff.",
+    excerpt: "A grounded reference guide to what the internet actually is: ARPANET history, packets, submarine cables, IP addressing, DNS, and the protocols that keep billions of devices talking.",
     content: `
-Let's be honest for a second. Most of us have been using the internet since we were old enough to hold a tablet or click a mouse, and yet if someone asked us to explain what the internet actually *is*, we'd probably wave our hand in the direction of the WiFi router and say something like, "It's just... out there." And that's fine! You don't need to know how an engine works to drive a car. But if you're reading this blog, you probably want more than that. You want the real story.
+The internet is not a cloud, not magic, and not a single machine. It is a globe-spanning network of computers that agree to communicate using shared rules. Billions of devices — phones, servers, laptops, sensors, and consoles — exchange data by following the same core protocols.
 
-So here it is. The internet is not a cloud. It is not magic. It is not even a single thing. The internet is, at its core, a massive, globe-spanning network of computers that have all agreed to talk to each other using the same set of rules. That's it. Billions of machines — phones, servers, laptops, smart refrigerators, surveillance cameras, game consoles — all connected together, all speaking the same language.
+This guide explains what the internet is, where it came from, how data travels, and which standards organizations keep it interoperable. For a hands-on view of how data is encapsulated as it moves through the stack, open the [OSI Model Simulator](https://app.osi-model-simulator.roboticela.com).
 
-**Where Did It Come From?**
+## Where Did the Internet Come From?
 
-The story of the internet starts in the late 1960s with a project funded by the United States Department of Defense called ARPANET. The idea was surprisingly simple: what if we could connect computers at different universities and research institutions so that scientists could share information more easily? The deeper, more strategic goal was to build a communication network that could survive a nuclear attack — if one route was destroyed, the data could automatically find another path.
+The story starts in the late 1960s with **ARPANET**, a project funded by the U.S. Department of Defense's Advanced Research Projects Agency (ARPA). The goal was to connect computers at universities and research labs so researchers could share resources — and to build a network that could keep working if individual links failed.
 
-ARPANET first went live on October 29, 1969, when researchers at UCLA sent a message to Stanford. The message was supposed to be "LOGIN," but the system crashed after the first two letters. The very first message ever sent over what would become the internet was "LO." Honestly, that's kind of poetic.
+ARPANET first went live on **October 29, 1969**, when UCLA researchers attempted to send "LOGIN" to a computer at the Stanford Research Institute. The system crashed after the letters "LO" — often cited as the first message on the network that became the internet.
 
-Over the next two decades, the network grew. Universities joined. Then businesses. Then governments. Protocols were developed — most importantly, TCP/IP in the early 1980s — that gave every machine a consistent way to package and send data. And then in 1991, a British scientist named Tim Berners-Lee invented the World Wide Web, which gave us websites, hyperlinks, and browsers. The internet and the web are not the same thing — the web is just one service that runs *on top of* the internet — but the web is what made the internet explode into mainstream life.
+Over the following decades, universities, businesses, and governments joined. The **TCP/IP** protocol suite (standardized in the early 1980s) gave machines a consistent way to address and deliver packets. In 1991, Tim Berners-Lee introduced the **World Wide Web**, adding hypertext, URLs, and browsers on top of the internet. The web is a service that runs on the internet; it is not the same thing as the internet itself.
 
-**How Does Data Actually Travel?**
+Primary sources for this history include the IETF's TCP/IP RFCs and institutional histories from DARPA-era networking research. See the Sources section below for RFC 791, RFC 793, and related references.
 
-Okay, so you open your browser, type in a URL, and hit Enter. A web page appears. Simple, right? But think about what just happened. Your computer sent a request across possibly thousands of miles of physical cable, through a dozen or more intermediary machines, to a server sitting in a data center somewhere. That server processed your request, assembled a web page, and sent it back. All of this happened in under a second.
+## How Does Data Actually Travel?
 
-Here is the basic journey your data takes:
+When you open a URL, your device does not send one unbroken stream of bytes. It breaks the request into **packets**. Each packet carries payload data plus headers that identify source and destination addresses and other delivery metadata.
 
-Your computer breaks your request into small, manageable pieces called **packets**. Think of it like mailing a very long letter by cutting it into pieces and sending each piece in a separate envelope. Each packet contains a little header that says where it came from and where it needs to go.
+Typical path:
 
-These packets leave your computer through your network interface card (NIC) — the hardware inside your device that handles communication. They travel through your home router, which sends them to your Internet Service Provider (ISP). Your ISP has enormous routers that look at each packet's destination address and decide the best path forward. The packets may jump through half a dozen different networks before they arrive.
+- Your device's network interface sends packets to your home router.
+- The router forwards them to your **Internet Service Provider (ISP)**.
+- ISP and transit routers inspect each packet's destination IP and choose a next hop.
+- Packets may cross multiple autonomous networks before reaching the destination server.
+- The server reassembles packets, processes the request, and returns a response the same way.
 
-At the destination server, the packets are reassembled in order, and the server reads the request, builds a response, and sends it back — again in packets, again traveling the most efficient path it can find.
+At the conceptual level, addressing and forwarding happen at **Layer 3 (Network)** of the OSI model, while reliable delivery often involves **Layer 4 (Transport)** protocols such as TCP. [See Layer 3 in the simulator](https://app.osi-model-simulator.roboticela.com) to watch IP-level encapsulation in motion. For the handshake that starts many TCP connections, read [TCP Three-Way Handshake Explained](/blogs/tcp-three-way-handshake-explained).
 
-**Physical Infrastructure: The World Under Your Feet**
+## Physical Infrastructure: Cables Under Land and Sea
 
-This is the part that blows most people's minds. The internet isn't wireless in any fundamental sense. Most of the world's data travels through physical cables — and a huge portion of it travels through **undersea fiber optic cables** that span the entire ocean floor.
+Most internet traffic still travels over physical media. A large share of intercontinental traffic runs through **submarine fiber-optic cable systems** on the ocean floor. Industry trackers such as TeleGeography document hundreds of active systems spanning more than a million kilometers of cable.
 
-There are over 400 submarine cable systems in the world, stretching nearly 1.3 million kilometers total. These cables are about as thick as a garden hose in many places, yet they carry the bulk of global internet traffic. When one of these cables is damaged — by a ship anchor, a natural disaster, or a curious shark (yes, sharks have occasionally chewed on undersea cables) — large portions of a region's internet traffic can slow down dramatically.
+These cables are relatively thin for the capacity they carry, yet they move the majority of long-haul global traffic. Damage from ship anchors, earthquakes, or construction can disrupt regional connectivity until traffic is rerouted or repairs complete.
 
-On land, data travels through a hierarchy of cables. In your home, it's probably Cat6 Ethernet or WiFi. In your neighborhood, it might be coaxial cable or fiber from your ISP. Then there are massive fiber trunks running along highways, train lines, and city conduits. And at the top of the hierarchy are enormous **internet exchange points (IXPs)** — giant data centers where thousands of networks physically meet and exchange traffic.
+On land, traffic moves through access links (Ethernet, Wi-Fi, coaxial, or fiber), metro and long-haul fiber trunks, and **Internet Exchange Points (IXPs)** where networks interconnect and exchange traffic. For more on the physical layer, see [Physical Layer: Cables, Fiber, and Light](/blogs/physical-layer-cables-fiber-light).
 
-**What Is an IP Address?**
+## What Is an IP Address?
 
-Every device on the internet needs an address. Without an address, there's no way to know where to send data or where it came from. That address is called an **IP address** — IP standing for Internet Protocol.
+Every reachable host needs an address. An **IP address** identifies a network interface so routers can forward packets toward it.
 
-The old format, IPv4, looks something like \`192.168.1.1\`. It's a 32-bit number, which means there are about 4.3 billion possible IPv4 addresses. That sounds like a lot, but it is absolutely not enough for the modern internet. We have already run out, technically — the last big blocks of IPv4 addresses were given out around 2011.
+**IPv4** (defined in [RFC 791](https://www.rfc-editor.org/rfc/rfc791)) uses 32-bit addresses (for example, \`192.168.1.1\`), giving roughly 4.3 billion addresses. Global free pools were exhausted in the early 2010s; operators continue to use IPv4 with techniques such as NAT and address markets.
 
-The solution is **IPv6**, the new format. An IPv6 address looks like \`2001:0db8:85a3:0000:0000:8a2e:0370:7334\`. It's a 128-bit number, which gives us approximately 340 undecillion possible addresses. That's 340 followed by 36 zeros. We will not run out again. The transition to IPv6 is happening, slowly but surely, all around us.
+**IPv6** (core specification in [RFC 8200](https://www.rfc-editor.org/rfc/rfc8200)) uses 128-bit addresses and provides an effectively inexhaustible address space for practical purposes. Adoption has grown steadily, but dual-stack and transition mechanisms remain common. Dive deeper in [IP Addresses Explained: IPv4 vs IPv6](/blogs/ip-addresses-explained-v4-vs-v6) and [IPv4 vs IPv6: The Long Transition](/blogs/ipv4-vs-ipv6-the-long-transition).
 
-**What Is a Domain Name?**
+IP addressing and routing are Layer 3 topics — [explore Layer 3 in the OSI Model Simulator](https://app.osi-model-simulator.roboticela.com) while you read.
 
-Nobody wants to type \`142.250.185.78\` every time they want to visit Google. That's where domain names come in. A domain name — like \`google.com\` or \`wikipedia.org\` — is just a human-friendly label that maps to an IP address.
+## What Is a Domain Name?
 
-The system that handles this mapping is called the **Domain Name System, or DNS**. When you type a domain name into your browser, your computer quietly contacts a DNS server and asks, "What's the IP address for this name?" The DNS server responds with the answer, and then your browser can actually make the connection.
+Domain names such as \`google.com\` are human-readable labels mapped to IP addresses by the **Domain Name System (DNS)**. DNS is specified across multiple RFCs (notably [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034) and [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035)) and coordinated globally with involvement from organizations such as **ICANN** for policy and root-zone governance.
 
-DNS is so critical that many security researchers call it the "phonebook of the internet." When DNS breaks, even if everything else is working perfectly, you simply cannot reach any website by name. This is one of the most common causes of "the internet isn't working" situations — and often the fix is as simple as switching to a public DNS server like Google's \`8.8.8.8\` or Cloudflare's \`1.1.1.1\`.
+When DNS fails, sites may be unreachable by name even if IP connectivity still works. Public resolvers such as Google Public DNS (\`8.8.8.8\`) and Cloudflare (\`1.1.1.1\`) are common alternatives to ISP resolvers. Full walkthrough: [Understanding DNS: The Phonebook of the Internet](/blogs/understanding-dns-the-phonebook-of-the-internet).
 
-**Protocols: The Language of the Internet**
+## Protocols: The Language of the Internet
 
-For all these billions of machines to talk to each other, they need to speak the same language. In networking, those languages are called **protocols**. A protocol is just a set of agreed-upon rules for how communication happens.
+A **protocol** is an agreed set of rules for communication. The internet's core suite is **TCP/IP**:
 
-The most important protocol suite is called **TCP/IP**. It handles everything from how packets are addressed and routed (IP) to how they're reliably delivered and reassembled in the right order (TCP). On top of TCP/IP sits a whole ecosystem of higher-level protocols: HTTP and HTTPS for web pages, SMTP and IMAP for email, FTP for file transfers, and many more.
+- **IP** routes packets between networks ([RFC 791](https://www.rfc-editor.org/rfc/rfc791), [RFC 8200](https://www.rfc-editor.org/rfc/rfc8200)).
+- **TCP** provides reliable, ordered byte streams ([RFC 793](https://www.rfc-editor.org/rfc/rfc793)).
+- Higher-layer protocols include HTTP/HTTPS for the web, SMTP/IMAP for email, and many others.
 
-These protocols are meticulously documented in publicly available specifications called RFCs (Request for Comments). Anyone can read them. Anyone can implement them. This openness is part of why the internet grew so fast — no single company owned the standards, so anyone could build on top of them.
+These specifications are published as **RFCs** through the **IETF**. Open, implementable standards are a major reason independent networks can interconnect without a single owner controlling the entire system. Compare models in [OSI Model vs TCP/IP Model](/blogs/osi-model-vs-tcp-ip-model) or start from [OSI Model Explained Top-Down](/blogs/osi-model-explained-top-down).
 
-**The Internet Is Not the Web**
+## The Internet Is Not the Web
 
-This distinction is worth repeating because it causes constant confusion. The **internet** is the physical and logical infrastructure — the cables, routers, protocols, and IP addresses. The **World Wide Web** is a service built on top of that infrastructure. The web uses HTTP/HTTPS to deliver web pages through browsers.
+The **internet** is the interconnection fabric: links, routers, addressing, and routing. The **World Wide Web** is one application layer service that uses HTTP/HTTPS over that fabric.
 
-But there are many other services running on the internet that aren't part of the web at all: email, online gaming, video streaming, VoIP phone calls, file sharing, IoT sensors — these all use the internet, but they use different protocols and aren't "the web" in the traditional sense.
+Email, multiplayer games, VoIP, file transfer, and many IoT systems also use the internet without being "the web" in the browser sense.
 
-**Is the Internet Decentralized?**
+## Is the Internet Decentralized?
 
-Sort of. The internet was designed with decentralization in mind — the whole point was that if one node went down, traffic would route around it. And in a technical sense, that's still true. But in practice, the modern internet is surprisingly centralized in some ways.
+Architecturally, the internet was designed so traffic can route around failures. In practice, capacity and services concentrate around large cloud providers, major IXPs, and a limited number of submarine cable routes in some regions. Resilience remains high compared with a single network, but concentration creates operational and policy trade-offs that operators and researchers continue to study.
 
-A handful of enormous companies — Amazon Web Services, Google Cloud, Microsoft Azure — host a massive percentage of the world's websites and services. A few large internet exchange points carry the majority of global traffic. And only a few undersea cables connect some parts of the world.
+## Why This Matters
 
-So the internet is more resilient than a single server, but it's less distributed than its founding vision imagined. This is something researchers, engineers, and policymakers continue to debate and work on.
+Understanding packets, cables, IP, DNS, and open standards helps you diagnose outages, evaluate security risks, and learn networking with a mental model tied to how the real internet works — not just product metaphors.
 
-**Why Does Any of This Matter?**
-
-Understanding the internet at even a basic level changes how you interact with it. You start to understand why pages load slowly in certain regions. You understand why public WiFi can be risky. You start to appreciate why net neutrality debates matter. You understand why a data center fire in France can take down hundreds of European websites. You see the physical reality behind something that feels like pure digital magic.
-
-The internet is one of the most complex and consequential engineering achievements in human history. It connects over five billion people. It carries trillions of dollars of commerce every year. It hosts the sum of human knowledge. And at the bottom of it all, it's just a bunch of machines agreeing on how to talk to each other.
-
-That's kind of beautiful.
+Use this article as a reference entry point, then practice with the [OSI Model Simulator](https://app.osi-model-simulator.roboticela.com) and the related guides linked above.
     `,
     date: "2024-04-20",
-    author: "Alex Morgan",
-    tags: ["Internet Basics", "Networking", "Beginners", "Infrastructure"]
+    author: "Muhammad Shahsawar Khan",
+    tags: ["Internet Basics", "Networking", "Beginners", "Infrastructure"],
+    relatedSlugs: [
+      "understanding-dns-the-phonebook-of-the-internet",
+      "ip-addresses-explained-v4-vs-v6",
+      "physical-layer-cables-fiber-light",
+      "tcp-three-way-handshake-explained",
+      "osi-model-explained-top-down",
+      "ipv4-vs-ipv6-the-long-transition",
+    ],
+    faq: [
+      {
+        question: "What is the internet in one sentence?",
+        answer: "The internet is a global interconnection of independently operated networks that exchange data using shared protocols such as IP, TCP, and DNS.",
+      },
+      {
+        question: "Is the internet the same as the World Wide Web?",
+        answer: "No. The internet is the underlying network infrastructure. The World Wide Web is a service that runs on top of it using HTTP/HTTPS, browsers, and hyperlinks.",
+      },
+      {
+        question: "What was ARPANET?",
+        answer: "ARPANET was an early packet-switched research network funded by ARPA. It began operating in 1969 and pioneered ideas and technologies that led to today's internet.",
+      },
+      {
+        question: "Why do we need IPv6 if IPv4 still works?",
+        answer: "IPv4's address space is too small for modern device counts. IPv6 provides a vastly larger address space. Many networks run both (dual-stack) during the long transition.",
+      },
+      {
+        question: "Do submarine cables really carry most internet traffic?",
+        answer: "Yes. The majority of intercontinental internet traffic travels over submarine fiber-optic cable systems. Satellite links matter in some use cases, but cables carry the bulk of capacity.",
+      },
+      {
+        question: "Where can I see these layers in action?",
+        answer: "Use the OSI Model Simulator at app.osi-model-simulator.roboticela.com to watch encapsulation across layers, including Layer 3 (Network) where IP addressing and routing concepts apply.",
+      },
+    ],
+    sources: [
+      {
+        title: "RFC 791 — Internet Protocol",
+        url: "https://www.rfc-editor.org/rfc/rfc791",
+        publisher: "IETF / RFC Editor",
+      },
+      {
+        title: "RFC 793 — Transmission Control Protocol",
+        url: "https://www.rfc-editor.org/rfc/rfc793",
+        publisher: "IETF / RFC Editor",
+      },
+      {
+        title: "RFC 8200 — Internet Protocol, Version 6 (IPv6) Specification",
+        url: "https://www.rfc-editor.org/rfc/rfc8200",
+        publisher: "IETF / RFC Editor",
+      },
+      {
+        title: "RFC 1034 — Domain Names: Concepts and Facilities",
+        url: "https://www.rfc-editor.org/rfc/rfc1034",
+        publisher: "IETF / RFC Editor",
+      },
+      {
+        title: "RFC 1035 — Domain Names: Implementation and Specification",
+        url: "https://www.rfc-editor.org/rfc/rfc1035",
+        publisher: "IETF / RFC Editor",
+      },
+      {
+        title: "A Brief History of the Internet",
+        url: "https://www.internetsociety.org/internet/history-internet/brief-history-internet/",
+        publisher: "Internet Society",
+      },
+      {
+        title: "ICANN — What Does ICANN Do?",
+        url: "https://www.icann.org/resources/pages/what-2012-02-25-en",
+        publisher: "ICANN",
+      },
+      {
+        title: "Submarine Cable Map",
+        url: "https://www.submarinecablemap.com/",
+        publisher: "TeleGeography",
+      },
+      {
+        title: "What Is BGP?",
+        url: "https://www.cloudflare.com/learning/security/glossary/what-is-bgp/",
+        publisher: "Cloudflare Learning",
+      },
+      {
+        title: "IPv6 at a Glance",
+        url: "https://www.cisco.com/c/en/us/products/ios-nx-os-software/ipv6/index.html",
+        publisher: "Cisco",
+      },
+    ],
   },
   {
     id: "2",
@@ -416,7 +502,7 @@ Three packets. SYN. SYN-ACK. ACK. That's it. And on top of that tiny foundation,
 Every email you've sent. Every video you've streamed. Every banking transaction you've made. All of it started with two machines exchanging three packets and saying hello.
     `,
     date: "2024-04-28",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["TCP", "Three-Way Handshake", "Transport Layer", "Networking Fundamentals"]
   },
   {
@@ -686,7 +772,7 @@ Understanding IP addressing gives you power over your own technology. You can:
 The IP address is the bedrock of internet communication. Everything else — DNS, TCP, HTTP, all of it — builds on top of the fundamental layer of addressing. Understanding it is the first step to truly understanding how the internet works.
     `,
     date: "2024-05-05",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["IP Address", "IPv4", "IPv6", "Networking", "Internet Infrastructure"]
   },
   {
@@ -1222,7 +1308,7 @@ Flashcards, subnetting practice websites, and just doing problems by hand all wo
 That moment when it clicks — when the binary math stops feeling abstract and starts feeling like a clear, logical system — is genuinely satisfying. Subnetting is one of those networking skills that feels like a superpower once you've mastered it. And it's not as far away as it might seem from where you're starting.
     `,
     date: "2024-05-18",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Subnetting", "IP Addressing", "CIDR", "Networking Fundamentals"]
   },
   {
@@ -1849,7 +1935,7 @@ Messages, Slack, Teams, WhatsApp — each is a walled garden. Email is the open 
 The system isn't perfect. Spam is a nuisance. Security could be better. The protocols show their age. But as a piece of decentralized, open-standard communication infrastructure, email remains one of the internet's great success stories.
     `,
     date: "2024-05-28",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Email", "SMTP", "IMAP", "DNS", "Mail Protocols", "Networking"]
   },
   {
@@ -2215,7 +2301,7 @@ The field is becoming more complex and more interesting. The people who navigate
 The internet is not done. It's barely started. The networks of 2034 will look back at the networks of 2024 the same way we look back at dial-up modems. The packet will keep on traveling.
     `,
     date: "2024-06-05",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Future of Networking", "WiFi 7", "5G", "Zero Trust", "Quantum Networking", "Starlink"]
   },
   {
@@ -2626,7 +2712,7 @@ Networking is a career built on curiosity. The engineers who advance fastest are
 If this series of blog posts has lit that spark of curiosity for you — welcome. The field is a good one. And there's always more to learn.
     `,
     date: "2024-06-15",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Networking Career", "Certifications", "CCNA", "Career Advice", "Getting Started"]
   }
 ];

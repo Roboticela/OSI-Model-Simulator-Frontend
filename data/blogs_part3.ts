@@ -285,7 +285,7 @@ Major ISPs generally strip off or ignore QoS markings on the public internet. Wh
 But within the walls of a corporate network, or across private leased lines, QoS is the unsung hero keeping the modern digital workplace functioning without driving everyone crazy.
     `,
     date: "2024-07-12",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["QoS", "VoIP", "Traffic Management", "Layer 3"]
   },
   {
@@ -593,7 +593,7 @@ Major tech companies (Google, Facebook, Netflix) serve the vast majority of thei
 We are destined to live in a Dual-Stack world for at least another decade, waiting for the long tail of legacy corporate software and old hardware routers to finally retire. But the future—vast, complex, and hexadecimal—is already here.
     `,
     date: "2024-07-24",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["IPv4", "IPv6", "Layer 3", "Internet Architecture"]
   },
   {
@@ -1081,7 +1081,7 @@ For the rest of your banking session, your laptop and the bank server use the li
 This hybrid approach—using the slow, brilliant math of Asymmetric encryption to safely deliver the fast, efficient keys of Symmetric encryption—is the fundamental foundation of trust on the modern internet.
     `,
     date: "2024-08-16",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Encryption", "Security", "TLS", "Cryptography", "Layer 6"]
   },
   {

@@ -246,7 +246,7 @@ Subnetting—the process of manipulating the mask to break large networks into s
 So next time you see 255.255.255.0, you'll know it's not just a random string of maximum values. It's the fence that defines the borders of your digital neighborhood.
     `,
     date: "2024-05-08",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["IP Addressing", "Subnetting", "Networking Basics", "Layer 3"]
   },
   {
@@ -491,7 +491,7 @@ QUIC is now an official standard (often referred to as HTTP/3), and a massive pe
 So, while TCP is still the king of reliability, the fast, messy, "throw it and hope" paperboy protocol is quietly taking over the modern web.
     `,
     date: "2024-05-18",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["UDP", "TCP", "Transport Layer", "Networking Basics"]
   },
   {
@@ -942,7 +942,7 @@ Alternatively, a cleaner method is a **DHCP Reservation**. The admin tells the D
 DHCP is one of those invisible protocols that makes the modern, mobile internet possible. Without it, moving from your house, to a coffee shop, to your office would require a degree in network administration just to get online. Thanks to DORA, it's just a click of a button.
     `,
     date: "2024-06-05",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["DHCP", "IP Addressing", "Networking Protocols", "Layer 7"]
   },
   {
@@ -1290,7 +1290,7 @@ Almost all modern web architectures use a mix of both. Layer 4 load balancers ha
 If a single server is a chef in a kitchen, a Load Balancer is the Maitre D' standing at the front of the restaurant. It greets the guests, figures out which waiter is the least stressed, and seats the guest at the optimal table. Without it, the kitchen would collapse in chaos.
     `,
     date: "2024-06-20",
-    author: "Alex Morgan",
+    author: "Muhammad Shahsawar Khan",
     tags: ["Load Balancing", "Architecture", "High Availability", "Layer 4", "Layer 7"]
   },
   {

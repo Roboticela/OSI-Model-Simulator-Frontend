@@ -4,6 +4,7 @@ import { useState, useDeferredValue, useMemo } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { blogs } from '@/data/blogs';
+import { getAuthorByName } from '@/data/authors';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Search, Calendar, User, ArrowRight } from 'lucide-react';
@@ -91,7 +92,9 @@ export default function BlogsPage() {
           {/* Blog Grid */}
           {currentBlogs.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {currentBlogs.map((blog, index) => (
+              {currentBlogs.map((blog, index) => {
+                const author = getAuthorByName(blog.author);
+                return (
                 <motion.div
                   key={blog.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -119,7 +122,19 @@ export default function BlogsPage() {
                       <div className="flex items-center gap-4">
                         <span className="flex items-center gap-1">
                           <User className="w-4 h-4" />
-                          {blog.author}
+                          {author?.website ? (
+                            <a
+                              href={author.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="hover:text-primary transition-colors"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {blog.author}
+                            </a>
+                          ) : (
+                            blog.author
+                          )}
                         </span>
                         <span className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
@@ -134,7 +149,8 @@ export default function BlogsPage() {
                     </Link>
                   </div>
                 </motion.div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-20 text-foreground/60">
