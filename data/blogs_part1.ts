@@ -42,7 +42,7 @@ Most internet traffic still travels over physical media. A large share of interc
 
 These cables are relatively thin for the capacity they carry, yet they move the majority of long-haul global traffic. Damage from ship anchors, earthquakes, or construction can disrupt regional connectivity until traffic is rerouted or repairs complete.
 
-On land, traffic moves through access links (Ethernet, Wi-Fi, coaxial, or fiber), metro and long-haul fiber trunks, and **Internet Exchange Points (IXPs)** where networks interconnect and exchange traffic. For more on the physical layer, see [Physical Layer: Cables, Fiber, and Light](/blogs/physical-layer-cables-fiber-light).
+On land, traffic moves through access links (Ethernet, Wi-Fi, coaxial, or fiber), metro and long-haul fiber trunks, and **Internet Exchange Points (IXPs)** where networks interconnect and exchange traffic. For how this fits the layered model, see [OSI Model Explained Top-Down](/blogs/osi-model-explained-top-down).
 
 ## What Is an IP Address?
 
@@ -50,7 +50,7 @@ Every reachable host needs an address. An **IP address** identifies a network in
 
 **IPv4** (defined in [RFC 791](https://www.rfc-editor.org/rfc/rfc791)) uses 32-bit addresses (for example, \`192.168.1.1\`), giving roughly 4.3 billion addresses. Global free pools were exhausted in the early 2010s; operators continue to use IPv4 with techniques such as NAT and address markets.
 
-**IPv6** (core specification in [RFC 8200](https://www.rfc-editor.org/rfc/rfc8200)) uses 128-bit addresses and provides an effectively inexhaustible address space for practical purposes. Adoption has grown steadily, but dual-stack and transition mechanisms remain common. Dive deeper in [IP Addresses Explained: IPv4 vs IPv6](/blogs/ip-addresses-explained-v4-vs-v6) and [IPv4 vs IPv6: The Long Transition](/blogs/ipv4-vs-ipv6-the-long-transition).
+**IPv6** (core specification in [RFC 8200](https://www.rfc-editor.org/rfc/rfc8200)) uses 128-bit addresses and provides an effectively inexhaustible address space for practical purposes. Adoption has grown steadily, but dual-stack and transition mechanisms remain common. Dive deeper in [IP Addresses Explained: IPv4 vs IPv6](/blogs/ip-addresses-explained-v4-vs-v6).
 
 IP addressing and routing are Layer 3 topics — [explore Layer 3 in the OSI Model Simulator](https://app.osi-model-simulator.roboticela.com) while you read.
 
@@ -68,7 +68,7 @@ A **protocol** is an agreed set of rules for communication. The internet's core 
 - **TCP** provides reliable, ordered byte streams ([RFC 793](https://www.rfc-editor.org/rfc/rfc793)).
 - Higher-layer protocols include HTTP/HTTPS for the web, SMTP/IMAP for email, and many others.
 
-These specifications are published as **RFCs** through the **IETF**. Open, implementable standards are a major reason independent networks can interconnect without a single owner controlling the entire system. Compare models in [OSI Model vs TCP/IP Model](/blogs/osi-model-vs-tcp-ip-model) or start from [OSI Model Explained Top-Down](/blogs/osi-model-explained-top-down).
+These specifications are published as **RFCs** through the **IETF**. Open, implementable standards are a major reason independent networks can interconnect without a single owner controlling the entire system. Start from [OSI Model Explained Top-Down](/blogs/osi-model-explained-top-down).
 
 ## The Internet Is Not the Web
 
@@ -93,10 +93,8 @@ Use this article as a reference entry point, then practice with the [OSI Model S
     relatedSlugs: [
       "understanding-dns-the-phonebook-of-the-internet",
       "ip-addresses-explained-v4-vs-v6",
-      "physical-layer-cables-fiber-light",
       "tcp-three-way-handshake-explained",
       "osi-model-explained-top-down",
-      "ipv4-vs-ipv6-the-long-transition",
     ],
     faq: [
       {
